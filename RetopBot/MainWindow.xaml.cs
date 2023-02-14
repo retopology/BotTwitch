@@ -34,6 +34,12 @@ namespace RetopBot
     /// </summary>
     public partial class MainWindow : Window
     {
+        public class heroesclass
+        {
+            public string name { get; set; }
+            public string winrate { get; set; }
+            public string matches { get; set; }
+        }
         public MainWindow()
         {
             InitializeComponent();
@@ -112,6 +118,7 @@ namespace RetopBot
             public string channelname = "witchblvde";
             // public string channelname = "nmplol";
             public string myName = "";
+            public string ActualName;
             public string localpath = "";
             public static MainWindow mainwindow;
             public static TwitchClient client = new TwitchClient();
@@ -174,9 +181,10 @@ namespace RetopBot
                     token = db_documents.GetValue(1).ToString();
 
                 }
+                
                 cred = new ConnectionCredentials(myName, token);
 
-
+                ActualName = myName;
 
                 client.Initialize(cred, channelname);
                 client.Connect();
@@ -788,7 +796,7 @@ namespace RetopBot
                 }
             }
             // Отдать бота
-            if (e.ChatMessage.Username == "ba4ebar" && e.ChatMessage.Message.Contains("!отдать"))
+            if (e.ChatMessage.Username == ActualName && e.ChatMessage.Message.Contains("!отдать"))
             {
                 string[] mas = e.ChatMessage.Message.Split(' ');
                 myName = mas[1];
@@ -1120,12 +1128,7 @@ namespace RetopBot
         }
         #endregion
 
-        public class heroesclass
-        {
-            public string name { get; set; }
-            public string winrate { get; set; }
-            public  string matches { get; set; }
-        }
+        
         // Help Methods
         #region
         public string ParserHeroes(string hero)
