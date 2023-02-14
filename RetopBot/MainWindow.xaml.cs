@@ -164,12 +164,20 @@ namespace RetopBot
         {
             try
             {
-                StreamReader read = new StreamReader(localpath + "/token.txt");
-                string token = read.ReadToEnd();
-                string[] tokenuser = token.Split('|');
-                read.Close();
-                cred = new ConnectionCredentials(tokenuser[0], tokenuser[1]);
-                myName = tokenuser[0];
+
+                string token = "";
+                MySqlDataReader db_documents = Connection($"SELECT * FROM token");
+                while (db_documents.Read())
+                {
+                    Classes.MessageClass newitem = new MessageClass();
+                    myName = db_documents.GetValue(0).ToString();
+                    token = db_documents.GetValue(1).ToString();
+
+                }
+                cred = new ConnectionCredentials(myName, token);
+
+
+
                 client.Initialize(cred, channelname);
                 client.Connect();
                 client.OnChatCommandReceived += Client_OnChatCommandReceived; // Бот читает КОМАНДЫ
