@@ -12,7 +12,6 @@ using TwitchLib.Client;
 using TwitchLib.Client.Models;
 using TwitchLib.Client.Events;
 using TwitchLib.PubSub;
-
 using RetopBot.Classes;
 using SqlHelper;
 using MySql.Data.MySqlClient;
@@ -22,12 +21,14 @@ using System.Linq;
 using TwitchLib.Api.Helix.Models.Search;
 using System.Diagnostics;
 using TwitchLib.PubSub.Events;
-using System.Net;
+
 using XamlAnimatedGif.Decoding;
 using HtmlAgilityPack;
 using System.Text;
 using TwitchLib.Api.Helix;
 using System.Text.RegularExpressions;
+using System.Threading;
+using System.Windows.Interop;
 
 namespace RetopBot
 {
@@ -48,7 +49,7 @@ namespace RetopBot
 
             mainwindow = this;
 
-
+            
             startstream = DateTime.Now;
             localpath = Directory.GetCurrentDirectory();
             MYconnect = new MySqlConnection(ConnectString);
@@ -83,7 +84,7 @@ namespace RetopBot
             List<string> localwinners = new List<string>();
             public bool localgive = false;
             string moment = "1";
-            Timer localtimer = new Timer(1000);
+            System.Timers.Timer localtimer = new System.Timers.Timer(1000);
             int localcounttick = 0;
             bool findtogive = false;
             #endregion
@@ -116,8 +117,8 @@ namespace RetopBot
 
             // Свалка
             #region
-            // public string channelname = "ba4ebar";
-            public string channelname = "witchblvde";
+             public string channelname = "ba4ebar";
+            //public string channelname = "witchblvde";
             // public string channelname = "nmplol";
             public string myName = "";
             public string ActualName;
@@ -125,7 +126,7 @@ namespace RetopBot
             public static MainWindow mainwindow;
             public static TwitchClient client = new TwitchClient();
             public bool countryGame = false;
-
+            public bool findTrack = true;
             public ConnectionCredentials cred;
             public int CountIndex = 0;
             int counterrors = 0;
@@ -227,6 +228,10 @@ namespace RetopBot
             {
                 problems++;
             }
+        }
+        public void SendRpl(string msgid, string msg)
+        {
+            client.SendReply(channelname, msgid, msg);
         }
         #endregion
 
@@ -765,6 +770,9 @@ namespace RetopBot
         private void Client_OnMessageReceived(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
         {
 
+
+            
+
             // Загрузка в базу
             if (channelname == "witchblvde")
             {
@@ -784,8 +792,9 @@ namespace RetopBot
                     counterrors++;
                 }
             }
+            
 
-            if(e.ChatMessage.Username == myName)
+            if (e.ChatMessage.Username == myName)
             {
                 string[] mas = e.ChatMessage.Message.Split(' ');
                 if (mas[0] == "!таймаут")
@@ -825,6 +834,29 @@ namespace RetopBot
             {
                 if (authoOtvetscb.IsChecked == true)
                 {
+                    // Гугл
+                    if (e.ChatMessage.Message.Contains("!гугл"))
+                    {
+                        string[] mas = e.ChatMessage.Message.Split(' ');
+                        if (mas[0] == "!гугл" && mas.Length > 1)
+                        {
+                            string target = "";
+                            for (int i = 1; i < mas.Length; i++)
+                            {
+                                if (i == 1) target += mas[i];
+                                else target += " " + mas[i];
+                            }
+                            string otvet = GoogleIt(target);
+                            if(otvet != "")client.SendReply(channelname, e.ChatMessage.Id, otvet);
+                        }
+                    }
+
+                    // Найти трек
+                    if (e.ChatMessage.Message == "!трек" && findTrack == true)
+                    {
+                        findTrack = false;
+                        FindMus(e.ChatMessage.Id);
+                    }
                     // Стата героя
                     if (e.ChatMessage.Message.Contains("!стата"))
                     {
@@ -1130,9 +1162,107 @@ namespace RetopBot
         }
         #endregion
 
-        
+
         // Help Methods
-        #region
+        #region  
+        public string GoogleIt(string msg1)
+        {
+            List<string> msg = GoogleItParser(msg1);
+            string text = "";
+            if (msg != null)
+            {
+                foreach (var item in msg)
+                {
+                    if (item.Length > 2)
+                    {
+                        text += item;
+                        if (text.Length > 20) break;
+                    }
+                }
+                bool go = true;
+                char[] arr = text.ToCharArray();
+                int count = 0;
+                string end = "";
+                for (int i = 0; i < arr.Length; i++)
+                {
+                    if (arr[i] == '(' && count == 0) { go = false; continue; }
+                    if (arr[i] == ')' && count == 0) { go = true; count++; continue; }
+
+
+                    if (go && Char.IsLetter(arr[i]) | arr[i] == ' '
+                        | arr[i] == ',' | arr[i] == '-' | arr[i] == '.') end += arr[i];
+
+                }
+                for (int i = 0; i < 200; i++)
+                {
+                    end = end.Replace($"&#{i}", "");
+                }
+                string[] mas = end.Split('.');
+
+                if (mas.Length == 1) return mas[0];
+                else
+                {
+                    if (mas[0].Length > 100 | mas[0].Length + mas[1].Length > 200)
+                    {
+                        return mas[0];
+                    }
+                    else return mas[0] + ". " + mas[1];
+                }
+
+
+            }
+            return "";
+        }
+        public List<string> GoogleItParser(string msg)
+        {
+            try
+            {
+                string htmlcode = "https://ru.wikipedia.org/wiki/";
+                string[] mas = msg.Split(' ');
+
+                for (int j = 0; j < mas.Length; j++)
+                {
+                    if (j != 0) htmlcode += "_" + mas[j];
+                    else htmlcode += mas[j];
+                }
+
+                //b_WikipediaGoBigAnswer b_rc_gb_window
+                //b_rc_gb_sub b_rc_gb_sub_hero
+                //b_rc_gb_sub_cell b_rc_gb_sub_text
+                HtmlWeb ws = new HtmlWeb();
+                ws.OverrideEncoding = Encoding.UTF8;
+                HtmlDocument doc = ws.Load(htmlcode);
+                List<string> lis = new List<string>();
+                var test = doc.DocumentNode.SelectNodes(
+                        "//div[contains(@class, 'mw-parser-output')]" +
+                        "//p");
+                if (test != null)
+                {
+
+                    foreach (HtmlNode item in doc.DocumentNode.SelectNodes(
+                        "//div[contains(@class, 'mw-parser-output')]" +
+                        "//p"))
+                    {
+                        lis.Add(item.InnerText.ToString());
+
+                    }
+
+
+                    return lis;
+                }
+                else return null;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        public void FindMus(string msgid)
+        {
+            ShazamFolder.MainShazam main = new ShazamFolder.MainShazam();
+            main.GenetateMusicAsync(msgid);
+            
+        }
         public string ParserHeroes(string hero)
         {
             try
