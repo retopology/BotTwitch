@@ -36,9 +36,7 @@
                     <DropShadowEffect Opacity="0.5"/>
                 </Button.Effect>
             </Button>
-            <CheckBox x:Name="dontprinreport" Content="Не записывать отчет" HorizontalAlignment="Left" Margin="856,30,0,0" VerticalAlignment="Top" Foreground="White"/>
-            <CheckBox x:Name="windowtagCb" Content="Уведомления о тэге" HorizontalAlignment="Left" Margin="856,50,0,0" VerticalAlignment="Top" Foreground="White"/>
-            <CheckBox x:Name="authoOtvetscb" Content="Ответы в чате" HorizontalAlignment="Left" Margin="856,70,0,0" VerticalAlignment="Top" Foreground="White"/>
+            
         </Grid>
         <Grid x:Name="loadingend" Visibility="Hidden" IsEnabled="False">
             <Grid Background="Black" Margin="20,35,20,5" Opacity="0.5">

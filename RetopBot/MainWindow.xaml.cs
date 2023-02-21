@@ -770,9 +770,6 @@ namespace RetopBot
         private void Client_OnMessageReceived(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
         {
 
-
-            
-
             // Загрузка в базу
             if (channelname == "witchblvde")
             {
@@ -793,7 +790,7 @@ namespace RetopBot
                 }
             }
             
-
+            // Бан и таймаут
             if (e.ChatMessage.Username == myName)
             {
                 string[] mas = e.ChatMessage.Message.Split(' ');
@@ -806,6 +803,7 @@ namespace RetopBot
                     client.BanUser(channelname, mas[1]);
                 }
             }
+
             // Отдать бота
             if (e.ChatMessage.Username == ActualName && e.ChatMessage.Message.Contains("!отдать"))
             {
@@ -813,29 +811,31 @@ namespace RetopBot
                 myName = mas[1];
             }
 
-            // Количество сообщений
-            if (e.ChatMessage.Message == "!сообщения")
-            {
-                //SELECT COUNT(*) FROM `messages` WHERE username = 'ba4ebar'
-                MySqlDataReader db_documents = MainWindow.mainwindow.Connection($"SELECT COUNT(*) FROM `messages` WHERE username = '{e.ChatMessage.Username}'");
-                int count = 0;
-                while (db_documents.Read())
-                {
-                    count = Convert.ToInt32(db_documents.GetValue(0).ToString());
+            
 
-                }
-                client.SendMessage(channelname, e.ChatMessage.Username + ", у тебя " + count + " сообщений. Стата не точная");
-            }
-            // Поменять цвет
-            if (e.ChatMessage.Username == myName) SetColorChat();
-
-            // Загрузка в локальную базу и уведомление о тэге
+            // Загрузка в локальную базу и ответы
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                if (authoOtvetscb.IsChecked == true)
-                {
-                    // Гугл
-                    if (e.ChatMessage.Message.Contains("!гугл"))
+
+                // Количество сообщений
+                if (customfuncs.cbcountmsgs.IsChecked == true && e.ChatMessage.Message == "!сообщения")
+                    {
+                        //SELECT COUNT(*) FROM `messages` WHERE username = 'ba4ebar'
+                        MySqlDataReader db_documents = MainWindow.mainwindow.Connection($"SELECT COUNT(*) FROM `messages` WHERE username = '{e.ChatMessage.Username}'");
+                        int count = 0;
+                        while (db_documents.Read())
+                        {
+                            count = Convert.ToInt32(db_documents.GetValue(0).ToString());
+
+                        }
+                        client.SendMessage(channelname, e.ChatMessage.Username + ", у тебя " + count + " сообщений. Стата не точная");
+                    }
+
+                // Поменять цвет
+                if (customfuncs.cbcolornick.IsChecked == true && e.ChatMessage.Username == myName) SetColorChat();
+
+                // Гугл
+                if (customfuncs.cbgoogleit.IsChecked == true && e.ChatMessage.Message.Contains("!гугл"))
                     {
                         string[] mas = e.ChatMessage.Message.Split(' ');
                         if (mas[0] == "!гугл" && mas.Length > 1)
@@ -847,18 +847,19 @@ namespace RetopBot
                                 else target += " " + mas[i];
                             }
                             string otvet = GoogleIt(target);
-                            if(otvet != "")client.SendReply(channelname, e.ChatMessage.Id, otvet);
+                            if (otvet != "" && CheckBanWord(otvet) == false) client.SendReply(channelname, e.ChatMessage.Id, otvet);
                         }
                     }
 
-                    // Найти трек
-                    if (e.ChatMessage.Message == "!трек" && findTrack == true)
-                    {
-                        findTrack = false;
-                        FindMus(e.ChatMessage.Id);
-                    }
-                    // Стата героя
-                    if (e.ChatMessage.Message.Contains("!стата"))
+                // Найти трек
+                if (customfuncs.cbfindtrack.IsChecked == true && e.ChatMessage.Message.Contains("!трек") && findTrack == true)
+                {
+                    findTrack = false;
+                    FindMus(e.ChatMessage.Id);
+                }
+
+                // Стата героя
+                if (customfuncs.cbstatehero.IsChecked == true && e.ChatMessage.Message.Contains("!стата"))
                     {
                         string[] mas12 = e.ChatMessage.Message.Split(' ');
                         if (mas12[0] == "!стата")
@@ -876,8 +877,9 @@ namespace RetopBot
                             }
                         }
                     }
-                    // Команда !ласт 
-                    if (e.ChatMessage.Message.Contains("!ласт"))
+
+                // Команда !ласт 
+                if (customfuncs.cblastgame.IsChecked == true && e.ChatMessage.Message.Contains("!ласт"))
                     {
                         try
                         {
@@ -893,8 +895,8 @@ namespace RetopBot
 
                     }
 
-                    // Команда !wl 
-                    if (e.ChatMessage.Message.Contains("!wl"))
+                // Команда !wl 
+                if (customfuncs.cbwinlose.IsChecked == true && e.ChatMessage.Message.Contains("!wl"))
                     {
                         try
                         {
@@ -911,9 +913,58 @@ namespace RetopBot
                             client.SendReply(channelname, e.ChatMessage.Id, "Не удалось получить результат. Мой автор хуесос");
                         }
                     }
-                }
-                if (authoOtvetscb.IsChecked == true)MostQuestion(e.ChatMessage.Message, e.ChatMessage.Id);
 
+                // Функция Кто ты
+                if (customfuncs.cbwhoareyou.IsChecked == true && e.ChatMessage.Username == myName && e.ChatMessage.Message.Contains("!ктоты"))
+                    {
+                        try
+                        {
+                            Random rnd = new Random();
+                            Random rndnas = new Random();
+                            Random rndZnak = new Random();
+
+                            string[] mas = e.ChatMessage.Message.Split(' ');
+                            string answer = mas[1] + " -";
+                            Random randWords = new Random();
+                            int words = randWords.Next(5, 11);
+                            for (int i = 0; i < words; i++)
+                            {
+
+                                int numRnd = rnd.Next(0, chatmessage.Count);
+                                string[] randMsg = chatmessage[numRnd].message.Split(' ');
+
+                                int numrndnas = rndnas.Next(0, randMsg.Length);
+                                if (!answer.Contains(randMsg[numrndnas]) && randMsg[numrndnas].Length > 1)
+                                {
+                                    answer += " " + randMsg[numrndnas];
+
+                                    int numRndZnak = rndZnak.Next(0, 10);
+                                    if (numRndZnak % 3 == 0) answer += ",";
+                                }
+                                else i--;
+                            }
+                            client.SendMessage(channelname, answer);
+                        }
+                        catch
+                        {
+                            client.SendMessage(channelname, "@ba4ebar, пошел нахуй, иди код переделывать");
+                        }
+                    }
+
+                // Уведомления о теге
+                if (customfuncs.cbtagme.IsChecked == true && e.ChatMessage.Message.Contains(myName))
+                    {
+                        var windowBox = new ToastContentBuilder();
+                        windowBox.AddText("Тебя тегнул " + e.ChatMessage.Username);
+                        windowBox.Show();
+                    }
+
+                // Частые вопросы
+                if(customfuncs.cbMostQuestions.IsChecked == true) MostQuestion(e.ChatMessage.Message, e.ChatMessage.Id);
+
+
+                // Загрузка в локальную базу
+                #region
                 Classes.MessageClass msg = new MessageClass();
                 msg.username = e.ChatMessage.Username;
                 msg.message = e.ChatMessage.Message;
@@ -928,16 +979,17 @@ namespace RetopBot
                               msg.time + "|");
                 wrt.Close();
 
+                #endregion
+
+                // Запись чата
+                #region
                 chatmessage.Add(msg);
                 if (e.ChatMessage.IsModerator) mainfuncpage.WriteMessage(msg, true);
                 else mainfuncpage.WriteMessage(msg, false);
-            
-                if (e.ChatMessage.Message.Contains(myName) && windowtagCb.IsChecked == true)
-                {
-                    var windowBox = new ToastContentBuilder();
-                    windowBox.AddText("Тебя тегнул " + e.ChatMessage.Username);
-                    windowBox.Show();
-                }
+                #endregion
+
+
+
             }));
 
             // Бан всех кто писал что-то определенное
@@ -1069,43 +1121,6 @@ namespace RetopBot
                 }
             }
 
-            // Функция Кто ты
-            if(e.ChatMessage.Username == myName && e.ChatMessage.Message.Contains("!ктоты"))
-            {
-                try
-                {
-                    Random rnd = new Random();
-                    Random rndnas = new Random();
-                    Random rndZnak = new Random();
-
-                    string[] mas = e.ChatMessage.Message.Split(' ');
-                    string answer = mas[1] + " -";
-                    Random randWords = new Random();
-                    int words = randWords.Next(5, 11);
-                    for (int i = 0; i < words; i++)
-                    {
-                        
-                        int numRnd = rnd.Next(0, chatmessage.Count);
-                        string[] randMsg = chatmessage[numRnd].message.Split(' ');
-                        
-                        int numrndnas = rndnas.Next(0, randMsg.Length);
-                        if (!answer.Contains(randMsg[numrndnas]) && randMsg[numrndnas].Length > 1)
-                        {
-                            answer += " " + randMsg[numrndnas];
-
-                            int numRndZnak = rndZnak.Next(0, 10);
-                            if (numRndZnak % 3 == 0) answer += ",";
-                        }
-                        else i--;
-                    }
-                    client.SendMessage(channelname, answer);
-                }
-                catch
-                {
-                    client.SendMessage(channelname, "@ba4ebar, пошел нахуй, иди код переделывать");
-                }
-            }
-
             // Заполнение участников розыгрыша
             if (findtogive)
             {
@@ -1213,6 +1228,27 @@ namespace RetopBot
             }
             return "";
         }
+        public bool CheckBanWord(string msg)
+        {
+            bool est = false;
+            //Проверка
+            #region
+            if (msg.Contains("негр")) est = true;
+            if (msg.Contains("пидар")) est = true;
+            if (msg.Contains("пидор")) est = true;
+            if (msg.Contains("гей")) est = true;
+            if (msg.Contains("девственник")) est = true;
+            if (msg.Contains("чурк")) est = true;
+            if (msg.Contains("даун")) est = true;
+            if (msg.Contains("аутист")) est = true;
+            if (msg.Contains("куколд")) est = true;
+            if (msg.Contains("хач")) est = true;
+            if (msg.Contains("хохол")) est = true;
+            if (msg.Contains("ниге")) est = true;
+            if (msg.Contains("педик")) est = true;
+            #endregion
+            return est;
+        }
         public List<string> GoogleItParser(string msg)
         {
             try
@@ -1273,7 +1309,6 @@ namespace RetopBot
                 HtmlWeb ws = new HtmlWeb();
                 ws.OverrideEncoding = Encoding.UTF8;
                 HtmlDocument doc = ws.Load(htmlcode);
-                string etxt = "";
 
 
                 foreach (HtmlNode item in doc.DocumentNode.SelectNodes(
@@ -1499,7 +1534,7 @@ namespace RetopBot
             if (client.IsConnected == true)
             {
                 //MessageBox.Show("Бот закончил работу. Нажми ОК для синхраницзации базы");
-                if (dontprinreport.IsChecked == false)
+                if (customfuncs.dontprinreport.IsChecked == false)
                 {
                     statisitc.GenerateVanish();
                     int id = reports.Count;

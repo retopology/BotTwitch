@@ -4,7 +4,7 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:RetopBot.Pages.PagesFuncs"
-      xmlns:gif ="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
+      
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="1000"
       Title="customFuncs">
@@ -19,12 +19,43 @@
             <Grid.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
             </Grid.Effect>
-            
+
         </Grid>
         <Grid Background="Black" Opacity="0.2" Margin="615,10,10,10">
             <Grid.Effect>
                 <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
             </Grid.Effect>
+
+        </Grid>
+        <Grid Margin="10,10,390,10">
+            <Label Content="Авто ответы" Foreground="White" FontSize="26" Margin="20" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="cbALl" Content="Включить все" Foreground="White" FontSize="16" Margin="20,80,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="clicked"/>
+            <Grid x:Name="cbgrid" Margin="55,120,55,230" Background="#FF3E3E3E">
+                <CheckBox x:Name="cbgoogleit" Content="!гугл" Foreground="White" FontSize="14" Margin="20,10,0,0" 
+                          VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <CheckBox x:Name="cbfindtrack" Content="!трек" Foreground="White" FontSize="14" Margin="20,50,0,0" 
+                          VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <CheckBox x:Name="cbcountmsgs" Content="!сообщения" Foreground="White" FontSize="14" Margin="20,90,0,0" 
+                          VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+
+                <CheckBox x:Name="cbstatehero" Content="!стата" Foreground="White" FontSize="14" Margin="180,10,0,0" 
+                          VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <CheckBox x:Name="cblastgame" Content="!ласт" Foreground="White" FontSize="14" Margin="180,50,0,0" 
+                          VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <CheckBox x:Name="cbwinlose" Content="!wl" Foreground="White" FontSize="14" Margin="180,90,0,0" 
+                          VerticalAlignment="Top" HorizontalAlignment="Left"/>
+
+
+                <CheckBox x:Name="cbwhoareyou" Content="!ктоты" Foreground="White" FontSize="14" Margin="340,10,0,0" 
+                          VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                <CheckBox x:Name="cbMostQuestions" Content="Частые вопросы" Foreground="White" FontSize="14" Margin="340,50,0,0" 
+                          VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            </Grid>
+            <Label Content="Прчее" Foreground="White" FontSize="26" Margin="20,266,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="cbtagme" Content="Уведомления о тэге" Foreground="White" FontSize="16" Margin="20,324,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <CheckBox IsChecked="True" x:Name="cbcolornick" Content="Цветной ник" Foreground="White" FontSize="16" Margin="214,324,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+            <CheckBox x:Name="dontprinreport" Content="Не записывать отчет" Foreground="White" FontSize="16" Margin="357,324,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
 
         </Grid>
         <Grid Margin="615,10,10,10">
@@ -42,20 +73,11 @@
                       Margin="10,90,0,0" FontSize="12" Foreground="White"/>
             <ScrollViewer Margin="5,120,5,5" VerticalScrollBarVisibility="Hidden" Background="#FF3E3E3E">
                 <StackPanel x:Name="parrStack">
-                    
+
                 </StackPanel>
             </ScrollViewer>
         </Grid>
-        <ListBox x:Name="topUsers" Margin="10,10,405,55" FontSize="24">
-           
-        </ListBox>
-        <Button Width="100" Height="23" Content="Отчет" Margin="495,455,405,22" Click="Button_Click" Background="{x:Null}" Foreground="White" BorderBrush="White"/>
-        <ComboBox x:Name="mounthCb" Height="20" Width="130" Margin="0,435,200,0"/>
-        <Label Content="Отчеты" Foreground="White" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"
-               Margin="31,0,0,15"/>
-        <Grid x:Name="awaitgrid" Visibility="Hidden" IsEnabled="False">
-            <Image gif:AnimationBehavior.SourceUri="/Imgs/waitgif.gif" Margin="15,10,407,123" />
-            <Label Content="Считаю" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,300,380,0"/>
-        </Grid>
+
+
     </Grid>
 </Page>
