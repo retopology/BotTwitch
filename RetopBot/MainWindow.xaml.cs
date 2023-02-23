@@ -917,8 +917,9 @@ namespace RetopBot
                 // Функция Кто ты
                 if (customfuncs.cbwhoareyou.IsChecked == true && e.ChatMessage.Username == myName && e.ChatMessage.Message.Contains("!ктоты"))
                     {
-                        try
-                        {
+                    try
+                    {
+                        if (chatmessage.Count > 100) {
                             Random rnd = new Random();
                             Random rndnas = new Random();
                             Random rndZnak = new Random();
@@ -945,11 +946,14 @@ namespace RetopBot
                             }
                             client.SendMessage(channelname, answer);
                         }
-                        catch
-                        {
-                            client.SendMessage(channelname, "@ba4ebar, пошел нахуй, иди код переделывать");
-                        }
+                        else client.SendMessage(channelname, "Я устал.");
+
                     }
+                    catch
+                    {
+                        client.SendMessage(channelname, "@ba4ebar, пошел нахуй, иди код переделывать");
+                    }
+                }
 
                 // Уведомления о теге
                 if (customfuncs.cbtagme.IsChecked == true && e.ChatMessage.Message.Contains(myName))
