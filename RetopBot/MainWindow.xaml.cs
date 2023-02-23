@@ -117,8 +117,8 @@ namespace RetopBot
 
             // Свалка
             #region
-             public string channelname = "ba4ebar";
-            //public string channelname = "witchblvde";
+            // public string channelname = "ba4ebar";
+            public string channelname = "witchblvde";
             // public string channelname = "nmplol";
             public string myName = "";
             public string ActualName;
@@ -349,6 +349,7 @@ namespace RetopBot
                             newBot.top_user = db_documents.GetValue(9).ToString();
                             newBot.date = db_documents.GetValue(10).ToString();
                             newBot.time = db_documents.GetValue(11).ToString();
+                            
 
                             reports.Add(newBot);
                         }

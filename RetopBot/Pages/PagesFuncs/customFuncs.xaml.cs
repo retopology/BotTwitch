@@ -30,7 +30,8 @@ namespace RetopBot.Pages.PagesFuncs
             InitializeComponent();
             for (int i = 0; i < MainWindow.mainwindow.commands.Count; i++)
             {
-                commandsCb.Items.Add(i + "." + MainWindow.mainwindow.commands[i].header);
+                if (MainWindow.mainwindow.commands[i].type != "Off")
+                    commandsCb.Items.Add(i + "." + MainWindow.mainwindow.commands[i].header);
             }
             
 

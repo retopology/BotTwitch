@@ -14,162 +14,163 @@
         </LinearGradientBrush>
     </Page.Background>
     <Grid>
-        <Grid x:Name="topbuttons" Height="50" VerticalAlignment="Top" Margin="-85,25,85,0">
-            <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="0,0,400,0" MouseLeftButtonDown="ClickMain">
-                <Border.Style>
-                    <Style TargetType="{x:Type Border}">
-                        <Style.Triggers>
-                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
+        <Border Margin="0,30,0,0" CornerRadius="10" Background="#FF484848"
+                Height="55" VerticalAlignment="Top" 
+                     HorizontalAlignment="Center" >
+            <StackPanel Orientation="Horizontal" 
+                    x:Name="topbuttons" >
+                <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="15,0,10,0" MouseLeftButtonDown="ClickMain">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
 
-                <Border.Effect>
-                    <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
-                </Border.Effect>
-                <Label Content="Чат" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
+                    </Border.Effect>
+                    <Label Content="Чат" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                    FontSize="16"/>
-            </Border>
-            <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="0,0,120,0" MouseLeftButtonDown="ClickParty">
-                <Border.Style>
-                    <Style TargetType="{x:Type Border}">
-                        <Style.Triggers>
-                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
+                </Border>
+                <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="10,0,10,0" MouseLeftButtonDown="ClickParty">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
 
 
-                <Border.Effect>
-                    <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
-                </Border.Effect>
-                <Label Content="Полный чат" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
+                    </Border.Effect>
+                    <Label Content="Полный чат" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                    FontSize="16"/>
-            </Border>
-            <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="160,0,0,0" MouseLeftButtonDown="giveawaybtn">
-                <Border.Style>
-                    <Style TargetType="{x:Type Border}">
-                        <Style.Triggers>
-                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
+                </Border>
+                <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="10,0,10,0" MouseLeftButtonDown="giveawaybtn">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
 
-                <Border.Effect>
-                    <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
-                </Border.Effect>
-                <Label Content="Команды" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
+                    </Border.Effect>
+                    <Label Content="Команды" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                    FontSize="16"/>
-            </Border>
-            <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="440,0,0,0" MouseLeftButtonDown="gotostats">
-                <Border.Style>
-                    <Style TargetType="{x:Type Border}">
-                        <Style.Triggers>
-                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
+                </Border>
+                <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="10,0,10,0" MouseLeftButtonDown="gotostats">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
 
-                <Border.Effect>
-                    <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
-                </Border.Effect>
-                <Label Content="Статистика" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
+                    </Border.Effect>
+                    <Label Content="Статистика" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                    FontSize="16"/>
-            </Border>
-            <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="720,0,0,0" MouseLeftButtonDown="goToSpecFunc">
-                <Border.Style>
-                    <Style TargetType="{x:Type Border}">
-                        <Style.Triggers>
-                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                                <BeginStoryboard>
-                                    <Storyboard>
-                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
-                                    </Storyboard>
-                                </BeginStoryboard>
-                            </EventTrigger>
-                        </Style.Triggers>
-                    </Style>
-                </Border.Style>
+                </Border>
+                <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="10,0,15,0" MouseLeftButtonDown="goToSpecFunc">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
 
 
-                <Border.Effect>
-                    <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
-                </Border.Effect>
-                <Label Content="Функции" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
+                    </Border.Effect>
+                    <Label Content="Функции" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                    FontSize="16"/>
-            </Border>
-        </Grid>
-        <Grid Margin="0,90,0,10">
+                </Border>
+            </StackPanel>
+        </Border>
+        <Border Margin="0,90,0,10" CornerRadius="20" Background="#FF474747">
+            <Grid>
 
-            <Border  Background="White" Opacity="0.1" BorderThickness="1">
-                <Border.Effect>
-                    <DropShadowEffect BlurRadius="5" Opacity="0.5" ShadowDepth="5" Direction="50"/>
-                </Border.Effect>
-
-            </Border>
-            <Frame x:Name="mainframe" NavigationUIVisibility="Hidden"/>
+                <Frame x:Name="mainframe" NavigationUIVisibility="Hidden"/>
 
 
-        </Grid>
+            </Grid>
+        </Border>
         <Grid>
             <Grid x:Name="maingrid" IsEnabled="True"/>
 

@@ -14,46 +14,39 @@
         </LinearGradientBrush>
     </Page.Background>
     <Grid>
-        <Grid Background="Black" Opacity="0.2" Margin="10,50,589,10">
-            <Grid.Effect>
-                <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
-            </Grid.Effect>
-        </Grid>
-        <Grid Background="Black" Opacity="0.2" Margin="440,50,91,274">
-            <Grid.Effect>
-                <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
-            </Grid.Effect>
-        </Grid>
-        <ScrollViewer VerticalScrollBarVisibility="Hidden" Margin="10,50,589,10">
-            <StackPanel x:Name="commandsparrent">
-                <StackPanel.Resources>
-                    <Style TargetType="{x:Type Button}">
-                        <Setter Property="Background" Value="{Binding null}"/>
-                        <Setter Property="Foreground" Value="White"/>
-                        <Setter Property="BorderBrush" Value="White"/>
-                        <Setter Property="VerticalAlignment" Value="Top"/>
-                    </Style>
-                    <Style TargetType="{x:Type Label}">
-                        <Setter Property="Foreground" Value="White"/>
-                    </Style>
-                </StackPanel.Resources>
+        <Border CornerRadius="20" Margin="440,50,91,274" Background="#FF232323">
+
+            </Border>
+            <Border CornerRadius="20" Margin="10,50,589,10" Background="#FF232323">
+            <ScrollViewer VerticalScrollBarVisibility="Hidden">
+                <StackPanel x:Name="commandsparrent">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type Button}">
+                            <Setter Property="Background" Value="{Binding null}"/>
+                            <Setter Property="Foreground" Value="White"/>
+                            <Setter Property="BorderBrush" Value="White"/>
+                            <Setter Property="VerticalAlignment" Value="Top"/>
+                        </Style>
+                        <Style TargetType="{x:Type Label}">
+                            <Setter Property="Foreground" Value="White"/>
+                        </Style>
+                    </StackPanel.Resources>
 
 
 
 
 
-            </StackPanel>
-        </ScrollViewer>
-
+                </StackPanel>
+            </ScrollViewer>
+        </Border>
         <Label Content="Команды" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Foreground="White"/>
         <Label Content="Создание команды" HorizontalAlignment="Left" Margin="440,10,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Foreground="White"/>
         <Label Content="Заголовок" HorizontalAlignment="Center" Margin="0,60,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
         <TextBox x:Name="headertxt" Margin="553,65,105,411" BorderBrush="{x:Null}" Background="#FF505050" Foreground="White" VerticalContentAlignment="Center"/>
-        <Grid Background="Black" Opacity="0.2" Margin="440,270,91,162">
-            <Grid.Effect>
-                <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
-            </Grid.Effect>
-        </Grid>
+        <Border Margin="440,270,91,162" CornerRadius="20" Background="#FF232323">
+
+
+        </Border>
         <Label Content="Создание тэга" HorizontalAlignment="Left" Margin="440,231,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Foreground="White"/>
         <TextBox x:Name="msgtxt" Margin="553,99,105,377" BorderBrush="{x:Null}" Background="#FF505050" Foreground="White" VerticalContentAlignment="Center"/>
         <Label Content="Текст" HorizontalAlignment="Left" Margin="494,94,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
@@ -65,11 +58,9 @@
         <Label Content="Название" HorizontalAlignment="Left" Margin="452,285,0,0" VerticalAlignment="Top" FontSize="18" Foreground="White"/>
         <TextBox x:Name="addtagtxt" Margin="553,290,207,186" BorderBrush="{x:Null}" Background="#FF505050" Foreground="White" VerticalContentAlignment="Center"/>
         <Button Content="Добавить" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="798,290,0,0" VerticalAlignment="Top" Height="24" Width="102" Background="{x:Null}" BorderBrush="#FFB7B7B7" Foreground="White" Click="Button_Click"/>
-        <Grid Background="Black" Opacity="0.2" Margin="440,387,326,45">
-            <Grid.Effect>
-                <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
-            </Grid.Effect>
-        </Grid>
+        <Border Margin="440,387,326,45" CornerRadius="20" Background="#FF232323">
+
+        </Border>
         <Label Content="Фильтр" HorizontalAlignment="Left" Margin="440,348,0,0" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" Foreground="White"/>
         <ComboBox x:Name="filter_tagcb" HorizontalAlignment="Left" Margin="452,410,0,0" VerticalAlignment="Top" Width="206" BorderBrush="{x:Null}" Background="Black" SelectionChanged="filerchanged" SelectedIndex="0"/>
 

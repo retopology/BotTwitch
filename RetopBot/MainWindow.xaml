@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RetopBot"
         mc:Ignorable="d"
-        Title="MainWindow" MinHeight="450" MinWidth="800" WindowStyle="None" ResizeMode="NoResize"
+        Title="MainWindow"  WindowStyle="None" ResizeMode="NoResize"
                            Height="600" Width="1000"
-                           MaxHeight="600" MaxWidth="1000" 
+                           
         xmlns:gif ="https://github.com/XamlAnimatedGif/XamlAnimatedGif" KeyDown="hotkeys">
+
+    <!--MinHeight="450" MinWidth="800" MaxHeight="600" MaxWidth="1000" -->
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF383838"/>
