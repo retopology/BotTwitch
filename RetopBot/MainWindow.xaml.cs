@@ -1101,7 +1101,7 @@ namespace RetopBot
                 bool needcom = false;
                 foreach (var item in commands)
                 {
-                    if (e.ChatMessage.Message.Contains("!" + item.header))
+                    if (e.ChatMessage.Message.Contains("!" + item.header) && item.type == "On")
                     {
                         headercomm = item.text;
                         needcom = true; 
