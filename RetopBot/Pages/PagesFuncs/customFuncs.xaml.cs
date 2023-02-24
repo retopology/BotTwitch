@@ -59,7 +59,7 @@ namespace RetopBot.Pages.PagesFuncs
                 Grid grid = new Grid();
                 BrushConverter brh = new BrushConverter();
                 grid.Background = (Brush)brh.ConvertFromString("#FF242424");
-                grid.Margin = new Thickness(5, 5, 5, 5);
+                grid.Margin = new Thickness(10, 10, 10, 10);
 
                 Label header = new Label() {
                     Content = timerslist[i].header,

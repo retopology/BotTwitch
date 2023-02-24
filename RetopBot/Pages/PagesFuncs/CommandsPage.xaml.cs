@@ -116,6 +116,23 @@ namespace RetopBot.Pages.PagesFuncs
                             header.Margin = new Thickness(5, 5, 5, 0);
                             grid.Children.Add(header);
 
+                            
+
+                            TextBox msg = new TextBox();
+                            msg.Height = 35;
+                            msg.Text = MainWindow.mainwindow.commands[i].text;
+                            msg.Margin = new Thickness(5, 50, 125, 45);
+                            msg.BorderBrush = null;
+                            msg.Background = Brushes.DarkGray;
+                            grid.Children.Add(msg);
+
+                            Orientation orientation = Orientation.Horizontal;
+                            StackPanel stc = new StackPanel();
+                            stc.Orientation = orientation;
+                            stc.HorizontalAlignment = HorizontalAlignment.Right;
+                            stc.Margin = new Thickness(5, 5, 5, 5);
+
+
                             TextBox txt = new TextBox();
                             txt.Height = 35;
                             txt.Width = 35;
@@ -123,41 +140,18 @@ namespace RetopBot.Pages.PagesFuncs
                             txt.VerticalContentAlignment = VerticalAlignment.Center;
                             txt.VerticalAlignment = VerticalAlignment.Top;
                             txt.HorizontalAlignment = HorizontalAlignment.Right;
-                            txt.Margin = new Thickness(0, 5, 130, 0);
+                            txt.Margin = new Thickness(0, 0, 5, 0);
                             txt.BorderBrush = null;
                             txt.Text = "1";
                             txt.PreviewTextInput += Txt_PreviewTextInput;
-                            grid.Children.Add(txt);
-
-                            TextBox msg = new TextBox();
-                            msg.Height = 35;
-                            msg.Text = MainWindow.mainwindow.commands[i].text;
-                            msg.Margin = new Thickness(5, 50, 0, 45);
-                            msg.BorderBrush = null;
-                            msg.Background = Brushes.DarkGray;
-                            msg.HorizontalAlignment = HorizontalAlignment.Left;
-                            msg.Width = 253;
-                            grid.Children.Add(msg);
-
-                            Button send = new Button();
-                            send.Content = "Send";
-                            send.Height = 35;
-                            send.Background = (Brush)cnv.ConvertFrom("#FFEFFFDC");
-                            send.Foreground = Brushes.Black;
-                            send.Margin = new Thickness(256, 5, 15, 0);
-                            send.Click += delegate
-                            {
-                                if (txt.Text != "")
-                                    MainWindow.mainwindow.SendMsg(msg.Text, Convert.ToInt32(txt.Text));
-                                else MainWindow.mainwindow.SendMsg(msg.Text.ToString(), 1);
-                            };
-                            grid.Children.Add(send);
+                            stc.Children.Add(txt);
 
                             Button edit = new Button();
                             edit.Width = 35;
                             edit.Content = "/";
+                            edit.HorizontalAlignment = HorizontalAlignment.Right;
                             edit.Height = 35;
-                            edit.Margin = new Thickness(176, 5, 170, 0);
+                            edit.Margin = new Thickness(0, 0, 5, 0);
                             edit.Tag = 1.ToString();
                             edit.Click += delegate
                             {
@@ -172,13 +166,32 @@ namespace RetopBot.Pages.PagesFuncs
                                     edit.Tag = 1.ToString();
                                 }
                             };
-                            grid.Children.Add(edit);
+                            stc.Children.Add(edit);
+
+                            Button send = new Button();
+                            send.Content = "Send";
+                            send.Height = 35;
+                            send.Width = 100;
+                            send.Background = (Brush)cnv.ConvertFrom("#FFEFFFDC");
+                            send.Foreground = Brushes.Black;
+                            send.Margin = new Thickness(0, 0, 5, 0);
+                            send.Click += delegate
+                            {
+                                if (txt.Text != "")
+                                    MainWindow.mainwindow.SendMsg(msg.Text, Convert.ToInt32(txt.Text));
+                                else MainWindow.mainwindow.SendMsg(msg.Text.ToString(), 1);
+                            };
+                            stc.Children.Add(send);
+
+                            grid.Children.Add(stc);
+
+
+
+
 
                             ComboBox tags_par = new ComboBox();
                             tags_par.Height = 25;
-                            tags_par.HorizontalAlignment = HorizontalAlignment.Left;
-                            tags_par.Width = 150;
-                            tags_par.Margin = new Thickness(5, 90, 5, 5);
+                            tags_par.Margin = new Thickness(5, 90, 200, 5);
                             tags_par.BorderBrush = null;
                             tags_par.Background = Brushes.DarkGray;
                             for (int j = 0; j < tagsCom.Count; j++)
@@ -193,11 +206,11 @@ namespace RetopBot.Pages.PagesFuncs
 
 
                             TextBox hotkey = new TextBox();
-                            hotkey.Margin = new Thickness(160, 105, 0, 20);
+                            hotkey.Margin = new Thickness(0, 105, 75, 20);
                             hotkey.BorderBrush = null;
                             hotkey.Background = Brushes.DarkGray;
-                            hotkey.Width = 98;
-                            hotkey.HorizontalAlignment = HorizontalAlignment.Left;
+                            hotkey.Width = 100;
+                            hotkey.HorizontalAlignment = HorizontalAlignment.Right;
                             hotkey.Text = MainWindow.mainwindow.commands[i].hotkey;
                             hotkey.VerticalContentAlignment = VerticalAlignment.Center;
                             hotkey.HorizontalContentAlignment = HorizontalAlignment.Center;
@@ -206,8 +219,10 @@ namespace RetopBot.Pages.PagesFuncs
                             grid.Children.Add(hotkey);
 
                             Button red = new Button();
+                            red.HorizontalAlignment = HorizontalAlignment.Right;
+                            red.Width = 100;
                             red.Height = 35;
-                            red.Margin = new Thickness(266, 60, 15, 0);
+                            red.Margin = new Thickness(0, 60, 15, 0);
                             red.Tag = MainWindow.mainwindow.commands[i].id.ToString();
                             red.Content = "Edit";
                             red.Click += delegate
@@ -221,7 +236,9 @@ namespace RetopBot.Pages.PagesFuncs
 
                             Button delete = new Button();
                             delete.Height = 25;
-                            delete.Margin = new Thickness(266, 105, 15, 0);
+                            delete.Width = 50;
+                            delete.HorizontalAlignment = HorizontalAlignment.Right;
+                            delete.Margin = new Thickness(0, 105, 15, 0);
                             delete.Content = "X";
                             delete.Tag = MainWindow.mainwindow.commands[i].id.ToString();
                             delete.Click += delegate

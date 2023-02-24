@@ -31,33 +31,37 @@
                 
             </StackPanel>
         </ScrollViewer>
-        <TextBox x:Name="searchtxt" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="88,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" Height="28" Background="#FF3C3C3C" BorderBrush="White" Foreground="White"/>
-        <Label Content="Поиск" HorizontalAlignment="Left" Margin="16,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
-        <Label Content="Искать" HorizontalAlignment="Left" Margin="295,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
-        <ComboBox x:Name="targetcb" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="360,23,0,0" VerticalAlignment="Top" Width="162" Height="28" SelectedIndex="0">
-            <ComboBoxItem Content="Любое поле"/>
-            <ComboBoxItem Content="Юзер"/>
-            <ComboBoxItem Content="Сообщение"/>
-            <ComboBoxItem Content="Дата"/>
-            <ComboBoxItem Content="Время"/>
-        </ComboBox>
-        <Label Content="Границы" HorizontalAlignment="Left" Margin="539,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
-        <ComboBox x:Name="endscb" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="619,23,0,0" VerticalAlignment="Top" Width="162" Height="28" SelectedIndex="0">
-            <ComboBoxItem Content="100"/>
-            <ComboBoxItem Content="300"/>
-            <ComboBoxItem Content="500"/>
-            <ComboBoxItem Content="5000"/>
-            <ComboBoxItem Content="10000"/>
-            <ComboBoxItem Content="Вся база"/>
-        </ComboBox>
-        
-        <Button Content="GO" HorizontalAlignment="Left" Margin="831,20,0,0" VerticalAlignment="Top" Height="31" Width="110" BorderBrush="White" Foreground="White" Click="Button_Click" Background="{x:Null}"/>
+
+
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top">
+            <TextBox x:Name="searchtxt" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="88,23,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="196" Height="28" Background="#FF3C3C3C" BorderBrush="White" Foreground="White"/>
+            <Label Content="Поиск" HorizontalAlignment="Left" Margin="16,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+            <Label Content="Искать" HorizontalAlignment="Left" Margin="295,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+            <ComboBox x:Name="targetcb" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="360,23,0,0" VerticalAlignment="Top" Width="162" Height="28" SelectedIndex="0">
+                <ComboBoxItem Content="Любое поле"/>
+                <ComboBoxItem Content="Юзер"/>
+                <ComboBoxItem Content="Сообщение"/>
+                <ComboBoxItem Content="Дата"/>
+                <ComboBoxItem Content="Время"/>
+            </ComboBox>
+            <Label Content="Границы" HorizontalAlignment="Left" Margin="539,20,0,0" VerticalAlignment="Top" Foreground="White" FontSize="16"/>
+            <ComboBox x:Name="endscb" VerticalContentAlignment="Center" HorizontalAlignment="Left" Margin="619,23,0,0" VerticalAlignment="Top" Width="162" Height="28" SelectedIndex="0">
+                <ComboBoxItem Content="100"/>
+                <ComboBoxItem Content="300"/>
+                <ComboBoxItem Content="500"/>
+                <ComboBoxItem Content="5000"/>
+                <ComboBoxItem Content="10000"/>
+                <ComboBoxItem Content="Вся база"/>
+            </ComboBox>
+
+            <Button Content="GO" HorizontalAlignment="Left" Margin="831,20,0,0" VerticalAlignment="Top" Height="31" Width="110" BorderBrush="White" Foreground="White" Click="Button_Click" Background="{x:Null}"/>
+            <Label Content="если выбрать всю базу, завсинет, не кликать" HorizontalAlignment="Left" Margin="619,0,0,0" VerticalAlignment="Top" FontSize="9" Foreground="White" FontStyle="Italic"/>
+        </Grid>
+
         <Grid x:Name="Loadion" Visibility="Hidden">
             <Image gif:AnimationBehavior.SourceUri="/Imgs/waitgif.gif" VerticalAlignment="Center" HorizontalAlignment="Center"
                Height="350" Width="200" />
             <Label FontSize="48" Content="Ждем..." Margin="10,420,790,10" Foreground="White" FontWeight="Bold"/>
         </Grid>
-        <Label Content="если выбрать всю базу, завсинет, не кликать" HorizontalAlignment="Left" Margin="619,0,0,0" VerticalAlignment="Top" FontSize="9" Foreground="White" FontStyle="Italic"/>
-
     </Grid>
 </Page>

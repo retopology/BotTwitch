@@ -14,7 +14,9 @@
         </LinearGradientBrush>
     </Page.Background>
     <Grid>
-        <Border Visibility="Hidden" IsEnabled="False" x:Name="refreshotch" CornerRadius="10" Background="#FFAD00CA" Margin="36,25,869,443" MouseLeftButtonDown="refreshotchet">
+
+        <Border Visibility="Hidden" IsEnabled="False" x:Name="refreshotch" CornerRadius="10" Background="#FFAD00CA"
+                VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20" Width="100" MouseLeftButtonDown="refreshotchet">
 
 
             <Border.Effect>
@@ -23,8 +25,8 @@
             <Label Content="Обновить" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                    FontSize="16"/>
         </Border>
-        <Grid x:Name="generation" Visibility="Visible">
-            <Grid Background="Black" Opacity="0.2" Margin="200,200,200,150">
+        <Grid x:Name="generation" Visibility="Visible" Grid.RowSpan="3" Grid.ColumnSpan="4">
+            <Grid Background="Black" Opacity="0.2" Margin="100,50,100,50">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
                 </Grid.Effect>
@@ -62,69 +64,76 @@
                    Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,100,0,0" FontStyle="Italic" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
 
         </Grid>
-        <Grid x:Name="otchetgrid" Visibility="Hidden" IsEnabled="False">
-            
+        <Grid x:Name="otchetgrid" Visibility="Hidden" IsEnabled="False" Grid.RowSpan="3" Grid.ColumnSpan="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="105*"/>
+                <RowDefinition Height="72*"/>
+                <RowDefinition Height="73*"/>
+            </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="99*"/>
-                <ColumnDefinition Width="26*"/>
+                <ColumnDefinition Width="274*"/>
+                <ColumnDefinition Width="264*"/>
+                <ColumnDefinition Width="233*"/>
+                <ColumnDefinition Width="229*"/>
             </Grid.ColumnDefinitions>
 
-            <Grid Background="Black" Opacity="0.2" Margin="10,73,522,293">
+
+            <Grid Background="Black" Opacity="0.2" Margin="10,73,4,3" Grid.Column="0">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
                 </Grid.Effect>
             </Grid>
-            <Label Content="Количество сообщений:" Foreground="White" FontSize="16" Margin="18,82,581,382"/>
+            <Label Content="Количество сообщений:" Foreground="White" FontSize="16" Margin="18,82,119,92" Grid.ColumnSpan="2"/>
 
-            <Grid Background="Black" Opacity="0.2" Margin="275,73,257,293">
+            <Grid Background="Black" Opacity="0.2" Margin="2,73,4,3" Grid.Column="1">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
                 </Grid.Effect>
             </Grid>
-            <Label Content="Количество уникальных юзеров:" Foreground="White" FontSize="16" Margin="279,82,261,382"/>
+            <Label Content="Количество уникальных юзеров:" Foreground="White" FontSize="16" Margin="6,82,32,92" Grid.Column="1" Grid.ColumnSpan="2"/>
 
-            <Label Content="Отчет за текущую сессию" HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" FontSize="24" FontWeight="Bold"
-                       Margin="344,15,0,0"/>
+            <Label Content="Отчет за текущую сессию" HorizontalAlignment="Center" VerticalAlignment="Top" Foreground="White" FontSize="24" FontWeight="Bold"
+                       Margin="0,15,0,0" Grid.Column="1" Grid.ColumnSpan="2"/>
             <Label x:Name="countmsgslb" Content="0" HorizontalAlignment="Left" Margin="25,106,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White"/>
-            <Grid Background="Black" Opacity="0.2" Margin="10,212,522,150">
+            <Grid Background="Black" Opacity="0.2" Margin="10,2,4,4" Grid.Column="0" Grid.Row="1">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
                 </Grid.Effect>
             </Grid>
-            <Grid Background="Black" Opacity="0.2" Margin="10,355,522,10">
+            <Grid Background="Black" Opacity="0.2" Margin="10,1,4,10" Grid.Column="0" Grid.Row="2">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
                 </Grid.Effect>
             </Grid>
-            <Grid Background="Black" Opacity="0.2" Margin="275,212,257,150">
+            <Grid Background="Black" Opacity="0.2" Margin="2,2,3,4" Grid.Column="1" Grid.Row="1">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
                 </Grid.Effect>
             </Grid>
-            <Grid Background="Black" Opacity="0.2" Margin="539,72,11,294" Grid.ColumnSpan="2">
+            <Grid Background="Black" Opacity="0.2" Margin="2,72,11,4" Grid.Column="2" Grid.ColumnSpan="2">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
                 </Grid.Effect>
             </Grid>
-            <Grid Background="Black" Opacity="0.2" Margin="275,356,257,10">
+            <Grid Background="Black" Opacity="0.2" Margin="2,2,3,10" Grid.Column="1" Grid.Row="2">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
                 </Grid.Effect>
             </Grid>
-            <Grid Background="Black" Opacity="0.2" Margin="540,212,24,11">
+            <Grid Background="Black" Opacity="0.2" Margin="2,2,3,11" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
                 </Grid.Effect>
             </Grid>
-            <Grid Background="Black" Opacity="0.2" Margin="773,212,10,11" Grid.ColumnSpan="2">
+            <Grid Background="Black" Opacity="0.2" Margin="3,2,10,11" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2">
                 <Grid.Effect>
                     <DropShadowEffect Color="Black" BlurRadius="10" Direction="400"/>
                 </Grid.Effect>
             </Grid>
-            <Label Content="Топ слов:" Foreground="White" FontSize="16" Margin="550,218,50,246"/>
-            <Label Content="Топ пользователей:" Foreground="White" FontSize="16" Margin="779,218,29,246" Grid.ColumnSpan="2"/>
-            <Label Content="Сабов:" Foreground="White" FontSize="16" Margin="287,365,313,99"/>
-            <Label Content="Количество отстранений:" Foreground="White" FontSize="16" Margin="18,218,574,246" RenderTransformOrigin="0.5,0.5">
+            <Label Content="Топ слов:" Foreground="White" FontSize="16" Margin="12,8,3,100" Grid.Column="2" Grid.Row="1"/>
+            <Label Content="Топ пользователей:" Foreground="White" FontSize="16" Margin="9,8,29,100" Grid.Column="3" Grid.Row="1"/>
+            <Label Content="Сабов:" Foreground="White" FontSize="16" Margin="14,11,84,99" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"/>
+            <Label Content="Количество отстранений:" Foreground="White" FontSize="16" Margin="18,8,112,100" RenderTransformOrigin="0.5,0.5" Grid.ColumnSpan="2" Grid.Row="1">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -134,9 +143,9 @@
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
-            <Label Content="Длительность:" Foreground="White" FontSize="16" Margin="549,78,72,386"/>
-            <Label Content="Сообщений в минуту:" Foreground="White" FontSize="16" Margin="18,365,581,99"/>
-            <Label Content="Количество банов:" Foreground="White" FontSize="16" Margin="288,218,304,246" RenderTransformOrigin="0.5,0.5">
+            <Label Content="Длительность:" Foreground="White" FontSize="16" Margin="12,78,72,96" Grid.Column="2" Grid.ColumnSpan="2"/>
+            <Label Content="Сообщений в минуту:" Foreground="White" FontSize="16" Margin="18,11,119,99" Grid.ColumnSpan="2" Grid.Row="2"/>
+            <Label Content="Количество банов:" Foreground="White" FontSize="16" Margin="14,8,82,100" RenderTransformOrigin="0.5,0.5" Grid.Column="1" Grid.Row="1">
                 <Label.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -146,33 +155,33 @@
                     </TransformGroup>
                 </Label.RenderTransform>
             </Label>
-            <Label x:Name="countunikusers" Content="0" HorizontalAlignment="Left" Margin="286,106,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White"/>
-            <Label x:Name="countsubs" Content="0" HorizontalAlignment="Left" Margin="286,389,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" RenderTransformOrigin="0.084,0.515"/>
-            <Label x:Name="countotsraneniy" Content="0" HorizontalAlignment="Left" Margin="18,250,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White"/>
-            <Label x:Name="countbans" Content="0" HorizontalAlignment="Left" Margin="286,250,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White"/>
-            <Label x:Name="dlitenostlb" Content="0" HorizontalAlignment="Left" Margin="549,114,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="217"/>
-            <Label x:Name="countmsgsmin" Content="0" HorizontalAlignment="Left" Margin="18,397,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White"/>
+            <Label x:Name="countunikusers" Content="0" HorizontalAlignment="Left" Margin="12,106,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" Grid.Column="1"/>
+            <Label x:Name="countsubs" Content="0" HorizontalAlignment="Left" Margin="12,43,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" RenderTransformOrigin="0.084,0.515" Grid.Column="1" Grid.Row="2"/>
+            <Label x:Name="countotsraneniy" Content="0" HorizontalAlignment="Left" Margin="18,40,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" Grid.Row="1"/>
+            <Label x:Name="countbans" Content="0" HorizontalAlignment="Left" Margin="12,40,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" Grid.Column="1" Grid.Row="1"/>
+            <Label x:Name="dlitenostlb" Content="0" HorizontalAlignment="Left" Margin="12,114,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" Width="217" Grid.Column="2"/>
+            <Label x:Name="countmsgsmin" Content="0" HorizontalAlignment="Left" Margin="18,43,0,0" VerticalAlignment="Top" FontSize="48" Foreground="White" Grid.Row="2"/>
 
             <Label x:Name="minus_count_msgs" Content="0" HorizontalAlignment="Left" Margin="36,167,0,0" VerticalAlignment="Top" FontSize="20"/>
-            <Label x:Name="minus_unic_users" Content="0" HorizontalAlignment="Left" Margin="292,167,0,0" VerticalAlignment="Top" FontSize="20"/>
-            <Label x:Name="minus_count_bans" Content="0" HorizontalAlignment="Left" Margin="292,312,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF6D6D6D"/>
-            <Label x:Name="minus_count_timeoits" Content="0" HorizontalAlignment="Left" Margin="36,312,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF6D6D6D"/>
-            <Label x:Name="minus_msgs_per_Min" Content="0" HorizontalAlignment="Left" Margin="36,453,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF6D6D6D"/>
-            <Label x:Name="minus_count_subs" Content="0" HorizontalAlignment="Left" Margin="292,453,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF6D6D6D"/>
+            <Label x:Name="minus_unic_users" Content="0" HorizontalAlignment="Left" Margin="18,167,0,0" VerticalAlignment="Top" FontSize="20" Grid.Column="1"/>
+            <Label x:Name="minus_count_bans" Content="0" HorizontalAlignment="Left" Margin="18,102,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF6D6D6D" Grid.Column="1" Grid.Row="1"/>
+            <Label x:Name="minus_count_timeoits" Content="0" HorizontalAlignment="Left" Margin="36,102,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF6D6D6D" Grid.Row="1"/>
+            <Label x:Name="minus_msgs_per_Min" Content="0" HorizontalAlignment="Left" Margin="36,99,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF6D6D6D" Grid.Row="2"/>
+            <Label x:Name="minus_count_subs" Content="0" HorizontalAlignment="Left" Margin="36,99,0,0" VerticalAlignment="Top" FontSize="20" Foreground="#FF6D6D6D" Grid.Column="1" Grid.Row="2"/>
 
-            <ScrollViewer Margin="540,259,24,11" VerticalScrollBarVisibility="Hidden">
+            <ScrollViewer Margin="2,49,0,11" VerticalScrollBarVisibility="Hidden" Grid.Column="2" Grid.Row="1" Grid.RowSpan="2">
                 <StackPanel x:Name="parrenttopslova">
 
                 </StackPanel>
             </ScrollViewer>
 
-            <ScrollViewer Margin="773,259,11,11" VerticalScrollBarVisibility="Hidden" Grid.ColumnSpan="2">
+            <ScrollViewer Margin="3,49,11,11" VerticalScrollBarVisibility="Hidden" Grid.Column="3" Grid.Row="1" Grid.RowSpan="2">
                 <StackPanel x:Name="parrenttopusers">
 
                 </StackPanel>
             </ScrollViewer>
-            
+
         </Grid>
-        
+
     </Grid>
 </Page>

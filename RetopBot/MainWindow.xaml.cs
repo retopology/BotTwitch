@@ -28,6 +28,7 @@ using TwitchLib.Api.Helix;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Windows.Interop;
+using TwitchLib.PubSub.Enums;
 
 namespace RetopBot
 {
@@ -64,13 +65,6 @@ namespace RetopBot
             idBanMods = moderation.Count;
             localtimer.Elapsed += Localtimer_Elapsed;
             frame.Navigate(new Pages.startbot());
-
-
-
-
-
-
-
         }
 
         // Переменные
@@ -203,6 +197,7 @@ namespace RetopBot
 
 
                 client.OnJoinedChannel += Client_OnJoinedChannel;
+
 
                 return true;
 
@@ -1036,8 +1031,9 @@ namespace RetopBot
             // Снять последние ограничения
             if (e.ChatMessage.Username == myName && e.ChatMessage.Message.Contains("!убратьограничение"))
             {
-                //!убратьограничение curr all
-                //!убратьограничение curr 100
+                //                   номер сессии (curr - текущая)              Сколько (all - все)
+                //!убратьограничение            curr                                   all 
+                //!убратьограничение            curr                                   100
                 try
                 {
                     string[] mas = e.ChatMessage.Message.Split(' ');
@@ -1570,7 +1566,9 @@ namespace RetopBot
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Application.Current.MainWindow.WindowState = WindowState.Normal;
+            if (Application.Current.MainWindow.WindowState == WindowState.Maximized)
+                Application.Current.MainWindow.WindowState = WindowState.Normal;
+            else Application.Current.MainWindow.WindowState = WindowState.Maximized;
         }
 
         #endregion

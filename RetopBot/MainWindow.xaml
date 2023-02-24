@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RetopBot"
         mc:Ignorable="d"
-        Title="MainWindow"  WindowStyle="None" ResizeMode="NoResize"
+        Title="MainWindow"  WindowStyle="None" ResizeMode="CanResizeWithGrip"
+        AllowsTransparency="True"
                            Height="600" Width="1000"
                            
         xmlns:gif ="https://github.com/XamlAnimatedGif/XamlAnimatedGif" KeyDown="hotkeys">
@@ -28,17 +29,22 @@
                     <DropShadowEffect Opacity="0.5"/>
                 </Button.Effect>
             </Button>
-            <Border Height="20" VerticalAlignment="Top" Margin="5,5,95,0" MouseDown="bordermouse" Background="#FF6D6D6D" BorderBrush="#FF1F1F1F">
+            <Border Height="20" VerticalAlignment="Top" Margin="5,5,140,0" MouseDown="bordermouse" Background="#FF6D6D6D" BorderBrush="#FF1F1F1F">
                 <Border.Effect>
                     <DropShadowEffect Opacity="0.5"/>
                 </Border.Effect>
             </Border>
-            <Button Content="_" HorizontalAlignment="Right" Height="20" Width="40" Margin="0,5,50,0" VerticalAlignment="Top" Background="#FF7C8FCE" BorderBrush="{x:Null}" Foreground="White" Click="Button_Click_1">
+            <Button HorizontalContentAlignment="Center" Content="[   ]" HorizontalAlignment="Right" Height="20" Width="40" Margin="0,5,50,0" VerticalAlignment="Top" Background="#FF7C8FCE" BorderBrush="{x:Null}" Foreground="White" Click="Button_Click_2">
                 <Button.Effect>
                     <DropShadowEffect Opacity="0.5"/>
                 </Button.Effect>
             </Button>
-            
+            <Button Content="_" HorizontalAlignment="Right" Height="20" Width="40" Margin="0,5,95,0" VerticalAlignment="Top" Background="#FF7C8FCE" BorderBrush="{x:Null}" Foreground="White" Click="Button_Click_1">
+                <Button.Effect>
+                    <DropShadowEffect Opacity="0.5"/>
+                </Button.Effect>
+            </Button>
+
         </Grid>
         <Grid x:Name="loadingend" Visibility="Hidden" IsEnabled="False">
             <Grid Background="Black" Margin="20,35,20,5" Opacity="0.5">
