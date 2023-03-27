@@ -1,4 +1,4 @@
-﻿// Я чмо
+﻿
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -17,18 +17,10 @@ using MySql.Data.MySqlClient;
 using TwitchLib.Client.Extensions;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System.Linq;
-using TwitchLib.Api.Helix.Models.Search;
-using System.Diagnostics;
-using TwitchLib.PubSub.Events;
-
-using XamlAnimatedGif.Decoding;
 using HtmlAgilityPack;
 using System.Text;
-using TwitchLib.Api.Helix;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Windows.Interop;
-using TwitchLib.PubSub.Enums;
+
 
 namespace RetopBot
 {
@@ -60,11 +52,14 @@ namespace RetopBot
             actualColor = 0;
             commandspage = new Pages.PagesFuncs.CommandsPage();
             customfuncs = new Pages.PagesFuncs.customFuncs();
+            reportspage = new Pages.PagesFuncs.ReportsPage();
             CountIndex = data_base_chatmessage[data_base_chatmessage.Count - 1].id + 1;
             actualbansession = moderation[moderation.Count - 1].session + 1;
             idBanMods = moderation.Count;
             localtimer.Elapsed += Localtimer_Elapsed;
             frame.Navigate(new Pages.startbot());
+            
+           
         }
 
         // Переменные
@@ -103,6 +98,7 @@ namespace RetopBot
             public Pages.PagesFuncs.mainfunc mainfuncpage = new Pages.PagesFuncs.mainfunc();
             public Pages.PagesFuncs.statisticpage statisitc = new Pages.PagesFuncs.statisticpage();
             public Pages.PagesFuncs.allChatPage allchatpage = new Pages.PagesFuncs.allChatPage();
+            public Pages.PagesFuncs.ReportsPage reportspage;
             public Pages.PagesFuncs.customFuncs customfuncs;
             public Pages.PagesFuncs.CommandsPage commandspage;
             #endregion
@@ -112,6 +108,8 @@ namespace RetopBot
             #region
             // public string channelname = "ba4ebar";
             public string channelname = "witchblvde";
+           // public string channelname = "inboss1k";
+
             // public string channelname = "nmplol";
             public string myName = "";
             public string ActualName;
@@ -119,8 +117,10 @@ namespace RetopBot
             public static MainWindow mainwindow;
             public static TwitchClient client = new TwitchClient();
             public bool countryGame = false;
+            TwitchPubSub pubSub;
             public bool findTrack = true;
             public ConnectionCredentials cred;
+            string token;
             public int CountIndex = 0;
             int counterrors = 0;
             int countendprocess = 0;
@@ -159,6 +159,7 @@ namespace RetopBot
         {
             client.BanUser(channelname, user);
         }
+        
         public void TimeOutUser(string user, int duration)
         {
             client.TimeoutUser(channelname, user, TimeSpan.FromMinutes(duration), "Ban");
@@ -168,7 +169,7 @@ namespace RetopBot
             try
             {
 
-                string token = "";
+                token = "";
                 MySqlDataReader db_documents = Connection($"SELECT * FROM token");
                 while (db_documents.Read())
                 {
@@ -196,8 +197,9 @@ namespace RetopBot
 
 
 
-                client.OnJoinedChannel += Client_OnJoinedChannel;
-
+                
+                
+                
 
                 return true;
 
@@ -208,6 +210,8 @@ namespace RetopBot
             }
 
         }
+
+
         public void SendMsg(string str, int count)
         {
             try
@@ -433,6 +437,7 @@ namespace RetopBot
         // Бот читает КОМАНДЫ
         private void Client_OnChatCommandReceived(object sender, TwitchLib.Client.Events.OnChatCommandReceivedArgs e)
         {
+           
             //switch (e.Command.CommandText.ToLower())
             //{
             //    case "тест":
@@ -654,7 +659,7 @@ namespace RetopBot
                 if(msg.ToLower().Contains("донат") | msg.ToLower().Contains("подписк") | msg.ToLower().Contains("саб"))
                 {
                     client.SendReply(channelname, chatId, "Трек с доната/сабки - " +
-                        "△Sco△ Current track: x Sensi - Die letzte Sonnex Sensi - Die letzte Sonne");
+                        "Marc Acardipane - C.S.W.K.");
                     return;
                 }
             }
@@ -785,6 +790,25 @@ namespace RetopBot
                 }
             }
             
+            // Тест прогнозов
+            if(e.ChatMessage.Username == myName && e.ChatMessage.Message == "!лол")
+            {
+                //Dictionary<string, string> dict = new Dictionary<string, string>()
+                //{
+                //    {"Authorization",""},
+                //    {"Client-Id",""},
+                //    {"Content-Type","application/json"},
+                //    {"","{\r\n  \"broadcaster_id\": \"141981764\"," +
+                //        "\r\n  \"title\": \"Any leeks in the stream?\"," +
+                //        "\r\n  \"outcomes\": [\r\n    {\r\n      " +
+                //        "\"title\": \"Yes, give it time.\"\r\n    },\r\n    {\r\n      " +
+                //        "\"title\": \"Definitely not.\"\r\n    }\r\n  ],\r\n  \"prediction_window\": 120\r\n}"}
+                //};
+                //var answer = GoRequest("https://api.twitch.tv/helix/predictions", dict).Result;
+
+            }
+
+
             // Бан и таймаут
             if (e.ChatMessage.Username == myName)
             {
@@ -961,6 +985,11 @@ namespace RetopBot
                 // Частые вопросы
                 if(customfuncs.cbMostQuestions.IsChecked == true) MostQuestion(e.ChatMessage.Message, e.ChatMessage.Id);
 
+                // Список команд
+                if(customfuncs.commandslistcb.IsChecked == true && e.ChatMessage.Message == "!команды")
+                {
+                    client.SendMessage(channelname, "Команды - ласт, wl, трек, сообщения, гугл + фраза, стата + герой");
+                }
 
                 // Загрузка в локальную базу
                 #region
@@ -1506,7 +1535,7 @@ namespace RetopBot
                     return "null";
                 }
             }
-            #endregion
+        #endregion
 
         #endregion
 
@@ -1573,6 +1602,7 @@ namespace RetopBot
 
         #endregion
 
+        
         
     }
 }

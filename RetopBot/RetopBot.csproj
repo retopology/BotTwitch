@@ -249,6 +249,8 @@
   <ItemGroup>
     <Resource Include="Imgs\triangle.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Imgs\deltadown.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

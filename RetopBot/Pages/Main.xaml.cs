@@ -92,7 +92,12 @@ namespace RetopBot.Pages
 
         private void goToSpecFunc(object sender, MouseButtonEventArgs e)
         {
-                mainframe.Navigate(MainWindow.mainwindow.customfuncs);
+            mainframe.Navigate(MainWindow.mainwindow.customfuncs);
+        }
+
+        private void gotoreports(object sender, MouseButtonEventArgs e)
+        {
+            mainframe.Navigate(MainWindow.mainwindow.reportspage);
         }
     }
 }

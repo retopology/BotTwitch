@@ -14,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using TwitchLib.Api.Helix.Models.Users.GetUsers;
+using Windows.ApplicationModel.VoiceCommands;
+using Windows.UI.Xaml.Media;
 
 namespace RetopBot.Pages.PagesFuncs
 {
@@ -92,7 +95,10 @@ namespace RetopBot.Pages.PagesFuncs
             public string user { get; set; }
             public int count { get; set; }
         }
+        public void TestMethod()
+        {
 
+        }
         public async void LaunchCalculate(string target)
         {
             awaitgrid.Visibility = Visibility.Visible;
@@ -195,6 +201,47 @@ namespace RetopBot.Pages.PagesFuncs
             }
 
 
+        }
+
+
+        private void generatereport(object sender, MouseButtonEventArgs e)
+        {
+            parrent.Children.Clear();
+            Random rnd = new Random();
+            double sum = 0;
+            int[] mas = new int[31];
+            for (int i = 0; i < mas.Length; i++)
+            {
+                mas[i] = rnd.Next(100, 6001);
+                sum += mas[i];
+            }
+            for (int i = 0; i < mas.Length; i++)
+            {
+                Grid grid = new Grid()
+                {
+                    Background = Brushes.Black,
+                    VerticalAlignment = VerticalAlignment.Bottom,
+                    Margin = new Thickness(5, 5, 5, 5),
+                    Width = 70,
+                    Height = ((mas[i] * 100) / sum) + 50
+                };
+
+                Label lb = new Label()
+                {
+                    Foreground = Brushes.White,
+                    Content = mas[i].ToString()
+                };
+                grid.Children.Add(lb);
+                parrent.Children.Add(grid);
+                sum -= mas[i];
+                //< Grid Background = "Black" Width = "50" VerticalAlignment =
+                //"Bottom" Height = "50" Margin = "5" />
+            }
+        }
+
+        private void selectdate(object sender, MouseButtonEventArgs e)
+        {
+            datepicekr.Margin = new Thickness(10, 52, 800, 350);
         }
     }
 }

@@ -161,6 +161,35 @@
                     <Label Content="Функции" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
                    FontSize="16"/>
                 </Border>
+                <Border Height="40" Width="125" CornerRadius="10" Background="#FFAD00CA" Margin="10,0,15,0" MouseLeftButtonDown="gotoreports">
+                    <Border.Style>
+                        <Style TargetType="{x:Type Border}">
+                            <Style.Triggers>
+                                <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                                <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                    <BeginStoryboard>
+                                        <Storyboard>
+                                            <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </EventTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+
+
+                    <Border.Effect>
+                        <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
+                    </Border.Effect>
+                    <Label Content="Отчеты" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   FontSize="16"/>
+                </Border>
             </StackPanel>
         </Border>
         <Border Margin="0,90,0,10" CornerRadius="20" Background="#FF474747">
