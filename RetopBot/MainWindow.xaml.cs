@@ -139,6 +139,7 @@ namespace RetopBot
             public string slovoRoulette = "";
             public List<string> RouletteMembers = new List<string>();
 
+            //string ConnectString = "server=192.168.0.24;user=root;port=3312;database=witch;";
             string ConnectString = "server=localhost;user=root;port=3312;database=witch;";
             MySqlConnection MYconnect;
             #endregion
