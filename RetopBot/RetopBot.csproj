@@ -105,6 +105,9 @@
     <Compile Include="ShazamFolder\Toaster.cs" />
     <Compile Include="ShazamFolder\Types.cs" />
     <Compile Include="ShazamFolder\Utils.cs" />
+    <Compile Include="Windows\settingsWindow.xaml.cs">
+      <DependentUpon>settingsWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -166,6 +169,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\startbot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\settingsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -237,7 +244,7 @@
       <Version>3.5.3</Version>
     </PackageReference>
     <PackageReference Include="TwitchLib.Api.Core">
-      <Version>3.8.0</Version>
+      <Version>3.9.0</Version>
     </PackageReference>
     <PackageReference Include="XamlAnimatedGif">
       <Version>2.0.3</Version>
@@ -251,6 +258,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Imgs\deltadown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imgs\settings.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

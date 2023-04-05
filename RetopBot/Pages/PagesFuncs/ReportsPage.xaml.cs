@@ -95,10 +95,7 @@ namespace RetopBot.Pages.PagesFuncs
             public string user { get; set; }
             public int count { get; set; }
         }
-        public void TestMethod()
-        {
 
-        }
         public async void LaunchCalculate(string target)
         {
             awaitgrid.Visibility = Visibility.Visible;
@@ -106,7 +103,7 @@ namespace RetopBot.Pages.PagesFuncs
             await Task.Run(() =>
             {
 
-
+                
                 if (target.Length != 4)
                 {
                     string[] mas = target.Split(' ');
@@ -172,18 +169,45 @@ namespace RetopBot.Pages.PagesFuncs
                 int mseto = 1;
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
+                    Label countmsgsLb = new Label()
+                    {
+                        Content = "Количество сообщений - " + countmsgs,
+                        HorizontalAlignment = HorizontalAlignment.Center,
+                        Foreground = Brushes.White,
+                        FontSize = 22
+
+                    };
+                    parrent.Children.Add(countmsgsLb);
                     foreach (var item in endusersMsgs)
                     {
-                        if (mseto == 11) break;
+                        if (mseto == 11)
+                        {
+                            Label reportLb = new Label()
+                            {
+                                Content = "отчет за " + mounthCb.SelectedValue.ToString(),
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Foreground = Brushes.White,
+                                FontSize = 12
+
+                            };
+                            parrent.Children.Add(reportLb);
+                            break;
+                        }
                         else
                         {
-                            topUsers.Items.Add(mseto + ". " + item.user + " - " + item.count + " сообщений");
+                            Label userLb = new Label()
+                            {
+                                Content = mseto + ". " + item.user + " - " + item.count + " сообщений",
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Foreground = Brushes.White,
+                                FontSize = 16
+
+                            };
+                            parrent.Children.Add(userLb);   
                             mseto++;
                         }
 
                     }
-                    topUsers.Items.Add("Всего сообщений за Январь - " + countmsgs);
-                    topUsers.Items.Add("Отчет за " + mounthCb.SelectedValue.ToString());
                 }));
 
 
@@ -192,56 +216,15 @@ namespace RetopBot.Pages.PagesFuncs
             awaitgrid.IsEnabled = false;
 
         }
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            if (mounthCb.SelectedIndex != -1)
-            {
-                LaunchCalculate(mounthCb.SelectedValue.ToString());
-
-            }
-
-
-        }
-
 
         private void generatereport(object sender, MouseButtonEventArgs e)
         {
-            parrent.Children.Clear();
-            Random rnd = new Random();
-            double sum = 0;
-            int[] mas = new int[31];
-            for (int i = 0; i < mas.Length; i++)
+            if (mounthCb.SelectedIndex != -1)
             {
-                mas[i] = rnd.Next(100, 6001);
-                sum += mas[i];
-            }
-            for (int i = 0; i < mas.Length; i++)
-            {
-                Grid grid = new Grid()
-                {
-                    Background = Brushes.Black,
-                    VerticalAlignment = VerticalAlignment.Bottom,
-                    Margin = new Thickness(5, 5, 5, 5),
-                    Width = 70,
-                    Height = ((mas[i] * 100) / sum) + 50
-                };
+                parrent.Children.Clear();
+                LaunchCalculate(mounthCb.SelectedValue.ToString());
 
-                Label lb = new Label()
-                {
-                    Foreground = Brushes.White,
-                    Content = mas[i].ToString()
-                };
-                grid.Children.Add(lb);
-                parrent.Children.Add(grid);
-                sum -= mas[i];
-                //< Grid Background = "Black" Width = "50" VerticalAlignment =
-                //"Bottom" Height = "50" Margin = "5" />
             }
-        }
-
-        private void selectdate(object sender, MouseButtonEventArgs e)
-        {
-            datepicekr.Margin = new Thickness(10, 52, 800, 350);
         }
     }
 }

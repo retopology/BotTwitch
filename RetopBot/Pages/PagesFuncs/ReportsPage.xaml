@@ -17,118 +17,52 @@
     </Page.Background>
 
     <Grid>
-
-        <Border Height="40" Width="125" CornerRadius="10" VerticalAlignment="Top"
-                Background="#FFAD00CA" Margin="0,15,0,0" MouseLeftButtonDown="generatereport">
-            <Border.Style>
-                <Style TargetType="{x:Type Border}">
-                    <Style.Triggers>
-                        <EventTrigger RoutedEvent="UIElement.MouseEnter">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="145"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                        <EventTrigger RoutedEvent="UIElement.MouseLeave">
-                            <BeginStoryboard>
-                                <Storyboard>
-                                    <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="125"/>
-                                </Storyboard>
-                            </BeginStoryboard>
-                        </EventTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Border.Style>
-
-            <Border.Effect>
-                <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
-            </Border.Effect>
-            <Label Content="Генерация" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
-                   FontSize="16"/>
-        </Border>
-
         
-
+        
+        
         <Grid Visibility="Visible">
-            <Border Margin="10,70,10,300" CornerRadius="20">
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="1,1" StartPoint="0,0">
-                        <GradientStop Color="#FF404040"/>
-                        <GradientStop Color="#FF585858" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-                <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                    <StackPanel x:Name="parrent" Orientation="Horizontal" HorizontalAlignment="Center">
+            <Border Height="30" Width="150" CornerRadius="10" Background="#FFAD00CA" VerticalAlignment="Top"
+                HorizontalAlignment="Center" Margin="0,20,0,0" MouseLeftButtonDown="generatereport">
+                <Border.Style>
+                    <Style TargetType="{x:Type Border}">
+                        <Style.Triggers>
+                            <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="200"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                            <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="150"/>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
 
-                    </StackPanel>
-                </ScrollViewer>
+                <Border.Effect>
+                    <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
+                </Border.Effect>
+                <Label Content="Создать" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   FontSize="14"/>
             </Border>
-            <Border Margin="10,220,10,10" CornerRadius="20">
-                <Border.Background>
-                    <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
-                        <GradientStop Color="#FF404040"/>
-                        <GradientStop Color="#FF585858" Offset="1"/>
-                    </LinearGradientBrush>
-                </Border.Background>
-                <StackPanel>
-                    <Border CornerRadius="10" Margin="350,5,350,5">
-                        <Border.Background>
-                            <LinearGradientBrush EndPoint="0,1" StartPoint="1,0">
-                                <GradientStop Color="#FF545454" Offset="0"/>
-                                <GradientStop Color="#FF828282" Offset="1"/>
-                            </LinearGradientBrush>
-                        </Border.Background>
-                        <Label Content="User" HorizontalAlignment="Center" Foreground="White"
-                       FontSize="26"/>
-                    </Border>
+            <ComboBox x:Name="mounthCb" Height="20" Width="130" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,65,0,0"/>
+            
 
-                    <Label Content="2st" HorizontalAlignment="Center" Foreground="White"
-                       FontSize="26"/>
-                    <Label Content="3st" HorizontalAlignment="Center" Foreground="White"
-                       FontSize="26"/>
-                    <Label Content="4st" HorizontalAlignment="Center" Foreground="White"
-                       FontSize="26"/>
-                </StackPanel>
-            </Border>
+            <StackPanel x:Name="parrent" Margin="10,120,10,5">
 
+            </StackPanel>
 
-        </Grid>
-        <Grid Visibility="Hidden">
-            <ListBox x:Name="topUsers" Margin="10,10,405,55" FontSize="24">
-
-            </ListBox>
-            <Button Width="100" Height="23" Content="Отчет" Margin="495,455,405,22" Click="Button_Click" Background="{x:Null}" Foreground="White" BorderBrush="White"/>
-            <ComboBox x:Name="mounthCb" Height="20" Width="130" Margin="0,435,200,0"/>
-            <Label Content="Отчеты" Foreground="White" FontSize="20" VerticalAlignment="Bottom" HorizontalAlignment="Left"
-               Margin="31,0,0,15"/>
             <Grid x:Name="awaitgrid" Visibility="Hidden" IsEnabled="False">
-                <Image gif:AnimationBehavior.SourceUri="/Imgs/waitgif.gif" Margin="15,10,407,123" />
-                <Label Content="Считаю" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,300,380,0"/>
+                <Image gif:AnimationBehavior.SourceUri="/Imgs/waitgif.gif" HorizontalAlignment="Center"
+               Height="350" Width="200" />
+                <Label Content="Считаю" FontSize="30" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,350,0,0"/>
             </Grid>
         </Grid>
-        <Border Margin="10,20,800,450" CornerRadius="10" Background="#FF5B5B5B">
-            <Label Foreground="White" Content="Выбрать" Opacity="0.2" Margin="1"/>
-        </Border>
-        <Border Margin="205,20,760,450" CornerRadius="10" Background="#FF8C8C8C" MouseLeftButtonDown="selectdate">
-            <Image x:Name="imgBtnDate" Source="/Imgs/deltadown.png" Margin="7,10,7,7"/>
 
-        </Border>
-        <!--10,52,800,350-->
-        <Border x:Name="datepicekr" Margin="10,52,800,450" CornerRadius="10" Background="#FF8C8C8C">
-            <ScrollViewer VerticalScrollBarVisibility="Hidden">
-                <StackPanel>
-                    <Border CornerRadius="10" Background="#FF828282" Margin="10,5,10,0">
-                        <Label Content="Январь 2023" HorizontalAlignment="Center" Foreground="White"/>
-                    </Border>
-
-                    <Border CornerRadius="10" Background="#FF828282" Margin="10,5,10,0">
-                        <Label Content="Январь 2023" HorizontalAlignment="Center" Foreground="White"/>
-                    </Border>
-
-                </StackPanel>
-            </ScrollViewer>
-            
-        </Border>
     </Grid>
 </Page>

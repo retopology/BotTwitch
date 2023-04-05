@@ -23,15 +23,40 @@ namespace RetopBot.Pages
         public startbot()
         {
             InitializeComponent();
-            namestreamer.Content = MainWindow.mainwindow.channelname;
+            namestreamer.Content = Properties.Settings.Default.streamer;
             
         }
 
         private void start(object sender, MouseButtonEventArgs e)
         {
-           bool end =  MainWindow.mainwindow.GenerateBot();
+            StartBot();
+        }
+        public async void StartBot()
+        {
+            settingsbtn.IsEnabled = false;
+            startBtn.IsEnabled = false;
+            gifawait.Visibility = Visibility.Visible;
+            bool end = false;
+            await Task.Run(() =>
+            {
+                end = MainWindow.mainwindow.GenerateBot();
+                
+            });
+            gifawait.Visibility = Visibility.Hidden;
+            settingsbtn.IsEnabled = true;
+            startBtn.IsEnabled = true;
             if (end) MainWindow.mainwindow.frame.Navigate(new Pages.Main());
-            else MessageBox.Show("Не удалость подключится, попробуйте повторить попытку или перезапустить приложение");
+            else MessageBox.Show("Проверьте настройки подключения");
+
+        }
+
+        private void settings(object sender, MouseButtonEventArgs e)
+        {
+            Windows.settingsWindow settings = new Windows.settingsWindow();
+            settings.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
+            settings.ShowDialog();
+            namestreamer.Content = Properties.Settings.Default.streamer;
         }
     }
 }

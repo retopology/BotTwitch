@@ -6,11 +6,12 @@
       xmlns:local="clr-namespace:RetopBot.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
+      xmlns:gif ="https://github.com/XamlAnimatedGif/XamlAnimatedGif"
       Title="startbot">
-    
+
     <Grid>
 
-            <Image Source="/Imgs/1228.png" Height="125" Width="100" MouseLeftButtonDown="start">
+        <Image x:Name="startBtn" Source="/Imgs/1228.png" Height="125" Width="100" MouseLeftButtonDown="start">
 
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
@@ -35,12 +36,41 @@
 
 
             <Image.Effect>
-                    <DropShadowEffect ShadowDepth="8" Opacity="0.5" Direction="200"/>
-                </Image.Effect>
-            </Image>
-        <Label Foreground="White" FontSize="24" Content="Label" x:Name="namestreamer" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,500,0,0"/>
+                <DropShadowEffect ShadowDepth="8" Opacity="0.5" Direction="200"/>
+            </Image.Effect>
+        </Image>
+        <Image x:Name="settingsbtn" Source="/Imgs/settings.png" Height="75" Width="47" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30,0,0,30" MouseLeftButtonDown="settings">
+
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:0:0.4" Storyboard.TargetProperty="Width" To="100"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:0:0.4" Storyboard.TargetProperty="Width" To="47"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
 
 
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="8" Opacity="0.5" Direction="200"/>
+            </Image.Effect>
+        </Image>
+        <Label Foreground="White" FontSize="24" Content="" x:Name="namestreamer" HorizontalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,30"/>
+
+        <Image Visibility="Hidden" x:Name="gifawait" gif:AnimationBehavior.SourceUri="/Imgs/waitgif.gif" VerticalAlignment="Center" HorizontalAlignment="Center"
+               Height="350" Width="200" />
 
 
     </Grid>

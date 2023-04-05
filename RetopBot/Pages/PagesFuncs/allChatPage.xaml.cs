@@ -1,4 +1,6 @@
-﻿using SqlHelper;
+﻿using MySql.Data.MySqlClient;
+using RetopBot.Classes;
+using SqlHelper;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,175 +29,190 @@ namespace RetopBot.Pages.PagesFuncs
         {
             InitializeComponent();
         }
+        List<Classes.MessageClass> localmsg = new List<MessageClass>();
+        // FillData($"SELECT * FROM `messages` WHERE id > {count - ends - 1} AND ''")
+        // SELECT * FROM `messages` ORDER BY id DESC LIMIT
+
+        // SELECT * FROM `messages` ORDER BY id DESC LIMIT 1
+        public void FillData(string query)
+        {
+            MySqlDataReader db_documents = MainWindow.mainwindow.Connection(query);
+
+            while (db_documents.Read())
+            {
+                Classes.MessageClass newitem = new MessageClass();
+                newitem.id = Convert.ToInt32(db_documents.GetValue(0).ToString());
+                newitem.username = db_documents.GetValue(1).ToString();
+                newitem.message = db_documents.GetValue(2).ToString();
+                newitem.date = db_documents.GetValue(3).ToString();
+                newitem.time = db_documents.GetValue(4).ToString();
+                localmsg.Add(newitem);
+
+            }
+        }
         public void GenerateTabesal()
         {
-                
-                    try
+
+            try
+            {
+                localmsg.Clear();
+                parrent.Children.Clear();
+                int ends = 0;
+                    
+                // Определение границ
+                switch (endscb.SelectedIndex)
+                {
+                    case 0:
+                        ends = 100;
+                        break;
+                    case 1:
+                        ends = 300;
+                        break;
+                    case 2:
+                        ends = 500;
+                        break;
+                    case 3:
+                        ends = 5000;
+                        break;
+                    case 4:
+                        ends = 10000;
+                        break;
+                    case 5:
+                        ends = -1;
+                        break;
+                }
+                // ORDER BY id DESC LIMIT 1
+                MySqlDataReader countMsgs = MainWindow.mainwindow.Connection("SELECT COUNT(*) FROM `messages`");
+                int countMAx = 0;
+                while (countMsgs.Read())
+                {
+
+                    countMAx = Convert.ToInt32(countMsgs.GetValue(0).ToString());
+
+                }
+                int count = ends == -1 ? ends : countMAx - ends - 1;
+                string tartext = searchtxt.Text;
+                switch (targetcb.SelectedIndex)
+                {
+                    case 0:
+                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND username = '{tartext}' OR " +
+                            $"id > {count} AND message LIKE '%{tartext}%' OR " +
+                            $"id > {count} AND date LIKE '%{tartext}%' OR " +
+                            $"id > {count} AND time LIKE '%{tartext}%'");
+                        break;
+                    case 1:
+                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND username = '{tartext}'");
+                        break;
+                    case 2:
+                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND message = '{tartext}'");
+                        break;
+                    case 3:
+                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND date = '{tartext}'");
+                        break;
+                    case 4:
+                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND time = '{tartext}'");
+                        break;
+
+                }
+
+                localmsg.Reverse();
+
+                for (int i = 0; i < localmsg.Count; i++)
+                {
+
+                    Grid grid = new Grid();
+                    grid.Margin = new Thickness(10, 10, 10, 10);
+                    BrushConverter conert = new BrushConverter();
+                    grid.Background = (Brush)conert.ConvertFrom("#FF4E4E4E");
+
+                    Label time = new Label();
+                    time.Content = localmsg[i].time;
+                    grid.Children.Add(time);
+
+                    Label date = new Label();
+                    date.Margin = new Thickness(70, 0, 0, 0);
+                    date.Content = localmsg[i].date;
+                    grid.Children.Add(date);
+
+                    Label name = new Label();
+                    name.Foreground = Brushes.Red;
+                    name.Margin = new Thickness(150, 0, 0, 0);
+                    name.Content = localmsg[i].username;
+                    grid.Children.Add(name);
+
+                    Label msg = new Label();
+                    msg.Margin = new Thickness(10, 25, 0, 0);
+                    msg.FontSize = 18;
+                    msg.Content = MainWindow.mainwindow.GetCurrentStr(70, localmsg[i].message);
+                    grid.Children.Add(msg);
+
+                    Button copyname = new Button();
+                    copyname.Tag = localmsg[i].username.ToString();
+                    copyname.VerticalAlignment = VerticalAlignment.Top;
+                    copyname.HorizontalAlignment = HorizontalAlignment.Right;
+                    copyname.Content = "Copy Name";
+                    copyname.Width = 100;
+                    copyname.Margin = new Thickness(5, 5, 5, 5);
+                    copyname.Click += delegate
                     {
-                        parrent.Children.Clear();
-                        MainWindow.mainwindow.LoadData(MainWindow.tabels.messages);
+                        Clipboard.SetText(copyname.Tag.ToString());
+                    };
+                    grid.Children.Add(copyname);
 
-
-
-                        int ends = 0;
-                        switch (endscb.SelectedIndex)
-                        {
-                            case 0:
-                                ends = 100;
-                                break;
-                            case 1:
-                                ends = 300;
-                                break;
-                            case 2:
-                                ends = 500;
-                                break;
-                            case 3:
-                                ends = 5000;
-                                break;
-                            case 4:
-                                ends = 10000;
-                                break;
-                            case 5:
-                                ends = MainWindow.mainwindow.data_base_chatmessage.Count;
-                                break;
-                        }
-
-
-                        for (int i = MainWindow.mainwindow.data_base_chatmessage.Count - ends; i < MainWindow.mainwindow.data_base_chatmessage.Count; i++)
-                        {
-                            bool filter = true;
-                            if (searchtxt.Text != "")
-                            {
-                                switch (targetcb.SelectedIndex)
-                                {
-                                    case 0:
-                                        {
-                                            if (!MainWindow.mainwindow.data_base_chatmessage[i].message.Contains(searchtxt.Text) &&
-                                                !MainWindow.mainwindow.data_base_chatmessage[i].username.Contains(searchtxt.Text) &&
-                                                !MainWindow.mainwindow.data_base_chatmessage[i].date.Contains(searchtxt.Text) &&
-                                                !MainWindow.mainwindow.data_base_chatmessage[i].time.Contains(searchtxt.Text)) filter = false;
-                                        }
-                                        break;
-                                    case 1:
-                                        if (!MainWindow.mainwindow.data_base_chatmessage[i].username.Contains(searchtxt.Text)) filter = false;
-                                        break;
-                                    case 2:
-                                        if (!MainWindow.mainwindow.data_base_chatmessage[i].message.Contains(searchtxt.Text)) filter = false;
-                                        break;
-                                    case 3:
-                                        if (!MainWindow.mainwindow.data_base_chatmessage[i].date.Contains(searchtxt.Text)) filter = false;
-                                        break;
-                                    case 4:
-                                        if (!MainWindow.mainwindow.data_base_chatmessage[i].time.Contains(searchtxt.Text)) filter = false;
-                                        break;
-                                }
-                            }
-
-                            if (filter)
-                            {
-                                //    < Grid Background = "#FF4E4E4E" Margin = "10" >
-                                //    < Label Content = "00:00:00" />
-                                //    < Label Margin = "70,0,0,0" Content = "12.02.2022" />
-                                //    < Label Margin = "150,0,0,0" Content = "Name" />
-                                //    < Label Margin = "10,25,0,0" Content = "Text" />
-                                //    < Button Content = "Copy Name" VerticalAlignment = "Top" HorizontalAlignment = "Right" Margin = "5" Width = "100" />
-                                //    < Button Content = "Copy Text" VerticalAlignment = "Top" HorizontalAlignment = "Right" Margin = "5,30,5,5" Width = "100" />
-                                //    < Button Content = "Timeout 10" VerticalAlignment = "Top" HorizontalAlignment = "Right" Margin = "5,30,110,5" Width = "100" />
-                                //    < Button Content = "Ban" VerticalAlignment = "Top" HorizontalAlignment = "Right" Margin = "5,5,110,5" Width = "100" />
-                                //</ Grid >
-                                Grid grid = new Grid();
-                                grid.Margin = new Thickness(10, 10, 10, 10);
-                                BrushConverter conert = new BrushConverter();
-                                grid.Background = (Brush)conert.ConvertFrom("#FF4E4E4E");
-
-                                Label time = new Label();
-                                time.Content = MainWindow.mainwindow.data_base_chatmessage[i].time;
-                                grid.Children.Add(time);
-
-                                Label date = new Label();
-                                date.Margin = new Thickness(70, 0, 0, 0);
-                                date.Content = MainWindow.mainwindow.data_base_chatmessage[i].date;
-                                grid.Children.Add(date);
-
-                                Label name = new Label();
-                                name.Foreground = Brushes.Red;
-                                name.Margin = new Thickness(150, 0, 0, 0);
-                                name.Content = MainWindow.mainwindow.data_base_chatmessage[i].username;
-                                grid.Children.Add(name);
-
-                                Label msg = new Label();
-                                msg.Margin = new Thickness(10, 25, 0, 0);
-                                msg.FontSize = 18;
-                                msg.Content = MainWindow.mainwindow.GetCurrentStr(70, MainWindow.mainwindow.data_base_chatmessage[i].message);
-                                grid.Children.Add(msg);
-
-                                Button copyname = new Button();
-                                copyname.Tag = MainWindow.mainwindow.data_base_chatmessage[i].username.ToString();
-                                copyname.VerticalAlignment = VerticalAlignment.Top;
-                                copyname.HorizontalAlignment = HorizontalAlignment.Right;
-                                copyname.Content = "Copy Name";
-                                copyname.Width = 100;
-                                copyname.Margin = new Thickness(5, 5, 5, 5);
-                                copyname.Click += delegate
-                                {
-                                    Clipboard.SetText(copyname.Tag.ToString());
-                                };
-                                grid.Children.Add(copyname);
-
-                                Button coptext = new Button();
-                                coptext.Tag = MainWindow.mainwindow.data_base_chatmessage[i].message.ToString();
-                                coptext.VerticalAlignment = VerticalAlignment.Top;
-                                coptext.HorizontalAlignment = HorizontalAlignment.Right;
-                                coptext.Content = "Copy Text";
-                                coptext.Width = 100;
-                                coptext.Margin = new Thickness(5, 30, 5, 5);
-                                coptext.Click += delegate
-                                {
-                                    Clipboard.SetText(coptext.Tag.ToString());
-                                };
-                                grid.Children.Add(coptext);
-
-                                Button timeout = new Button();
-                                timeout.Tag = MainWindow.mainwindow.data_base_chatmessage[i].username.ToString();
-                                timeout.VerticalAlignment = VerticalAlignment.Top;
-                                timeout.HorizontalAlignment = HorizontalAlignment.Right;
-                                timeout.Content = "Timeout 10";
-                                timeout.Width = 100;
-                                timeout.Margin = new Thickness(5, 30, 110, 5);
-                                timeout.Click += delegate
-                                {
-                                    MainWindow.mainwindow.TimeOutUser(timeout.Tag.ToString(), 10);
-                                };
-                                grid.Children.Add(timeout);
-
-                                Button banuser = new Button();
-                                banuser.Tag = MainWindow.mainwindow.data_base_chatmessage[i].username.ToString();
-                                banuser.VerticalAlignment = VerticalAlignment.Top;
-                                banuser.HorizontalAlignment = HorizontalAlignment.Right;
-                                banuser.Content = "Ban";
-                                banuser.Width = 100;
-                                banuser.Margin = new Thickness(5, 5, 110, 5);
-                                banuser.Click += delegate
-                                {
-                                    MainWindow.mainwindow.BanUserMethod(banuser.Tag.ToString());
-                                };
-                                grid.Children.Add(banuser);
-
-                                parrent.Children.Add(grid);
-
-
-
-                            }
-                        }
-                        allmsgsscroll.ScrollToEnd();
-
-
-                    }
-                    catch
+                    Button coptext = new Button();
+                    coptext.Tag = localmsg[i].message.ToString();
+                    coptext.VerticalAlignment = VerticalAlignment.Top;
+                    coptext.HorizontalAlignment = HorizontalAlignment.Right;
+                    coptext.Content = "Copy Text";
+                    coptext.Width = 100;
+                    coptext.Margin = new Thickness(5, 30, 5, 5);
+                    coptext.Click += delegate
                     {
-                        MessageBox.Show("Ошибка, не удалось отобразить данные");
-                    }
-                
+                        Clipboard.SetText(coptext.Tag.ToString());
+                    };
+                    grid.Children.Add(coptext);
+
+                    Button timeout = new Button();
+                    timeout.Tag = localmsg[i].username.ToString();
+                    timeout.VerticalAlignment = VerticalAlignment.Top;
+                    timeout.HorizontalAlignment = HorizontalAlignment.Right;
+                    timeout.Content = "Timeout 10";
+                    timeout.Width = 100;
+                    timeout.Margin = new Thickness(5, 30, 110, 5);
+                    timeout.Click += delegate
+                    {
+                        MainWindow.mainwindow.TimeOutUser(timeout.Tag.ToString(), 10);
+                    };
+                    grid.Children.Add(timeout);
+
+                    Button banuser = new Button();
+                    banuser.Tag = localmsg[i].username.ToString();
+                    banuser.VerticalAlignment = VerticalAlignment.Top;
+                    banuser.HorizontalAlignment = HorizontalAlignment.Right;
+                    banuser.Content = "Ban";
+                    banuser.Width = 100;
+                    banuser.Margin = new Thickness(5, 5, 110, 5);
+                    banuser.Click += delegate
+                    {
+                        MainWindow.mainwindow.BanUserMethod(banuser.Tag.ToString());
+                    };
+                    grid.Children.Add(banuser);
+
+                    parrent.Children.Add(grid);
+
+
+
+                        
+                }
+                allmsgsscroll.ScrollToEnd();
+
+
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, не удалось отобразить данные");
+            }
+
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {

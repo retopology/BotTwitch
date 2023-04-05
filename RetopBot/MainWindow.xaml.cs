@@ -40,23 +40,8 @@ namespace RetopBot
             InitializeComponent();
 
             mainwindow = this;
-
-            
-            startstream = DateTime.Now;
-            localpath = Directory.GetCurrentDirectory();
-            MYconnect = new MySqlConnection(ConnectString);
-            LoadData(tabels.messages);
-            LoadData(tabels.report);
-            LoadData(tabels.commands);
-            LoadData(tabels.moderators);
-            actualColor = 0;
-            commandspage = new Pages.PagesFuncs.CommandsPage();
-            customfuncs = new Pages.PagesFuncs.customFuncs();
-            reportspage = new Pages.PagesFuncs.ReportsPage();
-            CountIndex = data_base_chatmessage[data_base_chatmessage.Count - 1].id + 1;
-            actualbansession = moderation[moderation.Count - 1].session + 1;
-            idBanMods = moderation.Count;
             localtimer.Elapsed += Localtimer_Elapsed;
+            
             frame.Navigate(new Pages.startbot());
             
            
@@ -106,11 +91,7 @@ namespace RetopBot
 
             // Свалка
             #region
-            // public string channelname = "ba4ebar";
-            public string channelname = "witchblvde";
-           // public string channelname = "inboss1k";
-
-            // public string channelname = "nmplol";
+            public string channelname = "";
             public string myName = "";
             public string ActualName;
             public string localpath = "";
@@ -139,8 +120,8 @@ namespace RetopBot
             public string slovoRoulette = "";
             public List<string> RouletteMembers = new List<string>();
 
-            //string ConnectString = "server=192.168.0.24;user=root;port=3312;database=witch;";
-            string ConnectString = "server=localhost;user=root;port=3312;database=witch;";
+            string ConnectString = "";
+            //string ConnectString = "server=localhost;user=root;port=3312;database=witch;";
             MySqlConnection MYconnect;
             #endregion
 
@@ -170,6 +151,33 @@ namespace RetopBot
             try
             {
 
+                // "server=192.168.0.3;user=root;port=3312;database=witch;"
+                ConnectString = $"server={Properties.Settings.Default.server};" +
+                    $"user={Properties.Settings.Default.user};" +
+                    $"password={Properties.Settings.Default.password};" +
+                    $"port={Properties.Settings.Default.port};" +
+                    $"database={Properties.Settings.Default.database};";
+                channelname = Properties.Settings.Default.streamer;
+                startstream = DateTime.Now;
+                localpath = Directory.GetCurrentDirectory();
+                MYconnect = new MySqlConnection(ConnectString);
+
+                var connect = Connection($"SELECT * FROM token");
+                if(connect == null ) return false;
+
+                
+                LoadData(tabels.messages);
+                LoadData(tabels.report);
+                LoadData(tabels.commands);
+                LoadData(tabels.moderators);
+                actualColor = 0;
+                
+                CountIndex = data_base_chatmessage[data_base_chatmessage.Count - 1].id + 1;
+                actualbansession = moderation[moderation.Count - 1].session + 1;
+                idBanMods = moderation.Count;
+                
+
+
                 token = "";
                 MySqlDataReader db_documents = Connection($"SELECT * FROM token");
                 while (db_documents.Read())
@@ -195,12 +203,14 @@ namespace RetopBot
                 client.OnUserTimedout += Client_OnUserTimedout;
                 client.OnUserBanned += Client_OnUserBanned;
                 client.OnMessageCleared += Client_OnMessageCleared;
-
-
-
+                Application.Current.Dispatcher.Invoke(() =>
+                {
+                    commandspage = new Pages.PagesFuncs.CommandsPage();
+                    customfuncs = new Pages.PagesFuncs.customFuncs();
+                    reportspage = new Pages.PagesFuncs.ReportsPage();
+                });
                 
-                
-                
+
 
                 return true;
 
@@ -643,7 +653,7 @@ namespace RetopBot
         {
             if(msg == "!настройки" | msg == "!settings")
             {
-                client.SendReply(channelname, chatId, "https://clips.twitch.tv/BitterCourageousHorseradishGivePLZ-Fz6s7zE5LEkRV6gA");
+                client.SendMessage(channelname, "https://clips.twitch.tv/BitterCourageousHorseradishGivePLZ-Fz6s7zE5LEkRV6gA");
                 return;
             }
             if (msg.ToLower().Contains("сборка") | msg.ToLower().Contains("руководство") | msg.ToLower().Contains("гайд") 
@@ -651,7 +661,7 @@ namespace RetopBot
             {
                 if (msg.ToLower().Contains("наге") | msg.ToLower().Contains("нага") | msg.ToLower().Contains("нагу"))
                 {
-                    client.SendReply(channelname, chatId, "Руководство по игре на наге от стримера - https://steamcommunity.com/sharedfiles/filedetails/?id=2915454065");
+                    client.SendMessage(channelname, "Руководство по игре на наге от стримера - https://steamcommunity.com/sharedfiles/filedetails/?id=2915454065");
                     return;
                 }
             }
@@ -659,7 +669,7 @@ namespace RetopBot
             {
                 if(msg.ToLower().Contains("донат") | msg.ToLower().Contains("подписк") | msg.ToLower().Contains("саб"))
                 {
-                    client.SendReply(channelname, chatId, "Трек с доната/сабки - " +
+                    client.SendMessage(channelname, "Трек с доната/сабки - " +
                         "Marc Acardipane - C.S.W.K.");
                     return;
                 }
@@ -669,7 +679,7 @@ namespace RetopBot
                 if(msg.ToLower().Contains("где") | msg.ToLower().Contains("его")
                     | msg.ToLower().Contains("witchblvde"))
                 {
-                    client.SendReply(channelname, chatId, 
+                    client.SendMessage(channelname,
                         "Плейлист в закрепе тг https://t.me/witchblvdes ");
                     return;
                 }
@@ -679,7 +689,7 @@ namespace RetopBot
                 if (msg.ToLower().Contains("клип") | msg.ToLower().Contains("где") 
                     | msg.ToLower().Contains("его") | msg.ToLower().Contains("witchblvde"))
                 {
-                    client.SendReply(channelname, chatId,
+                    client.SendMessage(channelname,
                         "https://clips.twitch.tv/BitterCourageousHorseradishGivePLZ-Fz6s7zE5LEkRV6gA");
                     return;
                 }
@@ -689,7 +699,7 @@ namespace RetopBot
                 if (msg.ToLower().Contains("ты") | msg.ToLower().Contains("куда")
                     | msg.ToLower().Contains("witchblvde"))
                 {
-                    client.SendReply(channelname, chatId,
+                    client.SendMessage(channelname,
                         "Стример не переехал, снял вторую квартиру для стримов");
                     return;
                 }
@@ -710,7 +720,7 @@ namespace RetopBot
                     | msg.ToLower().Contains("ром") | msg.ToLower().Contains("witchblvde"))
                 {
                     client.SendMessage(channelname,
-                        "Стример работает в GameDev кампании. По условиям контракта, свою ЗП и саму кампанию он не разглашает");
+                        "Стример безработный");
                     return;
                 }
             }
@@ -721,7 +731,7 @@ namespace RetopBot
                     | msg.ToLower().Contains("witchblvde"))
                 {
                     client.SendMessage(channelname,
-                        "По условиям контракта, свою ЗП и саму кампанию он не разглашает");
+                        "Стример не разглашает информацию о своем заработке");
                     return;
                 }
             }
@@ -731,7 +741,7 @@ namespace RetopBot
                     | msg.ToLower().Contains("ром") | msg.ToLower().Contains("стример")
                     | msg.ToLower().Contains("witchblvde"))
                 {
-                    client.SendReply(channelname, chatId,
+                    client.SendMessage(channelname,
                         "Стримеру 24.");
                     return;
                 }
@@ -742,7 +752,7 @@ namespace RetopBot
                     
                     | msg.ToLower().Contains("witchblvde"))
                 {
-                    client.SendReply(channelname, chatId,
+                    client.SendMessage(channelname,
                         "Стример живет в Одессе. Более точный адресс не расскажет!");
                     return;
                 }
@@ -752,13 +762,13 @@ namespace RetopBot
                 client.SendReply(channelname, chatId,
                         "Сейчас у стримера +-5к птс. Макс птс - 7к");
             }
-                if (msg.ToLower().Contains("птс") | msg.ToLower().Contains("ммр") | msg.ToLower().Contains("mmr"))
+            if (msg.ToLower().Contains("птс") | msg.ToLower().Contains("ммр") | msg.ToLower().Contains("mmr"))
             {
                 if (msg.ToLower().Contains("сколько") | msg.ToLower().Contains("макс")
 
                     | msg.ToLower().Contains("witchblvde"))
                 {
-                    client.SendReply(channelname, chatId,
+                    client.SendMessage(channelname,
                         "Сейчас у стримера +-5к птс. Макс птс - 7к");
                     return;
                 }
@@ -880,9 +890,19 @@ namespace RetopBot
 
                 // Стата героя
                 if (customfuncs.cbstatehero.IsChecked == true && e.ChatMessage.Message.Contains("!стата"))
+                {
+                    string[] mas12 = e.ChatMessage.Message.Split(' ');
+                    if (mas12[0] == "!стата")
                     {
-                        string[] mas12 = e.ChatMessage.Message.Split(' ');
-                        if (mas12[0] == "!стата")
+                        Random rnd = new Random();
+                        int numRnd = rnd.Next(1, 101);
+                        if (numRnd == 2)
+                        {
+                            TimeOutUser(e.ChatMessage.Username, 1);
+                            client.SendMessage(channelname, e.ChatMessage.Username + ", вместо ответа ты получаешь таймаут на 1 минуту! Не " +
+                                "расстраивайся, ведь шанс на это всего 1%, тебе везет! А если везет, то заходи на CSGO RUN по промокоду вичблейда!");
+                        }
+                        else
                         {
                             if (mas12.Length == 2 | mas12.Length == 3)
                             {
@@ -897,6 +917,7 @@ namespace RetopBot
                             }
                         }
                     }
+                }
 
                 // Команда !ласт 
                 if (customfuncs.cblastgame.IsChecked == true && e.ChatMessage.Message.Contains("!ласт"))
@@ -1601,9 +1622,8 @@ namespace RetopBot
             else Application.Current.MainWindow.WindowState = WindowState.Maximized;
         }
 
-        #endregion
 
-        
-        
+
+        #endregion
     }
 }
