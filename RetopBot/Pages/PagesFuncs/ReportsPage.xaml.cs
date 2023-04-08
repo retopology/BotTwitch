@@ -142,30 +142,17 @@ namespace RetopBot.Pages.PagesFuncs
                 List<ReportMsg> usersMsgs = new List<ReportMsg>();
                 for (int i = 0; i < localmsg.Count; i++)
                 {
-                    bool est = false;
-                    for (int p = 0; p < usersMsgs.Count; p++)
-                    {
-                        if (usersMsgs[p].user == localmsg[i].username)
-                        {
-                            est = true;
-                            break;
-                        }
-                    }
-                    if (!est)
-                    {
-                        string name = localmsg[i].username;
-                        int count = 0;
-                        for (int j = 0; j < localmsg.Count; j++)
-                        {
-                            if (localmsg[j].username == name) count++;
-                        }
-                        ReportMsg newit = new ReportMsg();
-                        newit.user = name;
-                        newit.count = count;
-                        usersMsgs.Add(newit);
-                    }
+
+                    ReportMsg newit = new ReportMsg();
+                    newit.count = localmsg.Where(x => x.username == localmsg[i].username).Count();
+                    newit.user = localmsg[i].username;
+                    usersMsgs.Add(newit);
+                    localmsg.RemoveAll(x => x.username == newit.user);
+
                 }
                 var endusersMsgs = usersMsgs.OrderBy(x => x.count).Reverse();
+
+
                 int mseto = 1;
                 Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {

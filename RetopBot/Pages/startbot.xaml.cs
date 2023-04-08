@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Net.WebSockets;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +32,8 @@ namespace RetopBot.Pages
         private void start(object sender, MouseButtonEventArgs e)
         {
             StartBot();
+            
+
         }
         public async void StartBot()
         {
@@ -41,10 +45,12 @@ namespace RetopBot.Pages
             {
                 end = MainWindow.mainwindow.GenerateBot();
                 
+
             });
             gifawait.Visibility = Visibility.Hidden;
             settingsbtn.IsEnabled = true;
             startBtn.IsEnabled = true;
+
             if (end) MainWindow.mainwindow.frame.Navigate(new Pages.Main());
             else MessageBox.Show("Проверьте настройки подключения");
 

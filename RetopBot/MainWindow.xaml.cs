@@ -175,8 +175,6 @@ namespace RetopBot
                 CountIndex = data_base_chatmessage[data_base_chatmessage.Count - 1].id + 1;
                 actualbansession = moderation[moderation.Count - 1].session + 1;
                 idBanMods = moderation.Count;
-                
-
 
                 token = "";
                 MySqlDataReader db_documents = Connection($"SELECT * FROM token");
@@ -329,12 +327,7 @@ namespace RetopBot
                             newitem.message = db_documents.GetValue(2).ToString();
                             newitem.date = db_documents.GetValue(3).ToString();
                             newitem.time = db_documents.GetValue(4).ToString();
-
-
-
                             data_base_chatmessage.Add(newitem);
-
-
                         }
                     }
                     break;
@@ -524,6 +517,10 @@ namespace RetopBot
                                 int winer = rnd.Next(0, localgivelist.Count);
                                 var est = localwinners.Find(x => x == localgivelist[winer]);
                                 if (est == null) localwinners.Add(localgivelist[winer]);
+                                else
+                                {
+                                   
+                                }
 
                                 
                             }
@@ -651,7 +648,13 @@ namespace RetopBot
         }
         public void MostQuestion(string msg, string chatId)
         {
-            if(msg == "!настройки" | msg == "!settings")
+            // Удаление сообщений с ***
+            if (msg.Contains("***"))
+            {
+                client.DeleteMessage(channelname, chatId);
+                return;
+            }
+            if (msg == "!настройки" | msg == "!settings")
             {
                 client.SendMessage(channelname, "https://clips.twitch.tv/BitterCourageousHorseradishGivePLZ-Fz6s7zE5LEkRV6gA");
                 return;
@@ -800,7 +803,9 @@ namespace RetopBot
                     counterrors++;
                 }
             }
+
             
+
             // Тест прогнозов
             if(e.ChatMessage.Username == myName && e.ChatMessage.Message == "!лол")
             {
@@ -1037,11 +1042,11 @@ namespace RetopBot
                 if (e.ChatMessage.IsModerator) mainfuncpage.WriteMessage(msg, true);
                 else mainfuncpage.WriteMessage(msg, false);
                 #endregion
-
+                
 
 
             }));
-
+            
             // Бан всех кто писал что-то определенное
             if (e.ChatMessage.Username == myName && e.ChatMessage.Message.Contains("!убратьвсех"))
             {
