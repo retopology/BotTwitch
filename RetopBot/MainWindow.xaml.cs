@@ -207,8 +207,8 @@ namespace RetopBot
                     customfuncs = new Pages.PagesFuncs.customFuncs();
                     reportspage = new Pages.PagesFuncs.ReportsPage();
                 });
-                
 
+                
 
                 return true;
 
@@ -646,12 +646,12 @@ namespace RetopBot
 
 
         }
-        public void MostQuestion(string msg, string chatId)
+        public void MostQuestion(string msg, string chatId, string user)
         {
             // Удаление сообщений с ***
             if (msg.Contains("***"))
             {
-                client.DeleteMessage(channelname, chatId);
+                client.TimeoutUser(channelname, user, TimeSpan.FromSeconds(1), "Ban");
                 return;
             }
             if (msg == "!настройки" | msg == "!settings")
@@ -717,16 +717,16 @@ namespace RetopBot
                     return;
                 }
             }
-            if (msg.ToLower().Contains("работа"))
-            {
-                if (msg.ToLower().Contains("стример") |  msg.ToLower().Contains("рома")
-                    | msg.ToLower().Contains("ром") | msg.ToLower().Contains("witchblvde"))
-                {
-                    client.SendMessage(channelname,
-                        "Стример безработный");
-                    return;
-                }
-            }
+            //if (msg.ToLower().Contains("работа"))
+            //{
+            //    if (msg.ToLower().Contains("стример") |  msg.ToLower().Contains("рома")
+            //        | msg.ToLower().Contains("ром") | msg.ToLower().Contains("witchblvde"))
+            //    {
+            //        client.SendMessage(channelname,
+            //            "Стример безработный");
+            //        return;
+            //    }
+            //}
             if (msg.ToLower().Contains("зарабатывае") | msg.ToLower().Contains("зарплата"))
             {
                 if (msg.ToLower().Contains("какая") | msg.ToLower().Contains("сколько") 
@@ -783,7 +783,7 @@ namespace RetopBot
         // Бот читает каждое сообщение
         private void Client_OnMessageReceived(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
         {
-
+            
             // Загрузка в базу
             if (channelname == "witchblvde")
             {
@@ -823,8 +823,6 @@ namespace RetopBot
                 //var answer = GoRequest("https://api.twitch.tv/helix/predictions", dict).Result;
 
             }
-
-
             // Бан и таймаут
             if (e.ChatMessage.Username == myName)
             {
@@ -1010,7 +1008,7 @@ namespace RetopBot
                     }
 
                 // Частые вопросы
-                if(customfuncs.cbMostQuestions.IsChecked == true) MostQuestion(e.ChatMessage.Message, e.ChatMessage.Id);
+                if(customfuncs.cbMostQuestions.IsChecked == true) MostQuestion(e.ChatMessage.Message, e.ChatMessage.Id, e.ChatMessage.Username);
 
                 // Список команд
                 if(customfuncs.commandslistcb.IsChecked == true && e.ChatMessage.Message == "!команды")

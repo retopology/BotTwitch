@@ -141,7 +141,8 @@ namespace RetopBot.Pages.PagesFuncs
             }
         }
 
-        
+
+
         //public void GenerateEvaChat(Classes.MessageClass ms, bool moder)
         //{
         //    string endmsg = MainWindow.mainwindow.GetCurrentStr(30, ms.message.ToString());
