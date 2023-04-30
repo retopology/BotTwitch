@@ -46,7 +46,7 @@ namespace RetopBot.Pages
             if (twenty.IsChecked == true) num = 200;
             for (int i = 0; i < num; i++)
             {
-                MainWindow.mainwindow.TimeOutUser(array[i], 1);
+                MainWindow.mainwindow.TimeOutUserCustom(array[i], 1);
             }
         }
     }

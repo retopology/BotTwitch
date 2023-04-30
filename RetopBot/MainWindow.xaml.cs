@@ -20,7 +20,14 @@ using System.Linq;
 using HtmlAgilityPack;
 using System.Text;
 using System.Text.RegularExpressions;
-
+using TwitchLib.Api.Helix;
+using TwitchLib.Api.Helix.Models.Clips.CreateClip;
+using TwitchLib.Api.Helix.Models.Clips.GetClips;
+using TwitchLib.Api.Core.Interfaces;
+using Newtonsoft.Json;
+using System.Net.Http;
+using System.ComponentModel;
+using TwitchLib.Api.Core.Enums;
 
 namespace RetopBot
 {
@@ -142,9 +149,9 @@ namespace RetopBot
             client.BanUser(channelname, user);
         }
         
-        public void TimeOutUser(string user, int duration)
+        public void TimeOutUserCustom(string user, int duration)
         {
-            client.TimeoutUser(channelname, user, TimeSpan.FromMinutes(duration), "Ban");
+            client.TimeoutUser(channelname, user, TimeSpan.FromMinutes(duration));
         }
         public bool GenerateBot()
         {
@@ -499,6 +506,7 @@ namespace RetopBot
             }));
             idBanMods++;
         }
+
         private void Localtimer_Elapsed(object sender, ElapsedEventArgs e)
         {
             localcounttick--;
@@ -745,7 +753,7 @@ namespace RetopBot
                     | msg.ToLower().Contains("witchblvde"))
                 {
                     client.SendMessage(channelname,
-                        "Стримеру 24.");
+                        "Стримеру 25.");
                     return;
                 }
             }
@@ -829,7 +837,7 @@ namespace RetopBot
                 string[] mas = e.ChatMessage.Message.Split(' ');
                 if (mas[0] == "!таймаут")
                 {
-                    TimeOutUser(mas[1], 200);
+                    TimeOutUserCustom(mas[1], 200);
                 }
                 if(mas[0] == "!бан")
                 {
@@ -901,7 +909,7 @@ namespace RetopBot
                         int numRnd = rnd.Next(1, 101);
                         if (numRnd == 2)
                         {
-                            TimeOutUser(e.ChatMessage.Username, 1);
+                            TimeOutUserCustom(e.ChatMessage.Username, 1);
                             client.SendMessage(channelname, e.ChatMessage.Username + ", вместо ответа ты получаешь таймаут на 1 минуту! Не " +
                                 "расстраивайся, ведь шанс на это всего 1%, тебе везет! А если везет, то заходи на CSGO RUN по промокоду вичблейда!");
                         }
@@ -1067,7 +1075,7 @@ namespace RetopBot
                         {
                             if (chatmessage[i].message.Contains(str))
                             {
-                                TimeOutUser(chatmessage[i].username, duration);
+                                TimeOutUserCustom(chatmessage[i].username, duration);
                                 countBansInline++;
                             }
                             count--;

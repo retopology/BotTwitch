@@ -181,7 +181,7 @@ namespace RetopBot.Pages.PagesFuncs
                     timeout.Margin = new Thickness(5, 30, 110, 5);
                     timeout.Click += delegate
                     {
-                        MainWindow.mainwindow.TimeOutUser(timeout.Tag.ToString(), 10);
+                        MainWindow.mainwindow.TimeOutUserCustom(timeout.Tag.ToString(), 10);
                     };
                     grid.Children.Add(timeout);
 
