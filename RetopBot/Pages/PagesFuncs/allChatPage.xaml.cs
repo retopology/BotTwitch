@@ -46,6 +46,7 @@ namespace RetopBot.Pages.PagesFuncs
                 newitem.message = db_documents.GetValue(2).ToString();
                 newitem.date = db_documents.GetValue(3).ToString();
                 newitem.time = db_documents.GetValue(4).ToString();
+                newitem.userid = db_documents.GetValue(5).ToString();
                 localmsg.Add(newitem);
 
             }
@@ -81,8 +82,9 @@ namespace RetopBot.Pages.PagesFuncs
                         ends = -1;
                         break;
                 }
+                // SELECT * FROM Table ORDER BY ID DESC LIMIT 1
                 // ORDER BY id DESC LIMIT 1
-                MySqlDataReader countMsgs = MainWindow.mainwindow.Connection("SELECT COUNT(*) FROM `messages`");
+                MySqlDataReader countMsgs = MainWindow.mainwindow.Connection("SELECT * FROM `messages` ORDER BY ID DESC LIMIT 1");
                 int countMAx = 0;
                 while (countMsgs.Read())
                 {
@@ -115,7 +117,6 @@ namespace RetopBot.Pages.PagesFuncs
 
                 }
 
-                localmsg.Reverse();
 
                 for (int i = 0; i < localmsg.Count; i++)
                 {
@@ -173,7 +174,7 @@ namespace RetopBot.Pages.PagesFuncs
                     grid.Children.Add(coptext);
 
                     Button timeout = new Button();
-                    timeout.Tag = localmsg[i].username.ToString();
+                    timeout.Tag = localmsg[i].userid.ToString();
                     timeout.VerticalAlignment = VerticalAlignment.Top;
                     timeout.HorizontalAlignment = HorizontalAlignment.Right;
                     timeout.Content = "Timeout 10";
@@ -181,7 +182,7 @@ namespace RetopBot.Pages.PagesFuncs
                     timeout.Margin = new Thickness(5, 30, 110, 5);
                     timeout.Click += delegate
                     {
-                        MainWindow.mainwindow.TimeOutUserCustom(timeout.Tag.ToString(), 10);
+                        MainWindow.mainwindow.TimeOutUserCustom(10,timeout.Tag.ToString());
                     };
                     grid.Children.Add(timeout);
 

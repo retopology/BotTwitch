@@ -42,12 +42,12 @@ namespace RetopBot.Pages
 
         private void banbtn_Click(object sender, RoutedEventArgs e)
         {
-            int num = 1000;
-            if (twenty.IsChecked == true) num = 200;
-            for (int i = 0; i < num; i++)
-            {
-                MainWindow.mainwindow.TimeOutUserCustom(array[i], 1);
-            }
+            //int num = 1000;
+            //if (twenty.IsChecked == true) num = 200;
+            //for (int i = 0; i < num; i++)
+            //{
+            //    MainWindow.mainwindow.TimeOutUserCustom(array[i], 1);
+            //}
         }
     }
 }

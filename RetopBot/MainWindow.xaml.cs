@@ -28,6 +28,9 @@ using Newtonsoft.Json;
 using System.Net.Http;
 using System.ComponentModel;
 using TwitchLib.Api.Core.Enums;
+using System.Net.Http.Headers;
+using System.Drawing;
+using System.Windows.Markup;
 
 namespace RetopBot
 {
@@ -120,7 +123,10 @@ namespace RetopBot
             int actualbansession = 0;
             int actualColor;
             bool maskGiveAway = false;
-
+            GiveAways actualGiveAway = new GiveAways();
+            public string CLientId = "";
+            public string MyUserId = "";
+            public string StreamerId = "";
             public DateTime startstream;
             int problems = 0;
             public bool Roulette = false;
@@ -149,9 +155,26 @@ namespace RetopBot
             client.BanUser(channelname, user);
         }
         
-        public void TimeOutUserCustom(string user, int duration)
+        public void TimeOutUserCustom(int duration, string userId)
         {
-            client.TimeoutUser(channelname, user, TimeSpan.FromMinutes(duration));
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("POST"), $"https://api.twitch.tv/helix/moderation/bans?broadcaster_id={StreamerId}&moderator_id={MyUserId}"))
+                {
+                    string tok = token.Replace("oauth:", "");
+                    request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {tok}");
+                    request.Headers.TryAddWithoutValidation("Client-Id", CLientId);
+
+
+                    request.Content = new StringContent("{\"data\": {\"user_id\":\"" + userId + "\",\"duration\":" + duration + ",\"reason\":\"no reason\"}}");
+                    request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+
+                    var response = httpClient.SendAsync(request).Result;
+                    string end =  response.Content.ReadAsStringAsync().Result;
+
+                }
+            }
+            //client.TimeoutUser(channelname, user, TimeSpan.FromMinutes(duration));
         }
         public bool GenerateBot()
         {
@@ -166,6 +189,7 @@ namespace RetopBot
                     $"database={Properties.Settings.Default.database};";
                 channelname = Properties.Settings.Default.streamer;
                 startstream = DateTime.Now;
+                StreamerId = Properties.Settings.Default.streamerid;
                 localpath = Directory.GetCurrentDirectory();
                 MYconnect = new MySqlConnection(ConnectString);
 
@@ -187,9 +211,10 @@ namespace RetopBot
                 MySqlDataReader db_documents = Connection($"SELECT * FROM token");
                 while (db_documents.Read())
                 {
-                    Classes.MessageClass newitem = new MessageClass();
                     myName = db_documents.GetValue(0).ToString();
                     token = db_documents.GetValue(1).ToString();
+                    CLientId = db_documents.GetValue(2).ToString();
+                    MyUserId = db_documents.GetValue(3).ToString();
 
                 }
                 
@@ -334,6 +359,7 @@ namespace RetopBot
                             newitem.message = db_documents.GetValue(2).ToString();
                             newitem.date = db_documents.GetValue(3).ToString();
                             newitem.time = db_documents.GetValue(4).ToString();
+                            newitem.userid = db_documents.GetValue(5).ToString();
                             data_base_chatmessage.Add(newitem);
                         }
                     }
@@ -801,7 +827,7 @@ namespace RetopBot
                     string time = GenerateTime();
                     string msg = e.ChatMessage.Message.Replace("'", "");
                     var end = Connection(SqlHelp.InsterSql(new string[] {
-                        "messages", CountIndex.ToString(), e.ChatMessage.Username, msg, dat, time
+                        "messages", CountIndex.ToString(), e.ChatMessage.Username, msg, dat, time, e.ChatMessage.UserId
                         }));
                     CountIndex++;
 
@@ -831,33 +857,12 @@ namespace RetopBot
                 //var answer = GoRequest("https://api.twitch.tv/helix/predictions", dict).Result;
 
             }
-            // Бан и таймаут
-            if (e.ChatMessage.Username == myName)
-            {
-                string[] mas = e.ChatMessage.Message.Split(' ');
-                if (mas[0] == "!таймаут")
-                {
-                    TimeOutUserCustom(mas[1], 200);
-                }
-                if(mas[0] == "!бан")
-                {
-                    client.BanUser(channelname, mas[1]);
-                }
-            }
 
-            // Отдать бота
-            if (e.ChatMessage.Username == ActualName && e.ChatMessage.Message.Contains("!отдать"))
-            {
-                string[] mas = e.ChatMessage.Message.Split(' ');
-                myName = mas[1];
-            }
 
-            
 
             // Загрузка в локальную базу и ответы
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-
                 // Количество сообщений
                 if (customfuncs.cbcountmsgs.IsChecked == true && e.ChatMessage.Message == "!сообщения")
                     {
@@ -909,7 +914,7 @@ namespace RetopBot
                         int numRnd = rnd.Next(1, 101);
                         if (numRnd == 2)
                         {
-                            TimeOutUserCustom(e.ChatMessage.Username, 1);
+                            TimeOutUserCustom(60, e.ChatMessage.UserId);
                             client.SendMessage(channelname, e.ChatMessage.Username + ", вместо ответа ты получаешь таймаут на 1 минуту! Не " +
                                 "расстраивайся, ведь шанс на это всего 1%, тебе везет! А если везет, то заходи на CSGO RUN по промокоду вичблейда!");
                         }
@@ -967,45 +972,45 @@ namespace RetopBot
                     }
 
                 // Функция Кто ты
-                if (customfuncs.cbwhoareyou.IsChecked == true && e.ChatMessage.Username == myName && e.ChatMessage.Message.Contains("!ктоты"))
-                    {
-                    try
-                    {
-                        if (chatmessage.Count > 100) {
-                            Random rnd = new Random();
-                            Random rndnas = new Random();
-                            Random rndZnak = new Random();
+                //if (customfuncs.cbwhoareyou.IsChecked == true && e.ChatMessage.Username == myName && e.ChatMessage.Message.Contains("!ктоты"))
+                //    {
+                //    try
+                //    {
+                //        if (chatmessage.Count > 100) {
+                //            Random rnd = new Random();
+                //            Random rndnas = new Random();
+                //            Random rndZnak = new Random();
 
-                            string[] mas = e.ChatMessage.Message.Split(' ');
-                            string answer = mas[1] + " -";
-                            Random randWords = new Random();
-                            int words = randWords.Next(5, 11);
-                            for (int i = 0; i < words; i++)
-                            {
+                //            string[] mas = e.ChatMessage.Message.Split(' ');
+                //            string answer = mas[1] + " -";
+                //            Random randWords = new Random();
+                //            int words = randWords.Next(5, 11);
+                //            for (int i = 0; i < words; i++)
+                //            {
 
-                                int numRnd = rnd.Next(0, chatmessage.Count);
-                                string[] randMsg = chatmessage[numRnd].message.Split(' ');
+                //                int numRnd = rnd.Next(0, chatmessage.Count);
+                //                string[] randMsg = chatmessage[numRnd].message.Split(' ');
 
-                                int numrndnas = rndnas.Next(0, randMsg.Length);
-                                if (!answer.Contains(randMsg[numrndnas]) && randMsg[numrndnas].Length > 1)
-                                {
-                                    answer += " " + randMsg[numrndnas];
+                //                int numrndnas = rndnas.Next(0, randMsg.Length);
+                //                if (!answer.Contains(randMsg[numrndnas]) && randMsg[numrndnas].Length > 1)
+                //                {
+                //                    answer += " " + randMsg[numrndnas];
 
-                                    int numRndZnak = rndZnak.Next(0, 10);
-                                    if (numRndZnak % 3 == 0) answer += ",";
-                                }
-                                else i--;
-                            }
-                            client.SendMessage(channelname, answer);
-                        }
-                        else client.SendMessage(channelname, "Я устал.");
+                //                    int numRndZnak = rndZnak.Next(0, 10);
+                //                    if (numRndZnak % 3 == 0) answer += ",";
+                //                }
+                //                else i--;
+                //            }
+                //            client.SendMessage(channelname, answer);
+                //        }
+                //        else client.SendMessage(channelname, "Я устал.");
 
-                    }
-                    catch
-                    {
-                        client.SendMessage(channelname, "@ba4ebar, пошел нахуй, иди код переделывать");
-                    }
-                }
+                //    }
+                //    catch
+                //    {
+                //        client.SendMessage(channelname, "@ba4ebar, пошел нахуй, иди код переделывать");
+                //    }
+                //}
 
                 // Уведомления о теге
                 if (customfuncs.cbtagme.IsChecked == true && e.ChatMessage.Message.Contains(myName))
@@ -1031,14 +1036,10 @@ namespace RetopBot
                 msg.message = e.ChatMessage.Message;
                 msg.date = GenerateDate();
                 msg.time = GenerateTime();
+                msg.userid = e.ChatMessage.UserId;
                 //     0          1              2        3         4    // LEN = 5
                 // "ba4ebar|всем привет я | новенький|21.10.2022|23:10"
-                StreamWriter wrt = new StreamWriter(localpath + "/sessionchat.txt", true);
-                wrt.WriteLine(msg.username + "|" +
-                              msg.message + "|" +
-                              msg.date + "|" +
-                              msg.time + "|");
-                wrt.Close();
+
 
                 #endregion
 
@@ -1075,7 +1076,7 @@ namespace RetopBot
                         {
                             if (chatmessage[i].message.Contains(str))
                             {
-                                TimeOutUserCustom(chatmessage[i].username, duration);
+                                TimeOutUserCustom(duration, chatmessage[i].userid);
                                 countBansInline++;
                             }
                             count--;
@@ -1186,20 +1187,32 @@ namespace RetopBot
             // Заполнение участников розыгрыша
             if (findtogive)
             {
+                // 298240807
                 // 76561198990303751
                 var n = localgivelist.Find(x => x == e.ChatMessage.Username);
                 if (n == null)
                 {
-                    if (maskGiveAway)
+                    bool exist = true;
+                    if(actualGiveAway.IsNumber == true)
                     {
-                        if (e.ChatMessage.Message.Length == 18 | e.ChatMessage.Message.Length == 17)
-                        {
-                            if (NumberOrNot(e.ChatMessage.Message))
-                                localgivelist.Add(e.ChatMessage.Username);
-
-                        }
+                        if (!NumberOrNot(e.ChatMessage.Message) | e.ChatMessage.Message.Length != actualGiveAway.TargetInt.Length)
+                            exist = false;
                     }
-                    else localgivelist.Add(e.ChatMessage.Username);
+                    if(actualGiveAway.IsString == true && exist == true)
+                    {
+                        if (e.ChatMessage.Message != actualGiveAway.TargetMsg) 
+                            exist = false;
+                    }
+                    if(actualGiveAway.IsSubs == true && exist == true)
+                    {
+                        if(e.ChatMessage.IsSubscriber != true)
+                            exist = false;
+                    }
+                    if (exist)
+                    {
+                        localgivelist.Add(e.ChatMessage.Username);                       
+                    }
+
                 }
             }
 
@@ -1210,15 +1223,45 @@ namespace RetopBot
                 {
                     findtogive = true;
                     localgive = true;
+
                     string[] mas = e.ChatMessage.Message.Split(' ');
+                    actualGiveAway = new GiveAways();
+                    
+                    for (int i = 2; i < mas.Length; i++)
+                    {
+                        if (mas[i].Contains("int"))
+                        {
+                            string[] findMsg = mas[i].Split('=');
+                            actualGiveAway.TargetInt = findMsg[1];
+                            actualGiveAway.IsNumber = true;
+                            continue;
+                        }
+                        if (mas[i].Contains("msg"))
+                        {
+                            string[] findMsg = mas[i].Split('=');
+                            actualGiveAway.TargetMsg = findMsg[1];
+                            actualGiveAway.IsString = true;
+                            continue;
+                        }
+                        if (mas[i].Contains("subs"))
+                        {
+                            actualGiveAway.IsSubs = true;
+                            continue;
+                        }
+
+                    }
+                    
                     if (mas.Length == 3) maskGiveAway = true;
                     else maskGiveAway = false;
                     localcounttick = Convert.ToInt32(mas[1]);
                     localtimer.Start();
-                    if(maskGiveAway)client.SendMessage(channelname, "Стартовал розыгрыш! Для участия нужно написать свой SteamID." +
-                        "Спамить не надо, учитывается только одно сообщение. Конец через " + localcounttick + " сек.");
-                    else client.SendMessage(channelname, "Стартовал розыгрыш! Для участия нужно 1 сообщение после этого." +
-                        "Спамить не надо, учитывается только одно сообщение. Конец через " + localcounttick + " сек.");
+                    string msgToGive = "Стартовал розыгрыш! Для участия нужно написать ";
+                    if (actualGiveAway.IsString) msgToGive +=  "слово/фразу - " + actualGiveAway.TargetMsg;
+                    if (actualGiveAway.IsNumber) msgToGive += " число, которое имеет подобный вид - " + actualGiveAway.TargetInt;
+                    if (!actualGiveAway.IsNumber && !actualGiveAway.IsString) msgToGive += "1 любое сообщение";
+                    msgToGive += " .Спамить не надо, учитывается только одно сообщение. Конец через " + localcounttick + " сек.";
+                    if (actualGiveAway.IsSubs) msgToGive += " Участниками могут быть только платные подписчики";
+                        client.SendMessage(channelname, msgToGive);
                     
                 }
                 catch

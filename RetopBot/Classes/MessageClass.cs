@@ -13,5 +13,6 @@ namespace RetopBot.Classes
         public string message { get; set; }
         public string date { get; set; }
         public string time { get; set; }
+        public string userid { get; set; }
     }
 }

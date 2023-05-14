@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RetopBot.Windows;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -39,6 +40,9 @@ namespace RetopBot.Pages
         {
             settingsbtn.IsEnabled = false;
             startBtn.IsEnabled = false;
+            userSettings.IsEnabled = false;
+            
+
             gifawait.Visibility = Visibility.Visible;
             bool end = false;
             await Task.Run(() =>
@@ -50,7 +54,7 @@ namespace RetopBot.Pages
             gifawait.Visibility = Visibility.Hidden;
             settingsbtn.IsEnabled = true;
             startBtn.IsEnabled = true;
-
+            userSettings.IsEnabled = true;
             if (end) MainWindow.mainwindow.frame.Navigate(new Pages.Main());
             else MessageBox.Show("Проверьте настройки подключения");
 
@@ -63,6 +67,14 @@ namespace RetopBot.Pages
 
             settings.ShowDialog();
             namestreamer.Content = Properties.Settings.Default.streamer;
+        }
+
+        private void usersett(object sender, MouseButtonEventArgs e)
+        {
+            Windows.userSettings settings = new Windows.userSettings();
+            settings.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
+            settings.ShowDialog();
         }
     }
 }

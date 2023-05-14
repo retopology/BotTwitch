@@ -94,5 +94,17 @@ namespace RetopBot.Properties {
                 this["database"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string streamerid {
+            get {
+                return ((string)(this["streamerid"]));
+            }
+            set {
+                this["streamerid"] = value;
+            }
+        }
     }
 }

@@ -45,7 +45,8 @@ namespace RetopBot.Pages.PagesFuncs
                 if(timespamcommand.Text != "")
                 {
                     string[] mas = commandsCb.SelectedValue.ToString().Split('.');
-                    TimersClass newTimer = new TimersClass(MainWindow.mainwindow.commands[Convert.ToInt32(mas[0])].text, Convert.ToInt32(timespamcommand.Text), mas[1]);
+                    TimersClass newTimer = new TimersClass(MainWindow.mainwindow.commands[Convert.ToInt32(mas[0])].text, 
+                        Convert.ToInt32(timespamcommand.Text), mas[1]);
                     timerslist.Add(newTimer);
                     FillCommandsList();
                 }

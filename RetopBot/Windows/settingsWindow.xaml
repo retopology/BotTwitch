@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:RetopBot.Windows"
         mc:Ignorable="d"
-        Title="settingsWindow" Height="400" Width="500" ResizeMode="NoResize" WindowStyle="None" MouseDown="dragme">
+        Title="settingsWindow" Height="451" Width="500" ResizeMode="NoResize" WindowStyle="None" MouseDown="dragme">
     <Window.Background>
         <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
             <GradientStop Color="#FF313131"/>
@@ -60,6 +60,13 @@
                 <Border Width="400" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="10" Background="#FF5B5B5B">
                     <TextBox x:Name="databaseTxt"
                         Background="#FF5B5B5B" BorderBrush="{x:Null}" Margin="3" Padding="2" Text="witch" Foreground="White"/>
+                </Border>
+            </Grid>
+            <Grid Margin="0,5,0,5">
+                <Label Content="ID" Foreground="White" FontSize="16" Margin="0,0,0,5"/>
+                <Border Width="400" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="10" Background="#FF5B5B5B">
+                    <TextBox x:Name="useridStreamer"
+                        Background="#FF5B5B5B" BorderBrush="{x:Null}" Margin="3" Padding="2" Text="698924516" Foreground="White"/>
                 </Border>
             </Grid>
 
