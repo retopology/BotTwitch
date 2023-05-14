@@ -31,7 +31,8 @@ namespace RetopBot.Classes
             if (countTick == countTimer)
             {
                 countTick = 0;
-                MainWindow.mainwindow.SendMsg(text, 1);
+                //MainWindow.mainwindow.SendMsg(text, 1);
+                MainWindow.mainwindow.SendMsg(timer.ToString() + " " + ActiveTimer, 1);
 
             }
         }

@@ -36,6 +36,9 @@
     <WarningLevel>4</WarningLevel>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>iconApp.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Crc32.NET, Version=1.0.0.0, Culture=neutral, PublicKeyToken=dc0b95cf99bf4e99, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -273,6 +276,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Imgs\inconUser.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="iconApp.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
