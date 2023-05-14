@@ -658,24 +658,49 @@ namespace RetopBot
                 }
             }
         }
+        public async Task HttpColorChatAsync(string color)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                using (var request = new HttpRequestMessage(new HttpMethod("PUT"), $"https://api.twitch.tv/helix/chat/color?user_id={MyUserId}&color={color}"))
+                {
+                    string tok = token.Replace("oauth:", "");
+                    request.Headers.TryAddWithoutValidation("Authorization", $"Bearer {tok}");
+                    request.Headers.TryAddWithoutValidation("Client-Id", CLientId);
+                    //request.Content.Headers.ContentType = MediaTypeHeaderValue.Parse("application/json");
+
+                    var response = await httpClient.SendAsync(request);
+                    string end = response.Content.ReadAsStringAsync().Result;
+                    client.SendMessage(channelname, end);
+                }
+            }
+        }
         public void SetColorChat()
         {
             if (actualColor == 10) actualColor = 1;
             else actualColor++;
+            string color = "";
             switch (actualColor)
             {
-                case 1: client.ChangeChatColor(channelname, TwitchLib.Client.Enums.ChatColorPresets.Chocolate); break;
-                case 2: client.ChangeChatColor(channelname, TwitchLib.Client.Enums.ChatColorPresets.Green); break;
-                case 3: client.ChangeChatColor(channelname, TwitchLib.Client.Enums.ChatColorPresets.GoldenRod); break;
-                case 4: client.ChangeChatColor(channelname, TwitchLib.Client.Enums.ChatColorPresets.Firebrick); break;
-                case 5: client.ChangeChatColor(channelname, TwitchLib.Client.Enums.ChatColorPresets.YellowGreen); break;
-                case 6: client.ChangeChatColor(channelname, TwitchLib.Client.Enums.ChatColorPresets.CadetBlue); break;
-                case 7: client.ChangeChatColor(channelname, TwitchLib.Client.Enums.ChatColorPresets.DodgerBlue); break;
-                case 8: client.ChangeChatColor(channelname, TwitchLib.Client.Enums.ChatColorPresets.SpringGreen); break;
-                case 9: client.ChangeChatColor(channelname, TwitchLib.Client.Enums.ChatColorPresets.Coral); break;
-                case 10: client.ChangeChatColor(channelname, TwitchLib.Client.Enums.ChatColorPresets.Blue); break;
+                case 1: color = "blue"; break;
+                case 2: color = "blue_violet"; break;
+                case 3: color = "cadet_blue"; break;
+                case 4: color = "chocolate"; break;
+                case 5: color = "coral"; break;
+                case 6: color = "dodger_blue"; break;
+                case 7: color = "firebrick"; break;
+                case 8: color = "golden_rod"; break;
+                case 9: color = "green"; break;
+                case 10: color = "hot_pink"; break;
+                case 11: color = "orange_red"; break;
+                case 12: color = "red"; break;
+                case 13: color = "sea_green"; break;
+                case 14: color = "spring_green"; break;
+                case 15: color = "yellow_green"; break;
+
 
             }
+            HttpColorChatAsync(color);
 
 
 
@@ -916,7 +941,7 @@ namespace RetopBot
                         {
                             TimeOutUserCustom(60, e.ChatMessage.UserId);
                             client.SendMessage(channelname, e.ChatMessage.Username + ", вместо ответа ты получаешь таймаут на 1 минуту! Не " +
-                                "расстраивайся, ведь шанс на это всего 1%, тебе везет! А если везет, то заходи на CSGO RUN по промокоду вичблейда!");
+                                "расстраивайся, ведь шанс на это всего 1%, тебе везет! А если везет, то заходи на GETX по промокоду вичблейда!");
                         }
                         else
                         {

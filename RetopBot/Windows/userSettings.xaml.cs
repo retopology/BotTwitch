@@ -62,7 +62,7 @@ namespace RetopBot.Windows
                 MYconnect.Close();
                 this.Close();
             }
-            
+
         }
         public void SetBase()
         {
