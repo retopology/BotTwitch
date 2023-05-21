@@ -44,27 +44,25 @@
                                 <ColumnDefinition Width="202*"/>
                             </Grid.ColumnDefinitions>
                             <CheckBox x:Name="cbgoogleit" Content="!гугл" Foreground="White" FontSize="14" Margin="20,10,0,0" 
-                          VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                          VerticalAlignment="Top" HorizontalAlignment="Left" Click="googleClick"/>
                             <CheckBox x:Name="cbfindtrack" Content="!трек" Foreground="White" FontSize="14" Margin="20,5,0,0" 
-                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1"/>
+                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="1" Click="findtrack"/>
                             <CheckBox x:Name="cbcountmsgs" Content="!сообщения" Foreground="White" FontSize="14" Margin="20,6,0,0" 
-                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2"/>
+                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Row="2" Click="countmsgsCLick"/>
 
 
                             <CheckBox x:Name="cbstatehero" Content="!стата" Foreground="White" FontSize="14" Margin="53,10,0,0" 
-                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1"/>
+                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Click="stataClick"/>
                             <CheckBox x:Name="cblastgame" Content="!ласт" Foreground="White" FontSize="14" Margin="53,5,0,0" 
-                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1"/>
+                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="1" Click="lastgameClick"/>
                             <CheckBox x:Name="cbwinlose" Content="!wl" Foreground="White" FontSize="14" Margin="53,6,0,0" 
-                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2"/>
+                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="1" Grid.Row="2" Click="winloseClick"/>
 
 
-                            <CheckBox x:Name="cbwhoareyou" Content="!ктоты" Foreground="White" FontSize="14" Margin="52,10,0,0" 
-                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2"/>
-                            <CheckBox x:Name="cbMostQuestions" Content="Частые вопросы" Foreground="White" FontSize="14" Margin="52,5,0,0" 
-                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="1"/>
-                            <CheckBox x:Name="commandslistcb" Content="!команды" Foreground="White" FontSize="14" Margin="52,6,0,0" 
-                                VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="2"/>
+                            <CheckBox x:Name="cbMostQuestions" Content="Частые вопросы" Foreground="White" FontSize="14" Margin="52,10,0,0" 
+                          VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Click="mostQuestionClick"/>
+                            <CheckBox x:Name="commandslistcb" Content="!команды" Foreground="White" FontSize="14" Margin="52,2,0,0" 
+                                VerticalAlignment="Top" HorizontalAlignment="Left" Grid.Column="2" Grid.Row="1" Click="commandsClick"/>
                         </Grid>
                     </Border>
                 </Grid>
@@ -72,8 +70,8 @@
 
                 <Grid Margin="0,0,0,100" VerticalAlignment="Bottom">
                     <Label Content="Прчее" Foreground="White" FontSize="26" Margin="20,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <CheckBox x:Name="cbtagme" Content="Уведомления о тэге" Foreground="White" FontSize="16" Margin="20,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
-                    <CheckBox IsChecked="True" x:Name="cbcolornick" Content="Цветной ник" Foreground="White" FontSize="16" Margin="214,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <CheckBox x:Name="cbtagme" Content="Уведомления о тэге" Foreground="White" FontSize="16" Margin="20,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="tagMeClick"/>
+                    <CheckBox IsChecked="True" x:Name="cbcolornick" Content="Цветной ник" Foreground="White" FontSize="16" Margin="214,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="colorNickClick"/>
                     <CheckBox x:Name="dontprinreport" Content="Не записывать отчет" Foreground="White" FontSize="16" Margin="357,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                 </Grid>
             </Grid>

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClassesModule;
+using HelpModule;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -14,6 +16,7 @@ using System.Windows.Media.Effects;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Variables;
 using static System.Net.Mime.MediaTypeNames;
 
 namespace RetopBot.Pages.PagesFuncs
@@ -62,21 +65,21 @@ namespace RetopBot.Pages.PagesFuncs
         }
         public void GenerateTags()
         {
-            for (int i = 0; i < MainWindow.mainwindow.commands.Count; i++)
+            for (int i = 0; i < ValuesProject.Commands.Count; i++)
             {
-                if (MainWindow.mainwindow.commands[i].type != "Off")
+                if (ValuesProject.Commands[i].type != "Off")
                 {
                     bool est = false;
                     foreach (var item in tagsCom)
                     {
-                        if (item == MainWindow.mainwindow.commands[i].tag)
+                        if (item == ValuesProject.Commands[i].tag)
                         {
                             est = true;
                             break;
                         }
                         
                     }
-                    if (!est) tagsCom.Add(MainWindow.mainwindow.commands[i].tag);
+                    if (!est) tagsCom.Add(ValuesProject.Commands[i].tag);
                 }
             }
         }
@@ -85,18 +88,18 @@ namespace RetopBot.Pages.PagesFuncs
             try
             {
                 commandsparrent.Children.Clear();
-                MainWindow.mainwindow.LoadData(MainWindow.tabels.commands);
+                MainWindow.mainwindow.database.FillCommands();
                 GenerateTags();
 
-                for (int i = 0; i < MainWindow.mainwindow.commands.Count; i++)
+                for (int i = 0; i < ValuesProject.Commands.Count; i++)
                 {
-                    if (MainWindow.mainwindow.commands[i].type != "Off")
+                    if (ValuesProject.Commands[i].type != "Off")
                     {
                         bool ecept = false;
                         if (filter_tagcb.SelectedIndex == 0) ecept = true;
                         else
                         {
-                            if (filter_tagcb.SelectedValue.ToString() == MainWindow.mainwindow.commands[i].tag) ecept = true;
+                            if (filter_tagcb.SelectedValue.ToString() == ValuesProject.Commands[i].tag) ecept = true;
                             else ecept = false;
                         }
                         if (ecept)
@@ -108,9 +111,9 @@ namespace RetopBot.Pages.PagesFuncs
                             grid.Height = 50;
 
                             Label header = new Label();
-                            if (MainWindow.mainwindow.commands[i].hotkey == " " | MainWindow.mainwindow.commands[i].hotkey == "")
-                                header.Content = MainWindow.mainwindow.commands[i].header;
-                            else header.Content = $"({MainWindow.mainwindow.commands[i].hotkey}) " + MainWindow.mainwindow.commands[i].header;
+                            if (ValuesProject.Commands[i].hotkey == " " | ValuesProject.Commands[i].hotkey == "")
+                                header.Content = ValuesProject.Commands[i].header;
+                            else header.Content = $"({ValuesProject.Commands[i].hotkey}) " + ValuesProject.Commands[i].header;
                             header.Foreground = Brushes.White;
                             header.FontSize = 20;
                             header.Margin = new Thickness(5, 5, 5, 0);
@@ -120,7 +123,7 @@ namespace RetopBot.Pages.PagesFuncs
 
                             TextBox msg = new TextBox();
                             msg.Height = 35;
-                            msg.Text = MainWindow.mainwindow.commands[i].text;
+                            msg.Text = ValuesProject.Commands[i].text;
                             msg.Margin = new Thickness(5, 50, 125, 45);
                             msg.BorderBrush = null;
                             msg.Background = Brushes.DarkGray;
@@ -178,8 +181,8 @@ namespace RetopBot.Pages.PagesFuncs
                             send.Click += delegate
                             {
                                 if (txt.Text != "")
-                                    MainWindow.mainwindow.SendMsg(msg.Text, Convert.ToInt32(txt.Text));
-                                else MainWindow.mainwindow.SendMsg(msg.Text.ToString(), 1);
+                                    MainWindow.mainwindow.botinfo.SendManyMsgs(msg.Text, Convert.ToInt32(txt.Text));
+                                else MainWindow.mainwindow.botinfo.SendManyMsgs(msg.Text.ToString(), 1);
                             };
                             stc.Children.Add(send);
 
@@ -198,7 +201,7 @@ namespace RetopBot.Pages.PagesFuncs
                             {
                                 tags_par.Items.Add(tagsCom[j]);
 
-                                if (tagsCom[j] == MainWindow.mainwindow.commands[i].tag) tags_par.SelectedIndex = j;
+                                if (tagsCom[j] == ValuesProject.Commands[i].tag) tags_par.SelectedIndex = j;
                             }
 
                             grid.Children.Add(tags_par);
@@ -211,7 +214,7 @@ namespace RetopBot.Pages.PagesFuncs
                             hotkey.Background = Brushes.DarkGray;
                             hotkey.Width = 100;
                             hotkey.HorizontalAlignment = HorizontalAlignment.Right;
-                            hotkey.Text = MainWindow.mainwindow.commands[i].hotkey;
+                            hotkey.Text = ValuesProject.Commands[i].hotkey;
                             hotkey.VerticalContentAlignment = VerticalAlignment.Center;
                             hotkey.HorizontalContentAlignment = HorizontalAlignment.Center;
                             hotkey.MaxLength = 1;
@@ -223,13 +226,14 @@ namespace RetopBot.Pages.PagesFuncs
                             red.Width = 100;
                             red.Height = 35;
                             red.Margin = new Thickness(0, 60, 15, 0);
-                            red.Tag = MainWindow.mainwindow.commands[i].id.ToString();
+                            red.Tag = ValuesProject.Commands[i].id.ToString();
                             red.Content = "Edit";
                             red.Click += delegate
                             {
                                 string hot = hotkey.Text;
                                 if (hot != "") hot = hot.ToUpper();
-                                MainWindow.mainwindow.Connection($"UPDATE commands SET text = '{msg.Text}', tag = '{tags_par.SelectedValue.ToString()}', hotkey = '{hot}' WHERE id = " + red.Tag.ToString());
+                                MainWindow.mainwindow.database.Connection($"UPDATE commands SET text = '{msg.Text}', tag = '{tags_par.SelectedValue.ToString()}', " +
+                                    $"hotkey = '{hot}' WHERE id = " + red.Tag.ToString() + $" AND streamerNick='{ValuesProject.StreamerName}'");
                                 GenerateCommads();
                             };
                             grid.Children.Add(red);
@@ -240,10 +244,11 @@ namespace RetopBot.Pages.PagesFuncs
                             delete.HorizontalAlignment = HorizontalAlignment.Right;
                             delete.Margin = new Thickness(0, 105, 15, 0);
                             delete.Content = "X";
-                            delete.Tag = MainWindow.mainwindow.commands[i].id.ToString();
+                            delete.Tag = ValuesProject.Commands[i].id.ToString();
                             delete.Click += delegate
                             {
-                                MainWindow.mainwindow.Connection("UPDATE commands SET type = 'Off' WHERE id = " + delete.Tag.ToString());
+                                MainWindow.mainwindow.database.Connection("UPDATE commands SET type = 'Off' WHERE id = " + delete.Tag.ToString() + 
+                                    $" AND streamerNick='{ValuesProject.StreamerName}'");
                                 GenerateCommads();
                             };
                             grid.Children.Add(delete);
@@ -289,7 +294,7 @@ namespace RetopBot.Pages.PagesFuncs
 
         private void Txt_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            if(!MainWindow.mainwindow.NumberOrNot(e.Text)) e.Handled = true;
+            if(!HelpMethods.NumberOrNot(e.Text)) e.Handled = true;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -302,16 +307,29 @@ namespace RetopBot.Pages.PagesFuncs
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            string keyk = hotkeytxt.Text;
-            if (keyk == "") keyk = " ";
-            else keyk = keyk.ToUpper();
-            int id = MainWindow.mainwindow.commands.Count;
-            var end = MainWindow.mainwindow.Connection(SqlHelper.SqlHelp.InsterSql(new string[] {
-                MainWindow.tabels.commands.ToString(), id.ToString(),msgtxt.Text, headertxt.Text, "On",
-                tagcb.SelectedValue.ToString(), keyk
-            }));
-            if (end == null) MessageBox.Show("Произошла ошибка, команда не загружена!");
-            else GenerateCommads();
+            try
+            {
+                string keyk = hotkeytxt.Text;
+                if (keyk == "") keyk = " ";
+                else keyk = keyk.ToUpper();
+                int id = ValuesProject.Commands.Count;
+                CommandsClass command = new CommandsClass
+                {
+                    id = ValuesProject.IdCommands,
+                    text = msgtxt.Text,
+                    header = headertxt.Text,
+                    type = "On",
+                    tag = tagcb.SelectedValue.ToString(),
+                    hotkey = keyk,
+                    streamerNick = ValuesProject.StreamerName
+                };
+                MainWindow.mainwindow.database.InstertSql(command);
+                 GenerateCommads();
+            }
+            catch
+            {
+                MessageBox.Show("Произошла ошибка, команда не загружена!");
+            }
         }
 
         private void textinputaddkey(object sender, TextCompositionEventArgs e)

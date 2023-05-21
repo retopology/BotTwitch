@@ -47,7 +47,7 @@ namespace RetopBot.Pages
             bool end = false;
             await Task.Run(() =>
             {
-                end = MainWindow.mainwindow.GenerateBot();
+                end = MainWindow.mainwindow.StartUsing();
                 
 
             });

@@ -1,0 +1,6 @@
+C:\Users\ivan\Desktop\BotTwitch\HelpModule\bin\Debug\HelpModule.dll
+C:\Users\ivan\Desktop\BotTwitch\HelpModule\bin\Debug\HelpModule.pdb
+C:\Users\ivan\Desktop\BotTwitch\HelpModule\obj\Debug\HelpModule.csproj.AssemblyReference.cache
+C:\Users\ivan\Desktop\BotTwitch\HelpModule\obj\Debug\HelpModule.csproj.CoreCompileInputs.cache
+C:\Users\ivan\Desktop\BotTwitch\HelpModule\obj\Debug\HelpModule.dll
+C:\Users\ivan\Desktop\BotTwitch\HelpModule\obj\Debug\HelpModule.pdb

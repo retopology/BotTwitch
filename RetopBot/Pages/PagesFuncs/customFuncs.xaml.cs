@@ -17,6 +17,7 @@ using MySql.Data.MySqlClient;
 using RetopBot.Classes;
 using System.Collections.Specialized;
 using TwitchLib.Api.Helix.Models.Charity.GetCharityCampaign;
+using Variables;
 
 namespace RetopBot.Pages.PagesFuncs
 {
@@ -28,10 +29,10 @@ namespace RetopBot.Pages.PagesFuncs
         public customFuncs()
         {
             InitializeComponent();
-            for (int i = 0; i < MainWindow.mainwindow.commands.Count; i++)
+            for (int i = 0; i < ValuesProject.Commands.Count; i++)
             {
-                if (MainWindow.mainwindow.commands[i].type != "Off")
-                    commandsCb.Items.Add(i + "." + MainWindow.mainwindow.commands[i].header);
+                if (ValuesProject.Commands[i].type != "Off")
+                    commandsCb.Items.Add(i + "." + ValuesProject.Commands[i].header);
             }
             
 
@@ -45,7 +46,7 @@ namespace RetopBot.Pages.PagesFuncs
                 if(timespamcommand.Text != "")
                 {
                     string[] mas = commandsCb.SelectedValue.ToString().Split('.');
-                    TimersClass newTimer = new TimersClass(MainWindow.mainwindow.commands[Convert.ToInt32(mas[0])].text, 
+                    TimersClass newTimer = new TimersClass(ValuesProject.Commands[Convert.ToInt32(mas[0])].text, 
                         Convert.ToInt32(timespamcommand.Text), mas[1]);
                     timerslist.Add(newTimer);
                     FillCommandsList();
@@ -142,7 +143,7 @@ namespace RetopBot.Pages.PagesFuncs
         private void selectcommand(object sender, SelectionChangedEventArgs e)
         {
             string[] mas = commandsCb.SelectedValue.ToString().Split('.');
-            string text = MainWindow.mainwindow.commands.Find(x => x.header == mas[1]).text;
+            string text = ValuesProject.Commands.Find(x => x.header == mas[1]).text;
             commandLb.Content = text;
         }
 
@@ -156,6 +157,69 @@ namespace RetopBot.Pages.PagesFuncs
             {
                 item.IsChecked = end;
             }
+        }
+
+        private void googleClick(object sender, RoutedEventArgs e)
+        {
+            if (cbgoogleit.IsChecked == true) ValuesProject.CB_GOOGLE = true;
+            else ValuesProject.CB_GOOGLE = false;
+        }
+
+
+
+        private void countmsgsCLick(object sender, RoutedEventArgs e)
+        {
+            if (cbcountmsgs.IsChecked == true) ValuesProject.CB_COUNT_MSGS = true;
+            else ValuesProject.CB_COUNT_MSGS = false;
+        }
+
+        private void stataClick(object sender, RoutedEventArgs e)
+        {
+            if (cbstatehero.IsChecked == true) ValuesProject.CB_STATA = true;
+            else ValuesProject.CB_STATA = false;
+        }
+
+        private void lastgameClick(object sender, RoutedEventArgs e)
+        {
+            if (cblastgame.IsChecked == true) ValuesProject.CB_LAST_GAME = true;
+            else ValuesProject.CB_LAST_GAME = false;
+        }
+
+        private void winloseClick(object sender, RoutedEventArgs e)
+        {
+            if (cbwinlose.IsChecked == true) ValuesProject.CB_WIN_LOSE = true;
+            else ValuesProject.CB_WIN_LOSE = false;
+        }
+
+        private void mostQuestionClick(object sender, RoutedEventArgs e)
+        {
+            if (cbMostQuestions.IsChecked == true) ValuesProject.CB_AUTO_QUESTION = true;
+            else ValuesProject.CB_AUTO_QUESTION = false;
+        }
+
+        private void commandsClick(object sender, RoutedEventArgs e)
+        {
+            if (commandslistcb.IsChecked == true) ValuesProject.CB_COMMANDS_LIST = true;
+            else ValuesProject.CB_COMMANDS_LIST = false;
+        }
+
+        private void tagMeClick(object sender, RoutedEventArgs e)
+        {
+            if (cbtagme.IsChecked == true) ValuesProject.CB_TAG_MESSAGE = true;
+            else ValuesProject.CB_TAG_MESSAGE = false;
+            
+        }
+
+        private void colorNickClick(object sender, RoutedEventArgs e)
+        {
+            if (cbcolornick.IsChecked == true) ValuesProject.CB_COLORED = true;
+            else ValuesProject.CB_COLORED = false;
+        }
+
+        private void findtrack(object sender, RoutedEventArgs e)
+        {
+            if (cbfindtrack.IsChecked == true) ValuesProject.CB_FIND_TRACK = true;
+            else ValuesProject.CB_FIND_TRACK = false;
         }
     }
 }

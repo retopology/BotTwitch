@@ -1,4 +1,5 @@
-﻿using MySql.Data.MySqlClient;
+﻿using ClassesModule;
+using MySql.Data.MySqlClient;
 using Newtonsoft.Json.Linq;
 using RetopBot.Classes;
 using System;

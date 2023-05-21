@@ -1,0 +1,9 @@
+C:\Users\ivan\Desktop\BotTwitch\Variables\obj\Debug\Variables.csproj.AssemblyReference.cache
+C:\Users\ivan\Desktop\BotTwitch\Variables\obj\Debug\Variables.csproj.CoreCompileInputs.cache
+C:\Users\ivan\Desktop\BotTwitch\Variables\bin\Debug\Variables.dll
+C:\Users\ivan\Desktop\BotTwitch\Variables\bin\Debug\Variables.pdb
+C:\Users\ivan\Desktop\BotTwitch\Variables\bin\Debug\ClassesModule.dll
+C:\Users\ivan\Desktop\BotTwitch\Variables\bin\Debug\ClassesModule.pdb
+C:\Users\ivan\Desktop\BotTwitch\Variables\obj\Debug\Variables.csproj.CopyComplete
+C:\Users\ivan\Desktop\BotTwitch\Variables\obj\Debug\Variables.dll
+C:\Users\ivan\Desktop\BotTwitch\Variables\obj\Debug\Variables.pdb

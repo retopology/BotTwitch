@@ -1,0 +1,14 @@
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\obj\Debug\DataBaseModule.csproj.AssemblyReference.cache
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\obj\Debug\DataBaseModule.csproj.CoreCompileInputs.cache
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\bin\Debug\DataBaseModule.dll
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\bin\Debug\DataBaseModule.pdb
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\bin\Debug\ClassesModule.dll
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\bin\Debug\HelpModule.dll
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\bin\Debug\MySql.Data.dll
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\bin\Debug\Variables.dll
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\bin\Debug\ClassesModule.pdb
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\bin\Debug\HelpModule.pdb
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\bin\Debug\Variables.pdb
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\obj\Debug\DataBaseModule.csproj.CopyComplete
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\obj\Debug\DataBaseModule.dll
+C:\Users\ivan\Desktop\BotTwitch\DataBaseModule\obj\Debug\DataBaseModule.pdb

@@ -1,0 +1,11 @@
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\obj\Debug\HttpModule.csproj.AssemblyReference.cache
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\obj\Debug\HttpModule.csproj.CoreCompileInputs.cache
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\bin\Debug\HttpModule.dll
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\bin\Debug\HttpModule.pdb
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\bin\Debug\ClassesModule.dll
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\bin\Debug\Variables.dll
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\bin\Debug\ClassesModule.pdb
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\bin\Debug\Variables.pdb
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\obj\Debug\HttpModule.csproj.CopyComplete
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\obj\Debug\HttpModule.dll
+C:\Users\ivan\Desktop\BotTwitch\HttpModule\obj\Debug\HttpModule.pdb

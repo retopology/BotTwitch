@@ -1,0 +1,12 @@
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\obj\Debug\ParserModule.csproj.AssemblyReference.cache
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\obj\Debug\ParserModule.csproj.CoreCompileInputs.cache
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\bin\Debug\ParserModule.dll
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\bin\Debug\ParserModule.pdb
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\bin\Debug\HtmlAgilityPack.dll
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\bin\Debug\Variables.dll
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\bin\Debug\ClassesModule.dll
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\bin\Debug\Variables.pdb
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\bin\Debug\ClassesModule.pdb
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\obj\Debug\ParserModule.csproj.CopyComplete
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\obj\Debug\ParserModule.dll
+C:\Users\ivan\Desktop\BotTwitch\ParserModule\obj\Debug\ParserModule.pdb

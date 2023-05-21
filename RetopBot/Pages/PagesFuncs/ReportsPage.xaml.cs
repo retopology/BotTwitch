@@ -1,4 +1,6 @@
-﻿using MySql.Data.MySqlClient;
+﻿using ClassesModule;
+using HelpModule;
+using MySql.Data.MySqlClient;
 using RetopBot.Classes;
 using System;
 using System.Collections.Generic;
@@ -15,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TwitchLib.Api.Helix.Models.Users.GetUsers;
+using Variables;
 using Windows.ApplicationModel.VoiceCommands;
 using Windows.UI.Xaml.Media;
 
@@ -32,7 +35,7 @@ namespace RetopBot.Pages.PagesFuncs
             //01.12.2022
             //01.01.2023
             //13.02.2023
-            string nowDate = MainWindow.mainwindow.GenerateDate();
+            string nowDate = HelpMethods.GenerateDate();
             bool end = true;
             int startMount = 11;
             int startYear = 2022;
@@ -125,11 +128,11 @@ namespace RetopBot.Pages.PagesFuncs
                 }
                 else target = "." + target;
 
-                MySqlDataReader db_documents = MainWindow.mainwindow.Connection($"SELECT * FROM messages WHERE date LIKE '%{target}%'");
-                List<Classes.MessageClass> localmsg = new List<MessageClass>();
+                MySqlDataReader db_documents = MainWindow.mainwindow.database.Connection($"SELECT * FROM messages WHERE date LIKE '%{target}%' AND streamerNick = '{ValuesProject.StreamerName}'");
+                List<MessageClass> localmsg = new List<MessageClass>();
                 while (db_documents.Read())
                 {
-                    Classes.MessageClass newitem = new MessageClass();
+                    MessageClass newitem = new MessageClass();
                     newitem.id = Convert.ToInt32(db_documents.GetValue(0).ToString());
                     newitem.username = db_documents.GetValue(1).ToString();
                     newitem.message = db_documents.GetValue(2).ToString();

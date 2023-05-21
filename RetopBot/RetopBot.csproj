@@ -95,8 +95,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Classes\GiveAways.cs" />
-    <Compile Include="Classes\tokenUser.cs" />
+    <Compile Include="Classes\TimersClass.cs" />
     <Compile Include="Pages\PagesFuncs\ReportsPage.xaml.cs">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
     </Compile>
@@ -124,31 +123,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Classes\CommandsClass.cs" />
-    <Compile Include="Classes\Countryes.cs" />
-    <Compile Include="Classes\Games.cs" />
-    <Compile Include="Classes\MessageClass.cs" />
-    <Compile Include="Classes\ModeratorsClass.cs" />
-    <Compile Include="Classes\rerportclass.cs" />
-    <Compile Include="Classes\TimersClass.cs" />
-    <Compile Include="Classes\Users.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="Pages\killDemaLLL.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\Main.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\PagesFuncs\allChatPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\PagesFuncs\AuthoQuestion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -190,17 +173,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Pages\killDemaLLL.xaml.cs">
-      <DependentUpon>killDemaLLL.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\Main.xaml.cs">
       <DependentUpon>Main.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PagesFuncs\allChatPage.xaml.cs">
       <DependentUpon>allChatPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\PagesFuncs\AuthoQuestion.xaml.cs">
-      <DependentUpon>AuthoQuestion.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\PagesFuncs\CommandsPage.xaml.cs">
       <DependentUpon>CommandsPage.xaml</DependentUpon>
@@ -279,6 +256,35 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="iconApp.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BotModule\BotModule.csproj">
+      <Project>{fdecdc07-be0b-4556-b410-953b382a77d9}</Project>
+      <Name>BotModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ClassesModule\ClassesModule.csproj">
+      <Project>{b990234c-9611-4629-b74d-ed59ce83f82a}</Project>
+      <Name>ClassesModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DataBaseModule\DataBaseModule.csproj">
+      <Project>{ed1f4850-a8a0-49c8-99bc-0dd26d7cf7fc}</Project>
+      <Name>DataBaseModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HelpModule\HelpModule.csproj">
+      <Project>{9d3b511d-2603-44fb-980a-aa936be6f4e5}</Project>
+      <Name>HelpModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HttpModule\HttpModule.csproj">
+      <Project>{96fc0177-5371-422e-bb80-94c4c0f785a0}</Project>
+      <Name>HttpModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Variables\Variables.csproj">
+      <Project>{bd7a9a0e-81c6-44f1-a5af-2600742c1bb9}</Project>
+      <Name>Variables</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

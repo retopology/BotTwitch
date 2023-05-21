@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClassesModule;
+using HelpModule;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Variables;
 
 namespace RetopBot.Pages.PagesFuncs
 {
@@ -39,7 +42,7 @@ namespace RetopBot.Pages.PagesFuncs
 
         public void GenerateVanish()
         {
-            List<Classes.MessageClass> dublicate = MainWindow.mainwindow.chatmessage;
+            List<MessageClass> dublicate = ValuesProject.LocalChat;
             // Топ слов
             #region
             string allword = "";
@@ -111,10 +114,10 @@ namespace RetopBot.Pages.PagesFuncs
             }
             count_unic_users = countUnicusers;
                 DateTime endstream = DateTime.Now;
-                string raznizatime = MainWindow.mainwindow.RaznizaTime(MainWindow.mainwindow.startstream, endstream);
+                string raznizatime = HelpMethods.RaznizaTime(ValuesProject.startstream, endstream);
             duration = raznizatime;
-            count_timeout = MainWindow.mainwindow.timeoutedstream;
-            count_ban = MainWindow.mainwindow.bansstream;
+            count_timeout = ValuesProject.TimeoutedStream;
+            count_ban = ValuesProject.BansStream;
             int countMins = 0;
             string[] mastime = raznizatime.Split(':');
             char[] arrhoures = mastime[0].ToCharArray();
@@ -137,18 +140,18 @@ namespace RetopBot.Pages.PagesFuncs
             else msgsmin = dublicate.Count / countMins;
 
             msgs_per_min = msgsmin;
-            count_subs = MainWindow.mainwindow.subsStream;
+            count_subs = ValuesProject.SubsInStream;
 
     }
 
         public void GenerateOtchet()
         {
-            MainWindow.mainwindow.LoadData(MainWindow.tabels.report);
-            Classes.rerportclass lastreport;
-            if(MainWindow.mainwindow.reports.Count != 0) lastreport = MainWindow.mainwindow.reports[MainWindow.mainwindow.reports.Count - 1];
+            MainWindow.mainwindow.database.FillReports();
+            rerportclass lastreport;
+            if(ValuesProject.Reports.Count != 0) lastreport = ValuesProject.Reports[ValuesProject.Reports.Count - 1];
             else
             {
-                lastreport = new Classes.rerportclass();
+                lastreport = new rerportclass();
                 lastreport.time = "00:00:00";
                 lastreport.count_msg = 0;
                 lastreport.count_unic_users = 0;
@@ -162,7 +165,7 @@ namespace RetopBot.Pages.PagesFuncs
                 lastreport.date = "01.11.2022";
 
     }
-            List<Classes.MessageClass> dublicate = MainWindow.mainwindow.chatmessage;
+            List<MessageClass> dublicate = ValuesProject.LocalChat;
 
             // Топ слов
             #region
@@ -263,8 +266,8 @@ namespace RetopBot.Pages.PagesFuncs
             }
             count_msg = dublicate.Count;
 
-            countsubs.Content = MainWindow.mainwindow.subsStream.ToString();
-            int raz_subs = MainWindow.mainwindow.subsStream - lastreport.count_subs;
+            countsubs.Content = ValuesProject.SubsInStream.ToString();
+            int raz_subs = ValuesProject.SubsInStream - lastreport.count_subs;
             if (raz_subs > 0)
             {
                 minus_count_subs.Content = $"(+{raz_subs})";
@@ -275,10 +278,10 @@ namespace RetopBot.Pages.PagesFuncs
                 minus_count_subs.Content = $"({raz_subs})";
                 minus_count_subs.Foreground = Brushes.Red;
             }
-            count_subs = MainWindow.mainwindow.subsStream;
+            count_subs = ValuesProject.SubsInStream;
 
-            countbans.Content = MainWindow.mainwindow.bansstream.ToString();
-            int raz_buns = MainWindow.mainwindow.bansstream - lastreport.count_ban;
+            countbans.Content = ValuesProject.BansStream.ToString();
+            int raz_buns = ValuesProject.BansStream - lastreport.count_ban;
             if (raz_buns > 0)
             {
                 minus_count_bans.Content = $"(+{raz_buns})";
@@ -289,11 +292,11 @@ namespace RetopBot.Pages.PagesFuncs
                 minus_count_bans.Content = $"({raz_buns})";
                 minus_count_bans.Foreground = Brushes.Red;
             }
-            count_ban = MainWindow.mainwindow.bansstream;
+            count_ban = ValuesProject.BansStream;
 
 
-            countotsraneniy.Content = MainWindow.mainwindow.timeoutedstream.ToString();
-            int raz_timeout = MainWindow.mainwindow.timeoutedstream - lastreport.count_timeout;
+            countotsraneniy.Content = ValuesProject.TimeoutedStream.ToString();
+            int raz_timeout = ValuesProject.TimeoutedStream - lastreport.count_timeout;
             if (raz_timeout > 0)
             {
                 minus_count_timeoits.Content = $"(+{raz_timeout})";
@@ -304,7 +307,7 @@ namespace RetopBot.Pages.PagesFuncs
                 minus_count_timeoits.Content = $"({raz_timeout})";
                 minus_count_timeoits.Foreground = Brushes.Red;
             }
-            count_timeout = MainWindow.mainwindow.timeoutedstream;
+            count_timeout = ValuesProject.TimeoutedStream;
 
 
             int countUnicusers = 0;
@@ -343,7 +346,7 @@ namespace RetopBot.Pages.PagesFuncs
 
 
             DateTime endstream = DateTime.Now;
-            string raznizatime = MainWindow.mainwindow.RaznizaTime(MainWindow.mainwindow.startstream, endstream);
+            string raznizatime = HelpMethods.RaznizaTime(ValuesProject.startstream, endstream);
             dlitenostlb.Content = raznizatime;
             duration = raznizatime;
 

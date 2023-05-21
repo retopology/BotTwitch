@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using Variables;
 
 namespace RetopBot.ShazamFolder
 {
@@ -22,13 +23,15 @@ namespace RetopBot.ShazamFolder
             var match = await Task.Run(() => Shazam.IdentifyAsync(Config.Object.Device, cancel.Token));
             if (match != null)
             {
-                MainWindow.mainwindow.SendRpl(msgid,$"Трек, который щас играет - {match.Artist} - {match.Title}.");
+                MainWindow.mainwindow.PushMsg(msgid, $"Трек, который щас играет - {match.Artist} - {match.Title}.");
             }
             else
             {
-                MainWindow.mainwindow.SendRpl(msgid, $"Трек не найден.");
+                
+                MainWindow.mainwindow.PushMsg(msgid, $"Трек не найден.");
             }
-            MainWindow.mainwindow.findTrack = true;
+            ValuesProject.findTrack = true;
+
         }
     }
 }

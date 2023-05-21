@@ -1,5 +1,7 @@
-﻿using MySql.Data.MySqlClient;
-using RetopBot.Classes;
+﻿using ClassesModule;
+using HelpModule;
+using HttpModule;
+using MySql.Data.MySqlClient;
 using SqlHelper;
 using System;
 using System.Collections.Generic;
@@ -17,6 +19,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TwitchLib.Client.Models;
+using Variables;
 
 namespace RetopBot.Pages.PagesFuncs
 {
@@ -29,18 +32,15 @@ namespace RetopBot.Pages.PagesFuncs
         {
             InitializeComponent();
         }
-        List<Classes.MessageClass> localmsg = new List<MessageClass>();
-        // FillData($"SELECT * FROM `messages` WHERE id > {count - ends - 1} AND ''")
-        // SELECT * FROM `messages` ORDER BY id DESC LIMIT
+        List<MessageClass> localmsg = new List<MessageClass>();
 
-        // SELECT * FROM `messages` ORDER BY id DESC LIMIT 1
         public void FillData(string query)
         {
-            MySqlDataReader db_documents = MainWindow.mainwindow.Connection(query);
+            MySqlDataReader db_documents = MainWindow.mainwindow.database.Connection(query);
 
             while (db_documents.Read())
             {
-                Classes.MessageClass newitem = new MessageClass();
+                MessageClass newitem = new MessageClass();
                 newitem.id = Convert.ToInt32(db_documents.GetValue(0).ToString());
                 newitem.username = db_documents.GetValue(1).ToString();
                 newitem.message = db_documents.GetValue(2).ToString();
@@ -54,8 +54,8 @@ namespace RetopBot.Pages.PagesFuncs
         public void GenerateTabesal()
         {
 
-            try
-            {
+           // try
+           // {
                 localmsg.Clear();
                 parrent.Children.Clear();
                 int ends = 0;
@@ -84,7 +84,7 @@ namespace RetopBot.Pages.PagesFuncs
                 }
                 // SELECT * FROM Table ORDER BY ID DESC LIMIT 1
                 // ORDER BY id DESC LIMIT 1
-                MySqlDataReader countMsgs = MainWindow.mainwindow.Connection("SELECT * FROM `messages` ORDER BY ID DESC LIMIT 1");
+                MySqlDataReader countMsgs = MainWindow.mainwindow.database.Connection($"SELECT * FROM `messages` WHERE streamerNick = '{ValuesProject.StreamerName}' ORDER BY ID DESC LIMIT 1");
                 int countMAx = 0;
                 while (countMsgs.Read())
                 {
@@ -97,22 +97,22 @@ namespace RetopBot.Pages.PagesFuncs
                 switch (targetcb.SelectedIndex)
                 {
                     case 0:
-                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND username = '{tartext}' OR " +
-                            $"id > {count} AND message LIKE '%{tartext}%' OR " +
-                            $"id > {count} AND date LIKE '%{tartext}%' OR " +
-                            $"id > {count} AND time LIKE '%{tartext}%'");
+                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND username = '{tartext}' AND streamerNick = '{ValuesProject.StreamerName}' OR " +
+                            $"id > {count} AND message LIKE '%{tartext}%' AND streamerNick = '{ValuesProject.StreamerName}' OR " +
+                            $"id > {count} AND date LIKE '%{tartext}%' AND streamerNick = '{ValuesProject.StreamerName}' OR " +
+                            $"id > {count} AND time LIKE '%{tartext}%' AND streamerNick = '{ValuesProject.StreamerName}'");
                         break;
                     case 1:
-                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND username = '{tartext}'");
+                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND username = '{tartext}' AND streamerNick = '{ValuesProject.StreamerName}'");
                         break;
                     case 2:
-                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND message = '{tartext}'");
+                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND message = '{tartext}' AND streamerNick = '{ValuesProject.StreamerName}'");
                         break;
                     case 3:
-                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND date = '{tartext}'");
+                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND date = '{tartext}'  AND streamerNick = '{ValuesProject.StreamerName}'");
                         break;
                     case 4:
-                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND time = '{tartext}'");
+                        FillData($"SELECT * FROM `messages` WHERE id > {count} AND time = '{tartext}' AND streamerNick = '{ValuesProject.StreamerName}'");
                         break;
 
                 }
@@ -144,7 +144,7 @@ namespace RetopBot.Pages.PagesFuncs
                     Label msg = new Label();
                     msg.Margin = new Thickness(10, 25, 0, 0);
                     msg.FontSize = 18;
-                    msg.Content = MainWindow.mainwindow.GetCurrentStr(70, localmsg[i].message);
+                    msg.Content = HelpMethods.GetCurrentStr(70, localmsg[i].message);
                     grid.Children.Add(msg);
 
                     Button copyname = new Button();
@@ -182,12 +182,12 @@ namespace RetopBot.Pages.PagesFuncs
                     timeout.Margin = new Thickness(5, 30, 110, 5);
                     timeout.Click += delegate
                     {
-                        MainWindow.mainwindow.TimeOutUserCustom(10,timeout.Tag.ToString());
+                        POST.TimeOutUserCustom(600,timeout.Tag.ToString());
                     };
                     grid.Children.Add(timeout);
 
                     Button banuser = new Button();
-                    banuser.Tag = localmsg[i].username.ToString();
+                    banuser.Tag = localmsg[i].userid.ToString();
                     banuser.VerticalAlignment = VerticalAlignment.Top;
                     banuser.HorizontalAlignment = HorizontalAlignment.Right;
                     banuser.Content = "Ban";
@@ -195,7 +195,7 @@ namespace RetopBot.Pages.PagesFuncs
                     banuser.Margin = new Thickness(5, 5, 110, 5);
                     banuser.Click += delegate
                     {
-                        MainWindow.mainwindow.BanUserMethod(banuser.Tag.ToString());
+                        POST.TimeOutUserCustom(1000000,banuser.Tag.ToString());
                     };
                     grid.Children.Add(banuser);
 
@@ -208,11 +208,11 @@ namespace RetopBot.Pages.PagesFuncs
                 allmsgsscroll.ScrollToEnd();
 
 
-            }
-            catch
-            {
-                MessageBox.Show("Ошибка, не удалось отобразить данные");
-            }
+           // }
+           // catch
+           // {
+           //     MessageBox.Show("Ошибка, не удалось отобразить данные");
+           /// }
 
         }
         private void Button_Click(object sender, RoutedEventArgs e)

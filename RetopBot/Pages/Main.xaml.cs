@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using HelpModule;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using RetopBot.Pages.PagesFuncs;
 using System;
@@ -17,6 +18,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TwitchLib.Client.Models;
+using Variables;
 
 namespace RetopBot.Pages
 {
@@ -64,7 +66,7 @@ namespace RetopBot.Pages
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             DateTime nw = DateTime.Now;
-            string otv = MainWindow.mainwindow.RaznizaTime(MainWindow.mainwindow.startstream, nw);
+            string otv = HelpMethods.RaznizaTime(ValuesProject.startstream, nw);
             MessageBox.Show(otv);
         }
 

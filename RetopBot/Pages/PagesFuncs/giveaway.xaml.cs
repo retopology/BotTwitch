@@ -80,7 +80,7 @@ namespace RetopBot.Pages.PagesFuncs
             }));
             if (timerCount == 0)
             {
-                MainWindow.mainwindow.Roulette = false;
+                //MainWindow.mainwindow.Roulette = false;
                 roulettetimer.Stop();
                 endRoulleteTimer.Start();
                 timerCount = 0;
@@ -103,98 +103,98 @@ namespace RetopBot.Pages.PagesFuncs
         string winner = "";
         public void StartRoulette()
         {
-            Application.Current.Dispatcher.Invoke(new Action(() =>
-            {
-                if (MainWindow.mainwindow.RouletteMembers.Count > 1)
-                {
-                    parrent.Children.Clear();
-                    Random rnd = new Random();
-                    int winNum = rnd.Next(0, MainWindow.mainwindow.RouletteMembers.Count);
-                    winner = MainWindow.mainwindow.RouletteMembers[winNum];
+            //Application.Current.Dispatcher.Invoke(new Action(() =>
+            //{
+            //    if (MainWindow.mainwindow.RouletteMembers.Count > 1)
+            //    {
+            //        parrent.Children.Clear();
+            //        Random rnd = new Random();
+            //        int winNum = rnd.Next(0, MainWindow.mainwindow.RouletteMembers.Count);
+            //        winner = MainWindow.mainwindow.RouletteMembers[winNum];
 
-                    //3541 3542 3543 3544 3545
-                    //3642 3643 3644 3645 3646 3647
-                    int g = 0;
-                    int randomspeed = rnd.Next(9737, 10187);
-                    if (randomspeed == 9885) randomspeed = 9884;
-                    if (randomspeed == 9886) randomspeed = 9884;
-                    if (randomspeed == 9887) randomspeed = 9889;
-                    if (randomspeed == 9888) randomspeed = 9889;
-                    if (randomspeed == 10036) randomspeed = 10035;
-                    if (randomspeed == 10037) randomspeed = 10035;
-                    if (randomspeed == 10038) randomspeed = 10041;
-                    if (randomspeed == 10039) randomspeed = 10041;
-                    if (randomspeed == 10040) randomspeed = 10041;
-
-
-                    int winnerpgridid = 0;
-                    if (randomspeed >= 9737 && randomspeed <= 9884) winnerpgridid = 61;
-                    if (randomspeed >= 9889 && randomspeed <= 10035) winnerpgridid = 62;
-                    if (randomspeed >= 10041 && randomspeed <= 10186) winnerpgridid = 63;
-
-                    Random rand = new Random();
-                    for (int i = 0; i < 67; i++)
-                    {
-
-                        Grid da = new Grid();
-                        da.Width = 150;
-                        da.Height = 150;
-                        da.HorizontalAlignment = HorizontalAlignment.Left;
-                        da.Margin = new Thickness(1);
-                        da.Background = Brushes.Black;
+            //        //3541 3542 3543 3544 3545
+            //        //3642 3643 3644 3645 3646 3647
+            //        int g = 0;
+            //        int randomspeed = rnd.Next(9737, 10187);
+            //        if (randomspeed == 9885) randomspeed = 9884;
+            //        if (randomspeed == 9886) randomspeed = 9884;
+            //        if (randomspeed == 9887) randomspeed = 9889;
+            //        if (randomspeed == 9888) randomspeed = 9889;
+            //        if (randomspeed == 10036) randomspeed = 10035;
+            //        if (randomspeed == 10037) randomspeed = 10035;
+            //        if (randomspeed == 10038) randomspeed = 10041;
+            //        if (randomspeed == 10039) randomspeed = 10041;
+            //        if (randomspeed == 10040) randomspeed = 10041;
 
 
-                        int imgrand = rand.Next(1, 11);
-                        Image img = new Image();
-                        img.Source = new BitmapImage(new Uri(MainWindow.mainwindow.localpath +
-                            "/ImgsRoulette/" + imgrand + ".png"));
+            //        int winnerpgridid = 0;
+            //        if (randomspeed >= 9737 && randomspeed <= 9884) winnerpgridid = 61;
+            //        if (randomspeed >= 9889 && randomspeed <= 10035) winnerpgridid = 62;
+            //        if (randomspeed >= 10041 && randomspeed <= 10186) winnerpgridid = 63;
 
-                        da.Children.Add(img);
+            //        Random rand = new Random();
+            //        for (int i = 0; i < 67; i++)
+            //        {
 
-                        Grid backgroundlb = new Grid();
-                        backgroundlb.Height = 30;
-                        backgroundlb.Margin = new Thickness(0, 115, 0, 0);
-                        backgroundlb.Opacity = 0.5;
-                        backgroundlb.Background = Brushes.Black;
-
-                        da.Children.Add(backgroundlb);
-
-                        Label winnerlb = new Label();
-                        winnerlb.HorizontalAlignment = HorizontalAlignment.Center;
-                        winnerlb.VerticalAlignment = VerticalAlignment.Center;
-                        winnerlb.Foreground = Brushes.White;
-                        winnerlb.FontSize = 16;
-                        winnerlb.Margin = new Thickness(0, 115, 0, 0);
+            //            Grid da = new Grid();
+            //            da.Width = 150;
+            //            da.Height = 150;
+            //            da.HorizontalAlignment = HorizontalAlignment.Left;
+            //            da.Margin = new Thickness(1);
+            //            da.Background = Brushes.Black;
 
 
-                        g = rnd.Next(0, MainWindow.mainwindow.RouletteMembers.Count);
-                        if (i == winnerpgridid) winnerlb.Content = i + "." + winner;
-                        else winnerlb.Content = i + "." + MainWindow.mainwindow.RouletteMembers[g];
+            //            int imgrand = rand.Next(1, 11);
+            //            Image img = new Image();
+            //            img.Source = new BitmapImage(new Uri(MainWindow.mainwindow.localpath +
+            //                "/ImgsRoulette/" + imgrand + ".png"));
 
-                        da.Children.Add(winnerlb);
-                        parrent.Children.Add(da);
+            //            da.Children.Add(img);
 
-                    }
-                    //   int speed = rnd.Next(3500, 4001);
-                    //randomspeed = Convert.ToInt32(speedtxt.Text);
-                    randomspeed = randomspeed * -1;
-                    TranslateTransform go = new TranslateTransform();
-                    STARTroul.RenderTransform = go;
-                    DoubleAnimation ani = new DoubleAnimation(0, randomspeed, TimeSpan.FromSeconds(10));
-                    ani.EasingFunction = new QuadraticEase();
-                    go.BeginAnimation(TranslateTransform.XProperty, ani);
-                }
-                else
-                {
-                    endRoulleteTimer.Stop();
-                    roulettetimer.Stop();
-                    MessageBox.Show("Мало участников");
-                    timerCount = lastTime;
-                    timerCountEnd = 11;
-                    timerlb.Content = lastTime;
-                    winnerlb.Content = winner;
-                }
-            }));
+            //            Grid backgroundlb = new Grid();
+            //            backgroundlb.Height = 30;
+            //            backgroundlb.Margin = new Thickness(0, 115, 0, 0);
+            //            backgroundlb.Opacity = 0.5;
+            //            backgroundlb.Background = Brushes.Black;
+
+            //            da.Children.Add(backgroundlb);
+
+            //            Label winnerlb = new Label();
+            //            winnerlb.HorizontalAlignment = HorizontalAlignment.Center;
+            //            winnerlb.VerticalAlignment = VerticalAlignment.Center;
+            //            winnerlb.Foreground = Brushes.White;
+            //            winnerlb.FontSize = 16;
+            //            winnerlb.Margin = new Thickness(0, 115, 0, 0);
+
+
+            //            g = rnd.Next(0, MainWindow.mainwindow.RouletteMembers.Count);
+            //            if (i == winnerpgridid) winnerlb.Content = i + "." + winner;
+            //            else winnerlb.Content = i + "." + MainWindow.mainwindow.RouletteMembers[g];
+
+            //            da.Children.Add(winnerlb);
+            //            parrent.Children.Add(da);
+
+            //        }
+            //        //   int speed = rnd.Next(3500, 4001);
+            //        //randomspeed = Convert.ToInt32(speedtxt.Text);
+            //        randomspeed = randomspeed * -1;
+            //        TranslateTransform go = new TranslateTransform();
+            //        STARTroul.RenderTransform = go;
+            //        DoubleAnimation ani = new DoubleAnimation(0, randomspeed, TimeSpan.FromSeconds(10));
+            //        ani.EasingFunction = new QuadraticEase();
+            //        go.BeginAnimation(TranslateTransform.XProperty, ani);
+            //    }
+            //    else
+            //    {
+            //        endRoulleteTimer.Stop();
+            //        roulettetimer.Stop();
+            //        MessageBox.Show("Мало участников");
+            //        timerCount = lastTime;
+            //        timerCountEnd = 11;
+            //        timerlb.Content = lastTime;
+            //        winnerlb.Content = winner;
+            //    }
+            //}));
         }
 
         
@@ -202,11 +202,11 @@ namespace RetopBot.Pages.PagesFuncs
         private void clickstartroulet(object sender, MouseButtonEventArgs e)
         {
             
-            lastTime = timerCount;
-            timerlb.Content = timerCount.ToString();
-            roulettetimer.Start();
-            MainWindow.mainwindow.slovoRoulette = slovotxt.Text;
-            MainWindow.mainwindow.Roulette = true;
+            //lastTime = timerCount;
+            //timerlb.Content = timerCount.ToString();
+            //roulettetimer.Start();
+            //MainWindow.mainwindow.slovoRoulette = slovotxt.Text;
+            //MainWindow.mainwindow.Roulette = true;
         }
 
 
@@ -214,18 +214,18 @@ namespace RetopBot.Pages.PagesFuncs
 
         private void clearreulst(object sender, MouseButtonEventArgs e)
         {
-            MainWindow.mainwindow.Roulette = false;
-            MainWindow.mainwindow.RouletteMembers.Clear();
-            countmembers.Content = "Участников: 0";
-            parrent.Children.Clear();
-            WinGrid.Visibility = Visibility.Hidden;
-            WinGrid.IsEnabled = false;
-            endRoulleteTimer.Stop();
-            roulettetimer.Stop();
-            timerCount = lastTime;
-            timercb.SelectedIndex = 0;
-            timerCountEnd = 11;
-            timerlb.Content = lastTime;
+            //MainWindow.mainwindow.Roulette = false;
+            //MainWindow.mainwindow.RouletteMembers.Clear();
+            //countmembers.Content = "Участников: 0";
+            //parrent.Children.Clear();
+            //WinGrid.Visibility = Visibility.Hidden;
+            //WinGrid.IsEnabled = false;
+            //endRoulleteTimer.Stop();
+            //roulettetimer.Stop();
+            //timerCount = lastTime;
+            //timercb.SelectedIndex = 0;
+            //timerCountEnd = 11;
+            //timerlb.Content = lastTime;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)

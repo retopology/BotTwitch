@@ -1,0 +1,6 @@
+C:\Users\ivan\Desktop\BotTwitch\ClassesModule\obj\Debug\ClassesModule.csproj.AssemblyReference.cache
+C:\Users\ivan\Desktop\BotTwitch\ClassesModule\obj\Debug\ClassesModule.csproj.CoreCompileInputs.cache
+C:\Users\ivan\Desktop\BotTwitch\ClassesModule\bin\Debug\ClassesModule.dll
+C:\Users\ivan\Desktop\BotTwitch\ClassesModule\bin\Debug\ClassesModule.pdb
+C:\Users\ivan\Desktop\BotTwitch\ClassesModule\obj\Debug\ClassesModule.dll
+C:\Users\ivan\Desktop\BotTwitch\ClassesModule\obj\Debug\ClassesModule.pdb

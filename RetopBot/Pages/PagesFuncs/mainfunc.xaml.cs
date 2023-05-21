@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ClassesModule;
+using HelpModule;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using TwitchLib.Client.Extensions;
+using Variables;
 
 namespace RetopBot.Pages.PagesFuncs
 {
@@ -27,12 +30,12 @@ namespace RetopBot.Pages.PagesFuncs
         }
         
         
-        public void WriteMessage(Classes.MessageClass ms, bool moder)
+        public void WriteMessage(MessageClass ms, bool moder)
         {
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 
-                string endmsg = MainWindow.mainwindow.GetCurrentStr(55, ms.message.ToString());
+                string endmsg = HelpMethods.GetCurrentStr(55, ms.message.ToString());
                 
                 Grid allchatGrid = new Grid();
                 BrushConverter converter = new BrushConverter();
@@ -61,17 +64,17 @@ namespace RetopBot.Pages.PagesFuncs
                 if (allmsgsparrent.Children.Count == 150) allmsgsparrent.Children.Remove(allmsgsparrent.Children[0]);
 
                // if (ms.username == "kotoshmyak") GenerateEvaChat(ms, moder);
-                if (ms.message.Contains("@" + MainWindow.mainwindow.myName) |
-                ms.message.Contains(MainWindow.mainwindow.myName)) GenerateMyChat(ms, moder);
+                if (ms.message.Contains("@" + ValuesProject.ActualUser.username) |
+                ms.message.Contains(ValuesProject.ActualUser.username)) GenerateMyChat(ms, moder);
 
                 if (ms.username == nickdudetxt.Text) SearchDudePar(ms, moder);
             }));
 
         }
         //SearchDudePar
-        public void SearchDudePar(Classes.MessageClass ms, bool moder)
+        public void SearchDudePar(MessageClass ms, bool moder)
         {
-            string endmsg = MainWindow.mainwindow.GetCurrentStr(35, ms.message.ToString());
+            string endmsg = HelpMethods.GetCurrentStr(35, ms.message.ToString());
 
             Grid allchatGrid = new Grid();
             BrushConverter converter = new BrushConverter();
@@ -101,9 +104,9 @@ namespace RetopBot.Pages.PagesFuncs
 
         }
         //GenerateMyChat
-        public void GenerateMyChat(Classes.MessageClass ms, bool moder)
+        public void GenerateMyChat(MessageClass ms, bool moder)
         {
-            string endmsg = MainWindow.mainwindow.GetCurrentStr(30, ms.message.ToString());
+            string endmsg = HelpMethods.GetCurrentStr(30, ms.message.ToString());
 
             Grid allchatGrid = new Grid();
             BrushConverter converter = new BrushConverter();
