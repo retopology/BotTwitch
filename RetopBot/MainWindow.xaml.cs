@@ -55,8 +55,8 @@ namespace RetopBot
         }
         public void PushMsg(string msgid, string msg)
         {
-            if (msgid != ValuesProject.ActualUser.userId) botinfo.PushMsgFromWindow(msgid, msg);
-            else botinfo.SendManyMsgs(msg, 1);
+            //if (msgid != ValuesProject.ActualUser.userId) botinfo.PushMsgFromWindow(msgid, msg);
+            botinfo.SendManyMsgs(msg, 1);
         }
         private void Botinfo_onMessage(MessageClass message, bool track, bool moder)
         {

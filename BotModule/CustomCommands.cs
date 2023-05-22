@@ -57,8 +57,9 @@ namespace BotModule
 
                 if (mas.Length == 3) GiveAway.maskGiveAway = true;
                 else GiveAway.maskGiveAway = false;
+                GiveAway.localtimer = new System.Timers.Timer(1000);
                 GiveAway.localcounttick = Convert.ToInt32(mas[1]);
-                GiveAway.localtimer.Start();
+                GiveAway.StartGiveAwayTimer();
                 string msgToGive = "Стартовал розыгрыш! Для участия нужно написать ";
                 if (GiveAway.actualGiveAway.IsString) msgToGive += "слово/фразу - " + GiveAway.actualGiveAway.TargetMsg;
                 if (GiveAway.actualGiveAway.IsNumber) msgToGive += " число, которое имеет подобный вид - " + GiveAway.actualGiveAway.TargetInt;
@@ -106,7 +107,7 @@ namespace BotModule
         // !стата
         public static void SendHeroStatistic(MessageClass msg)
         {
-            string[] mas12 = msg.username.Split(' ');
+            string[] mas12 = msg.message.Split(' ');
             if (mas12[0] == "!стата")
             {
                 Random rnd = new Random();

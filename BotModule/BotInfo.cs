@@ -103,12 +103,13 @@ namespace BotModule
             bool Moderator = e.ChatMessage.IsModerator ? true : false;
             if(msg.username == ValuesProject.ActualUser.username)
             {
-                if (ValuesProject.CB_COLORED) CustomFuncs.SetColorChat();
+                
                 if (msg.message.Contains("!убратьвсех"))CustomCommands.BanWave(msg);
                 if (msg.message.Contains("!убратьограничение")) CustomCommands.CancleBanWave(msg);
                 if (msg.message.Contains("!стоп")) CustomCommands.StopGiveAway();
                 if (msg.message.Contains("!розыгрыш") && GiveAway.localgive == false) CustomCommands.StartGiveAway(msg);
                 CustomCommands.IsMyCommand(msg);
+                if (ValuesProject.CB_COLORED) CustomFuncs.SetColorChat();
             }
             if(GiveAway.findtogive) CustomCommands.IsGiveAwayMsg(msg,e.ChatMessage.IsSubscriber);
             if(ValuesProject.CB_COUNT_MSGS && msg.message.Contains("!сообщения")) CustomCommands.SendCountMsgs(msg);

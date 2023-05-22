@@ -42,7 +42,7 @@ namespace Variables
         // String
         public static string ConnectionString = ""; // Строка подключения к базе
         public static string StreamerName = ""; // Никнейм канала стримера
-        public static string DotaBuffUrl = ""; // Ссылка на дотабаф аккаунт
+        public static string DotaBuffUrl = "https://ru.dotabuff.com/players/173843946"; // Ссылка на дотабаф аккаунт
         public static string StreamerId = ""; // ID стримера
         public static string localpath = ""; // ID стримера
 

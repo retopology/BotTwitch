@@ -151,8 +151,34 @@ namespace RetopBot.Pages.PagesFuncs
         private void clicked(object sender, RoutedEventArgs e)
         {
             bool end = true;
-            if (cbALl.IsChecked == true) end = true;
-            else end = false;
+            if (cbALl.IsChecked == true)
+            {
+                ValuesProject.CB_FIND_TRACK = true;
+                ValuesProject.CB_COLORED = true;
+                ValuesProject.CB_TAG_MESSAGE = true;
+                ValuesProject.CB_COMMANDS_LIST = true;
+                ValuesProject.CB_WIN_LOSE = true;
+                ValuesProject.CB_AUTO_QUESTION = true;
+                ValuesProject.CB_LAST_GAME = true;
+                ValuesProject.CB_STATA = true;
+                ValuesProject.CB_COUNT_MSGS = true;
+                ValuesProject.CB_GOOGLE = true;
+                end = true;
+            }
+            else
+            {
+                ValuesProject.CB_FIND_TRACK = false;
+                ValuesProject.CB_COLORED = false;
+                ValuesProject.CB_TAG_MESSAGE = false;
+                ValuesProject.CB_COMMANDS_LIST = false;
+                ValuesProject.CB_WIN_LOSE = false;
+                ValuesProject.CB_AUTO_QUESTION = false;
+                ValuesProject.CB_LAST_GAME = false;
+                ValuesProject.CB_STATA = false;
+                ValuesProject.CB_COUNT_MSGS = false;
+                ValuesProject.CB_GOOGLE = false;
+                end = false;
+            }
             foreach (CheckBox item in cbgrid.Children)
             {
                 item.IsChecked = end;
