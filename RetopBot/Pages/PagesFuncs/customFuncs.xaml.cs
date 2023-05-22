@@ -155,7 +155,6 @@ namespace RetopBot.Pages.PagesFuncs
             {
                 ValuesProject.CB_FIND_TRACK = true;
                 ValuesProject.CB_COLORED = true;
-                ValuesProject.CB_TAG_MESSAGE = true;
                 ValuesProject.CB_COMMANDS_LIST = true;
                 ValuesProject.CB_WIN_LOSE = true;
                 ValuesProject.CB_AUTO_QUESTION = true;
@@ -169,7 +168,6 @@ namespace RetopBot.Pages.PagesFuncs
             {
                 ValuesProject.CB_FIND_TRACK = false;
                 ValuesProject.CB_COLORED = false;
-                ValuesProject.CB_TAG_MESSAGE = false;
                 ValuesProject.CB_COMMANDS_LIST = false;
                 ValuesProject.CB_WIN_LOSE = false;
                 ValuesProject.CB_AUTO_QUESTION = false;
