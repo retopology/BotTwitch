@@ -41,6 +41,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GET.cs" />
+    <Compile Include="PATCH.cs" />
     <Compile Include="POST.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PUT.cs" />

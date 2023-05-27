@@ -179,6 +179,7 @@
     <Compile Include="BotInfo.cs" />
     <Compile Include="CustomCommands.cs" />
     <Compile Include="CustomFuncs.cs" />
+    <Compile Include="GameEvent.cs" />
     <Compile Include="GiveAway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

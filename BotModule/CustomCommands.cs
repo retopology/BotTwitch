@@ -115,7 +115,7 @@ namespace BotModule
                 if (numRnd == 2)
                 {
                     POST.TimeOutUserCustom(60, msg.userid);
-                    CustomFuncs.SendMsg(msg.userid + ", вместо ответа ты получаешь таймаут на 1 минуту! Не " +
+                    CustomFuncs.SendMsg(msg.username + ", вместо ответа ты получаешь таймаут на 1 минуту! Не " +
                         "расстраивайся, ведь шанс на это всего 1%, тебе везет! А если везет, то заходи на GETX по промокоду вичблейда!");
                 }
                 else

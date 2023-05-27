@@ -20,6 +20,8 @@ using HttpModule;
 using TwitchLib.Client.Models.Internal;
 using TwitchLib.Api.Helix.Models.Chat.Emotes;
 using TwitchLib.Api.Helix.Models.Channels.GetChannelInformation;
+using System.Timers;
+using TwitchLib.Api.Helix.Models.Search;
 
 namespace BotModule
 {
@@ -29,6 +31,8 @@ namespace BotModule
         public delegate void MessageSender(MessageClass message, bool track, bool moder);
 
         public event MessageSender onMessage;
+
+
 
         internal static ConnectData ConnectData;
         private ConnectionCredentials cred;
@@ -59,7 +63,7 @@ namespace BotModule
                 ValuesProject.IdBanMods = ValuesProject.Moderators.Count;
 
                 cred = new ConnectionCredentials(ValuesProject.ActualUser.username, ValuesProject.ActualUser.token);
-
+                
                 client.Initialize(cred, ValuesProject.StreamerName);
                 client.Connect();
 
@@ -68,7 +72,6 @@ namespace BotModule
                 client.OnUserTimedout += Client_OnUserTimedout;
                 client.OnUserBanned += Client_OnUserBanned;
                 client.OnJoinedChannel += Client_OnJoinedChannel;
-
                 return true;
 
             }
@@ -78,10 +81,13 @@ namespace BotModule
             }
         }
 
+
+
         private void Client_OnJoinedChannel(object sender, OnJoinedChannelArgs e)
         {
             ValuesProject.CountViewrs++;
         }
+
 
         private void Client_OnMessageReceived(object sender, TwitchLib.Client.Events.OnMessageReceivedArgs e)
         {
@@ -99,11 +105,11 @@ namespace BotModule
             ConnectData.InstertSql(msg);
             ValuesProject.IdMessages++;
             
+            
             bool NeedTrack = false;
             bool Moderator = e.ChatMessage.IsModerator ? true : false;
             if(msg.username == ValuesProject.ActualUser.username)
             {
-                
                 if (msg.message.Contains("!убратьвсех"))CustomCommands.BanWave(msg);
                 if (msg.message.Contains("!убратьограничение")) CustomCommands.CancleBanWave(msg);
                 if (msg.message.Contains("!стоп")) CustomCommands.StopGiveAway();

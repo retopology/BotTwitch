@@ -47,6 +47,7 @@
     <Compile Include="GiveAways.cs" />
     <Compile Include="MessageClass.cs" />
     <Compile Include="ModeratorsClass.cs" />
+    <Compile Include="PredicionClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="rerportclass.cs" />
     <Compile Include="tokenUser.cs" />
