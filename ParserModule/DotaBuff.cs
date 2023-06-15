@@ -35,6 +35,7 @@ namespace ParserModule
 
                 }
                 List<Hero> fineded = new List<Hero>();
+                // Создание списка найденых героев
                 for (int i = 0; i < HeroesList.Count; i++)
                 {
                     try
@@ -140,6 +141,7 @@ namespace ParserModule
                     games[select].hero = end;
                     select++;
                 }
+                // Вывод
                 if (!last)
                 {
                     int countwinsdf = 0;

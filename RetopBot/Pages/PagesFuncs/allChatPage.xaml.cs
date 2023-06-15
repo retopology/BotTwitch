@@ -54,8 +54,8 @@ namespace RetopBot.Pages.PagesFuncs
         public void GenerateTabesal()
         {
 
-           // try
-           // {
+            try
+            {
                 localmsg.Clear();
                 parrent.Children.Clear();
                 int ends = 0;
@@ -82,10 +82,9 @@ namespace RetopBot.Pages.PagesFuncs
                         ends = -1;
                         break;
                 }
-                // SELECT * FROM Table ORDER BY ID DESC LIMIT 1
-                // ORDER BY id DESC LIMIT 1
                 MySqlDataReader countMsgs = MainWindow.mainwindow.database.Connection($"SELECT * FROM `messages` WHERE streamerNick = '{ValuesProject.StreamerName}' ORDER BY ID DESC LIMIT 1");
                 int countMAx = 0;
+                // Чтенние элементов
                 while (countMsgs.Read())
                 {
 
@@ -117,7 +116,7 @@ namespace RetopBot.Pages.PagesFuncs
 
                 }
 
-
+                // Вывод элементов на экран
                 for (int i = 0; i < localmsg.Count; i++)
                 {
 
@@ -208,11 +207,11 @@ namespace RetopBot.Pages.PagesFuncs
                 allmsgsscroll.ScrollToEnd();
 
 
-           // }
-           // catch
-           // {
-           //     MessageBox.Show("Ошибка, не удалось отобразить данные");
-           /// }
+            }
+            catch
+            {
+                MessageBox.Show("Ошибка, не удалось отобразить данные");
+            }
 
         }
         private void Button_Click(object sender, RoutedEventArgs e)

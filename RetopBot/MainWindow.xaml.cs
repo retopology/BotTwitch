@@ -44,6 +44,7 @@ namespace RetopBot
     {
         public BotInfo botinfo;
         public ConnectData database;
+        public bool existOnSystem = false;
         public MainWindow()
         {
             InitializeComponent();
@@ -131,13 +132,14 @@ namespace RetopBot
                     reportspage = new Pages.PagesFuncs.ReportsPage();
                 });
 
-                
 
+                existOnSystem = true;
                 return true;
 
             }
             catch
             {
+                existOnSystem = false;
                 return false;
             }
 
@@ -169,25 +171,37 @@ namespace RetopBot
         }
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            //if (client.IsConnected == true)
-            //{
-            //    //MessageBox.Show("Бот закончил работу. Нажми ОК для синхраницзации базы");
-            //    if (customfuncs.dontprinreport.IsChecked == false)
-            //    {
-            //        statisitc.GenerateVanish();
-            //        int id = reports.Count;
-            //        string date = GenerateDate();
-            //        string time = GenerateTime();
-            //        statisitc.top_slovo = statisitc.top_slovo.Replace("'", "");
-            //        statisitc.top_user = statisitc.top_user.Replace("'", "");
-            //        var otc = Connection($"INSERT into report VALUES({id}, {statisitc.count_msg}, " +
-            //            $"{statisitc.count_unic_users}, '{statisitc.duration}', {statisitc.count_timeout}, " +
-            //            $"{statisitc.count_ban}, {statisitc.msgs_per_min}, {statisitc.count_subs}, " +
-            //            $"'{statisitc.top_slovo}', '{statisitc.top_user}', '{date}', '{time}');");
-            //    }
-            //    client.Disconnect();
+            if (existOnSystem == true)
+            {
+                if (ValuesProject.NEEDSAVEREPORT == true)
+                {
+                    statisitc.GenerateVanish();
+                    string date = HelpModule.HelpMethods.GenerateDate();
+                    string time = HelpModule.HelpMethods.GenerateTime();
+                    statisitc.top_slovo = statisitc.top_slovo.Replace("'", "");
+                    statisitc.top_user = statisitc.top_user.Replace("'", "");
+                    database.InstertSql(new ClassesModule.rerportclass
+                    {
+                        id = 0,
+                        count_msg = statisitc.count_msg,
+                        count_unic_users = statisitc.count_unic_users,
+                        duration = statisitc.duration,
+                        count_timeout  = statisitc.count_timeout,
+                        count_ban = statisitc.count_ban,
+                        msgs_per_min = statisitc.msgs_per_min,
+                        count_subs = statisitc.count_subs,
+                        top_slovo = statisitc.top_slovo,
+                        top_user = statisitc.top_user,
+                        date = date,
+                        time = time,
+                        streamerNick = ValuesProject.StreamerName
 
-            //}
+
+
+                    });
+                }
+
+            }
             this.Close();
         }
 

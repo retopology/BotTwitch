@@ -245,5 +245,11 @@ namespace RetopBot.Pages.PagesFuncs
             if (cbfindtrack.IsChecked == true) ValuesProject.CB_FIND_TRACK = true;
             else ValuesProject.CB_FIND_TRACK = false;
         }
+
+        private void pressreport(object sender, RoutedEventArgs e)
+        {
+            if (dontprinreport.IsChecked == true) ValuesProject.NEEDSAVEREPORT = false;
+            else ValuesProject.NEEDSAVEREPORT = true;
+        }
     }
 }

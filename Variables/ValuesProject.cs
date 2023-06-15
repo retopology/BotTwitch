@@ -36,6 +36,7 @@ namespace Variables
         public static bool CB_TAG_MESSAGE = false; // Уведомление о тэге
         public static bool CB_AUTO_QUESTION = false; // Автоматические ответы
         public static bool CB_COMMANDS_LIST = false; // Списк команд (!команды)
+        public static bool NEEDSAVEREPORT = true; // Списк команд (!команды)
         public static bool findTrack = true; // Поиск трека
 
 

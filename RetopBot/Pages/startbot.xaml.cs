@@ -1,4 +1,6 @@
-﻿using RetopBot.Windows;
+﻿using ClassesModule;
+using MySql.Data.MySqlClient;
+using RetopBot.Windows;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -68,13 +70,58 @@ namespace RetopBot.Pages
             settings.ShowDialog();
             namestreamer.Content = Properties.Settings.Default.streamer;
         }
-
+        //MySqlConnection MYconnect;
+        //string ConnectString = "";
         private void usersett(object sender, MouseButtonEventArgs e)
         {
-            Windows.userSettings settings = new Windows.userSettings();
-            settings.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+            //MySqlDataReader db_documents = Connection($"SELECT * FROM token");
+            //if (db_documents != null)
+            //{
+            //    MYconnect.Close();
+                Windows.userSettings settings = new Windows.userSettings();
+            if (settings.canExist == true)
+            {
+                settings.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
 
-            settings.ShowDialog();
+                settings.ShowDialog();
+            }
+            else MessageBox.Show("Отустствует подключение! Проверьте настройки сети");
+
+            // }
+            // else
+            // {
+            //     MessageBox.Show("Отустствует подключение! Проверьте настройки сети");
+            //     MYconnect.Close();
+            // }
+
         }
+        //public void SetBase()
+        //{
+        //    ConnectString = $"server={Properties.Settings.Default.server};" +
+        //            $"user={Properties.Settings.Default.user};" +
+        //            $"password={Properties.Settings.Default.password};" +
+        //            $"port={Properties.Settings.Default.port};" +
+        //            $"database={Properties.Settings.Default.database};";
+
+        //    MYconnect = new MySqlConnection(ConnectString);
+        //}
+        //public MySqlDataReader Connection(string query)
+        //{
+        //    try
+        //    {
+        //        MYconnect.Close();
+        //        MYconnect.Open();
+
+        //        MySqlCommand command = new MySqlCommand(query, MYconnect);
+        //        MySqlDataReader reader = command.ExecuteReader();
+
+        //        return reader;
+        //    }
+        //    catch
+        //    {
+        //        return null;
+        //    }
+
+        //}
     }
 }

@@ -27,6 +27,7 @@ namespace RetopBot.Windows
     {
         MySqlConnection MYconnect;
         string ConnectString = "";
+        public bool canExist = true;
         public userSettings()
         {
             InitializeComponent();
@@ -52,16 +53,14 @@ namespace RetopBot.Windows
                 }
                 else
                 {
-                    MessageBox.Show("Отустствует подключение! Проверьте настройки сети");
                     MYconnect.Close();
-                    this.Close();
+                    canExist = false;
                 }
             }
             catch
             {
-                MessageBox.Show("Отустствует подключение! Проверьте настройки сети");
                 MYconnect.Close();
-                this.Close();
+                canExist = false;
             }
 
         }
@@ -79,7 +78,6 @@ namespace RetopBot.Windows
         {
             try
             {
-                MySqlConnection.ClearPool(MYconnect);
                 MYconnect.Close();
                 MYconnect.Open();
 

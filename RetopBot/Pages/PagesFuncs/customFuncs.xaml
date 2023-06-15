@@ -69,10 +69,10 @@
 
 
                 <Grid Margin="0,0,0,100" VerticalAlignment="Bottom">
-                    <Label Content="Прчее" Foreground="White" FontSize="26" Margin="20,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <Label Content="Прочее" Foreground="White" FontSize="26" Margin="20,0,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
                     <CheckBox x:Name="cbtagme" Content="Уведомления о тэге" Foreground="White" FontSize="16" Margin="20,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="tagMeClick"/>
                     <CheckBox IsChecked="True" x:Name="cbcolornick" Content="Цветной ник" Foreground="White" FontSize="16" Margin="214,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="colorNickClick"/>
-                    <CheckBox x:Name="dontprinreport" Content="Не записывать отчет" Foreground="White" FontSize="16" Margin="357,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <CheckBox x:Name="dontprinreport" Content="Не записывать отчет" Foreground="White" FontSize="16" Margin="357,50,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Click="pressreport"/>
                 </Grid>
             </Grid>
         </Border>
