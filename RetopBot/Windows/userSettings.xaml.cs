@@ -47,8 +47,8 @@ namespace RetopBot.Windows
 
                     }
                     usernameTxt.Text = usertok.username;
-                    tokenTxt.Text = usertok.token;
-                    clientIdtxt.Text = usertok.clientId;
+                    tokenTxt.Password = usertok.token;
+                    clientIdtxt.Password = usertok.clientId;
                     twitchIdTxt.Text = usertok.userId;
                 }
                 else
@@ -106,8 +106,8 @@ namespace RetopBot.Windows
 
         private void save(object sender, MouseButtonEventArgs e)
         {
-            var end = Connection($"UPDATE token SET username = '{usernameTxt.Text}', token = '{tokenTxt.Text}'," +
-                $" clientId = '{clientIdtxt.Text}', userId = '{twitchIdTxt.Text}'");
+            var end = Connection($"UPDATE token SET username = '{usernameTxt.Text}', token = '{tokenTxt.Password}'," +
+                $" clientId = '{clientIdtxt.Password}', userId = '{twitchIdTxt.Text}'");
             if(end != null)
             {
                 this.Close();

@@ -22,6 +22,7 @@ using TwitchLib.Api.Helix.Models.Chat.Emotes;
 using TwitchLib.Api.Helix.Models.Channels.GetChannelInformation;
 using System.Timers;
 using TwitchLib.Api.Helix.Models.Search;
+using TwitchLib.PubSub;
 
 namespace BotModule
 {
@@ -50,7 +51,6 @@ namespace BotModule
         {
             CustomFuncs.SendMsg(msg, count);
         }
-
         public bool GenerateBot()
         {
             try
@@ -66,12 +66,13 @@ namespace BotModule
                 
                 client.Initialize(cred, ValuesProject.StreamerName);
                 client.Connect();
-
+                
                 client.OnMessageReceived += Client_OnMessageReceived; // Бот читает каждое сообщение
                 client.OnNewSubscriber += Client_OnNewSubscriber;
                 client.OnUserTimedout += Client_OnUserTimedout;
                 client.OnUserBanned += Client_OnUserBanned;
                 client.OnJoinedChannel += Client_OnJoinedChannel;
+                //client.OnWhisperReceived
                 return true;
 
             }
@@ -108,7 +109,9 @@ namespace BotModule
             
             bool NeedTrack = false;
             bool Moderator = e.ChatMessage.IsModerator ? true : false;
-            if(msg.username == ValuesProject.ActualUser.username)
+
+            //Buttons.CheckForMove(msg);
+            if (msg.username == ValuesProject.ActualUser.username)
             {
                 if (msg.message.Contains("!убратьвсех"))CustomCommands.BanWave(msg);
                 if (msg.message.Contains("!убратьограничение")) CustomCommands.CancleBanWave(msg);

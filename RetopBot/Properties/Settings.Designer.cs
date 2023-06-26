@@ -106,5 +106,17 @@ namespace RetopBot.Properties {
                 this["streamerid"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string dotabuff {
+            get {
+                return ((string)(this["dotabuff"]));
+            }
+            set {
+                this["dotabuff"] = value;
+            }
+        }
     }
 }

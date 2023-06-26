@@ -112,6 +112,9 @@
     <Compile Include="Windows\settingsWindow.xaml.cs">
       <DependentUpon>settingsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\streamersettings.xaml.cs">
+      <DependentUpon>streamersettings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Windows\userSettings.xaml.cs">
       <DependentUpon>userSettings.xaml</DependentUpon>
     </Compile>
@@ -164,6 +167,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Windows\settingsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\streamersettings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -285,6 +292,12 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imgs\streamerIcon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Imgs\exitaccount.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

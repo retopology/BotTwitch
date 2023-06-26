@@ -1,0 +1,107 @@
+﻿<Window x:Class="RetopBot.Windows.streamersettings"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:RetopBot.Windows"
+        mc:Ignorable="d"
+        Title="streamersettings" Height="250" Width="500" ResizeMode="NoResize" WindowStyle="None" MouseDown="dragger">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FF313131"/>
+            <GradientStop Color="#FF1D1D1D" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid>
+        <Button Content="X" HorizontalAlignment="Right" Height="20" Width="40" Margin="0,15,15,0" VerticalAlignment="Top" Background="#FFD45454" BorderBrush="{x:Null}" Click="close" Foreground="White">
+            <Button.Effect>
+                <DropShadowEffect Opacity="0.5"/>
+            </Button.Effect>
+        </Button>
+        <StackPanel Margin="10,50,10,55">
+            <Grid Margin="0,5,0,5">
+                <Label Content="Стример" Foreground="White" FontSize="16" Margin="0,0,0,5"/>
+                <Border Width="400" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="10" Background="#FF5B5B5B">
+                    <TextBox x:Name="streamerTxt"
+                        Background="#FF5B5B5B" BorderBrush="{x:Null}" Margin="3" Padding="2" Text="" Foreground="White"/>
+                </Border>
+            </Grid>
+
+
+            <Grid Margin="0,5,0,5">
+                <Label Content="TwitchId" Foreground="White" FontSize="16" Margin="0,0,0,5"/>
+                <Border Width="400" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="10" Background="#FF5B5B5B">
+                    <TextBox x:Name="twitchIdTxt"
+                        Background="#FF5B5B5B" BorderBrush="{x:Null}" Margin="3" Padding="2" Text="" Foreground="White"/>
+                </Border>
+            </Grid>
+            <Grid Margin="0,5,0,5">
+                <Label Content="Dotabuff" Foreground="White" FontSize="16" Margin="0,0,0,5"/>
+                <Border Width="400" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="10" Background="#FF5B5B5B">
+                    <TextBox x:Name="dotabuffTxt"
+                        Background="#FF5B5B5B" BorderBrush="{x:Null}" Margin="3" Padding="2" Text="" Foreground="White"/>
+                </Border>
+            </Grid>
+
+
+        </StackPanel>
+        <Border Height="30" Width="150" CornerRadius="10" Background="#FFAD00CA" VerticalAlignment="Bottom"
+                HorizontalAlignment="Left" Margin="20,0,0,20" MouseLeftButtonDown="standart">
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="200"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="150"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
+            </Border.Effect>
+            <Label Content="Стандартные" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   FontSize="14"/>
+        </Border>
+        <Border Height="30" Width="100" CornerRadius="10" Background="#FF00AD1A" VerticalAlignment="Bottom"
+                HorizontalAlignment="Right" Margin="0,0,20,20" MouseLeftButtonDown="savesett">
+            <Border.Style>
+                <Style TargetType="{x:Type Border}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="150"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:0:0.2" Storyboard.TargetProperty="Width" To="100"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Border.Style>
+
+            <Border.Effect>
+                <DropShadowEffect Opacity="0.5" BlurRadius="10"/>
+            </Border.Effect>
+            <Label Content="Сохранить" Foreground="White" VerticalAlignment="Center" HorizontalAlignment="Center"
+                   FontSize="14"/>
+        </Border>
+    </Grid>
+</Window>

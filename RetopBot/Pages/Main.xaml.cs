@@ -102,6 +102,5 @@ namespace RetopBot.Pages
             mainframe.Navigate(MainWindow.mainwindow.reportspage);
         }
 
-
     }
 }

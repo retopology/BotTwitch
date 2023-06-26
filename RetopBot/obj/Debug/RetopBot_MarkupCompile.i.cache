@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 C:\Users\ivan\Desktop\BotTwitch\RetopBot\App.xaml
-121797531033
+13-464974260
 
-28-1721215862
+29-1952336477
 255-1186090411
-MainWindow.xaml;Pages\Main.xaml;Pages\PagesFuncs\allChatPage.xaml;Pages\PagesFuncs\CommandsPage.xaml;Pages\PagesFuncs\customFuncs.xaml;Pages\PagesFuncs\giveaway.xaml;Pages\PagesFuncs\mainfunc.xaml;Pages\PagesFuncs\ReportsPage.xaml;Pages\PagesFuncs\statisticpage.xaml;Pages\startbot.xaml;Windows\settingsWindow.xaml;Windows\userSettings.xaml;
+MainWindow.xaml;Pages\Main.xaml;Pages\PagesFuncs\allChatPage.xaml;Pages\PagesFuncs\CommandsPage.xaml;Pages\PagesFuncs\customFuncs.xaml;Pages\PagesFuncs\giveaway.xaml;Pages\PagesFuncs\mainfunc.xaml;Pages\PagesFuncs\ReportsPage.xaml;Pages\PagesFuncs\statisticpage.xaml;Pages\startbot.xaml;Windows\settingsWindow.xaml;Windows\streamersettings.xaml;Windows\userSettings.xaml;
 
 True
 

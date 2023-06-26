@@ -29,16 +29,16 @@
             <Grid Margin="0,5,0,5">
                 <Label Content="Token" Foreground="White" FontSize="16" Margin="0,0,0,5"/>
                 <Border Width="400" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="10" Background="#FF5B5B5B">
-                    <TextBox x:Name="tokenTxt"
-                        Background="#FF5B5B5B" BorderBrush="{x:Null}" Margin="3" Padding="2" Text="" Foreground="White"/>
+                    <PasswordBox x:Name="tokenTxt"
+                        Background="#FF5B5B5B" BorderBrush="{x:Null}" Margin="3" Padding="2" Password="" Foreground="White"/>
                 </Border>
             </Grid>
 
             <Grid Margin="0,5,0,5">
                 <Label Content="ClineId" Foreground="White" FontSize="16" Margin="0,0,0,5"/>
                 <Border Width="400" VerticalAlignment="Center" HorizontalAlignment="Right" CornerRadius="10" Background="#FF5B5B5B">
-                    <TextBox x:Name="clientIdtxt"
-                        Background="#FF5B5B5B" BorderBrush="{x:Null}" Margin="3" Padding="2" Text="" Foreground="White"/>
+                    <PasswordBox x:Name="clientIdtxt"
+                        Background="#FF5B5B5B" BorderBrush="{x:Null}" Margin="3" Padding="2" Password="" Foreground="White"/>
                 </Border>
             </Grid>
             <Grid Margin="0,5,0,5">

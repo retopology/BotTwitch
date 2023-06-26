@@ -199,19 +199,44 @@ namespace RetopBot.Pages.PagesFuncs
 
         private void stataClick(object sender, RoutedEventArgs e)
         {
-            if (cbstatehero.IsChecked == true) ValuesProject.CB_STATA = true;
+            if (cbstatehero.IsChecked == true)
+            {
+                if(ValuesProject.DotaBuffUrl != "") ValuesProject.CB_STATA = true;
+                else
+                {
+                    MessageBox.Show("Укажите ссылку на дотабаф в настройках");
+                    cbstatehero.IsChecked = false;
+                }
+                
+            }
             else ValuesProject.CB_STATA = false;
         }
 
         private void lastgameClick(object sender, RoutedEventArgs e)
         {
-            if (cblastgame.IsChecked == true) ValuesProject.CB_LAST_GAME = true;
+            if (cblastgame.IsChecked == true)
+            {
+                if (ValuesProject.DotaBuffUrl != "") ValuesProject.CB_LAST_GAME = true;
+                else
+                {
+                    MessageBox.Show("Укажите ссылку на дотабаф в настройках");
+                    cblastgame.IsChecked = false;
+                }
+            }
             else ValuesProject.CB_LAST_GAME = false;
         }
 
         private void winloseClick(object sender, RoutedEventArgs e)
         {
-            if (cbwinlose.IsChecked == true) ValuesProject.CB_WIN_LOSE = true;
+            if (cbwinlose.IsChecked == true)
+            {
+                if (ValuesProject.DotaBuffUrl != "") ValuesProject.CB_WIN_LOSE = true;
+                else
+                {
+                    MessageBox.Show("Укажите ссылку на дотабаф в настройках");
+                    cbwinlose.IsChecked = false;
+                }
+            }
             else ValuesProject.CB_WIN_LOSE = false;
         }
 

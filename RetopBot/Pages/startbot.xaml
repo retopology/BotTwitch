@@ -39,7 +39,7 @@
                 <DropShadowEffect ShadowDepth="8" Opacity="0.5" Direction="200"/>
             </Image.Effect>
         </Image>
-        <Image x:Name="settingsbtn" Source="/Imgs/settings.png" Height="75" Width="47" VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="30,0,0,30" MouseLeftButtonDown="settings">
+        <Image x:Name="settingsbtn" Source="/Imgs/settings.png" Height="75" Width="47" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="30,60,0,0" MouseLeftButtonDown="settings">
 
             <Image.Style>
                 <Style TargetType="{x:Type Image}">
@@ -68,8 +68,36 @@
             </Image.Effect>
         </Image>
 
+        <Image x:Name="streamersettings" Source="/Imgs/streamerIcon.png" Height="95" Width="67" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,60,0,0" MouseLeftButtonDown="settingsstreamer">
 
-        <Image x:Name="userSettings" Source="/Imgs/inconUser.png" Height="75" Width="47" VerticalAlignment="Bottom" HorizontalAlignment="Right" Margin="0,0,30,30" MouseLeftButtonDown="usersett">
+            <Image.Style>
+                <Style TargetType="{x:Type Image}">
+                    <Style.Triggers>
+                        <EventTrigger RoutedEvent="UIElement.MouseEnter">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:0:0.4" Storyboard.TargetProperty="Width" To="120"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                        <EventTrigger RoutedEvent="UIElement.MouseLeave">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimation Duration="0:0:0:0.4" Storyboard.TargetProperty="Width" To="67"/>
+                                </Storyboard>
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Image.Style>
+
+
+            <Image.Effect>
+                <DropShadowEffect ShadowDepth="8" Opacity="0.5" Direction="200"/>
+            </Image.Effect>
+        </Image>
+
+        <Image x:Name="userSettings" Source="/Imgs/inconUser.png" Height="75" Width="47" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,60,30,0" MouseLeftButtonDown="usersett">
 
             <Image.Style>
                 <Style TargetType="{x:Type Image}">

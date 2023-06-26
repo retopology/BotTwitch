@@ -95,6 +95,15 @@ namespace RetopBot.Pages
             // }
 
         }
+
+        private void settingsstreamer(object sender, MouseButtonEventArgs e)
+        {
+            Windows.streamersettings settings = new Windows.streamersettings();
+            settings.WindowStartupLocation = System.Windows.WindowStartupLocation.CenterScreen;
+
+            settings.ShowDialog();
+            namestreamer.Content = Properties.Settings.Default.streamer;
+        }
         //public void SetBase()
         //{
         //    ConnectString = $"server={Properties.Settings.Default.server};" +

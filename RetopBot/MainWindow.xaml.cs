@@ -108,7 +108,10 @@ namespace RetopBot
                 ValuesProject.startstream = DateTime.Now;
                 ValuesProject.StreamerId = Properties.Settings.Default.streamerid;
                 ValuesProject.localpath = Directory.GetCurrentDirectory();
+                ValuesProject.DotaBuffUrl = Properties.Settings.Default.dotabuff;
 
+                ValuesProject.StreamerName = Properties.Settings.Default.streamer;
+                ValuesProject.StreamerId = Properties.Settings.Default.streamerid;
 
                 database = new ConnectData();
                 botinfo = new BotInfo(database);

@@ -9,6 +9,16 @@ namespace Variables
 {
     public class ValuesProject
     {
+        // Buttons HotKyes
+        #region
+        public static char StopMove = 'A';
+        public static char SpellOne = 'Q';
+        public static char SpellTwo = 'W';
+        public static char SpellThree = 'E';
+        public static char SpellUltimate = 'R';
+        #endregion
+
+
         // Int
         public static int ActualColor = 0; // Цвет ника 
         public static int TimeoutedStream = 0; // Сколько пользователей отстранили за стрим
@@ -43,7 +53,7 @@ namespace Variables
         // String
         public static string ConnectionString = ""; // Строка подключения к базе
         public static string StreamerName = ""; // Никнейм канала стримера
-        public static string DotaBuffUrl = "https://ru.dotabuff.com/players/173843946"; // Ссылка на дотабаф аккаунт
+        public static string DotaBuffUrl = ""; // Ссылка на дотабаф аккаунт
         public static string StreamerId = ""; // ID стримера
         public static string localpath = ""; // ID стримера
 

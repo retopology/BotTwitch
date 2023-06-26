@@ -22,13 +22,11 @@ namespace RetopBot.Windows
         public settingsWindow()
         {
             InitializeComponent();
-            streamerTxt.Text = Properties.Settings.Default.streamer;
             serverTxt.Text = Properties.Settings.Default.server;
             portTxt.Text = Properties.Settings.Default.port;
             userTxt.Text = Properties.Settings.Default.user;
             passwordTxt.Text = Properties.Settings.Default.password;
             databaseTxt.Text = Properties.Settings.Default.database;
-            useridStreamer.Text = Properties.Settings.Default.streamerid;
         }
 
         private void dragger(object sender, MouseButtonEventArgs e)
@@ -38,13 +36,11 @@ namespace RetopBot.Windows
 
         private void savesettings(object sender, MouseButtonEventArgs e)
         {
-            Properties.Settings.Default.streamer = streamerTxt.Text;
             Properties.Settings.Default.server = serverTxt.Text;
             Properties.Settings.Default.port = portTxt.Text;
             Properties.Settings.Default.user = userTxt.Text;
             Properties.Settings.Default.password = passwordTxt.Text;
             Properties.Settings.Default.database = databaseTxt.Text;
-            Properties.Settings.Default.streamerid = useridStreamer.Text;
 
             Properties.Settings.Default.Save();
             this.Close();
@@ -54,13 +50,11 @@ namespace RetopBot.Windows
 
         private void standartsettings(object sender, MouseButtonEventArgs e)
         {
-            streamerTxt.Text = "witchblvde";
             serverTxt.Text = "localhost";
             portTxt.Text = "3312";
             userTxt.Text = "root";
             passwordTxt.Text = "";
             databaseTxt.Text = "witch";
-            useridStreamer.Text = "698924516";
         }
 
         private void dragme(object sender, MouseButtonEventArgs e)
