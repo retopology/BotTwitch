@@ -116,7 +116,6 @@ namespace RetopBot
                 database = new ConnectData();
                 botinfo = new BotInfo(database);
                 botinfo.onMessage += Botinfo_onMessage;
-
                 database.FillMessages();
                 database.FillModerators();
                 database.FillCommands();

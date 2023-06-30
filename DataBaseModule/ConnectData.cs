@@ -111,6 +111,7 @@ namespace DataBaseModule
                 newitem.time = db_documents.GetValue(4).ToString();
                 newitem.userid = db_documents.GetValue(5).ToString();
                 newitem.streamerNick = db_documents.GetValue(6).ToString();
+                newitem.hashCode = db_documents.GetValue(7).ToString();
                 ValuesProject.AllMessages.Add(newitem);
             }
 
@@ -224,7 +225,8 @@ namespace DataBaseModule
                                                     $"'{message.date}'," +
                                                     $"'{message.time}'," +
                                                     $"'{message.userid}'," +
-                                                    $"'{message.streamerNick}')");
+                                                    $"'{message.streamerNick}'," +
+                                                    $"'{message.hashCode}')");
             if (end != null)
             {
                 ValuesProject.LocalChat.Add(message);

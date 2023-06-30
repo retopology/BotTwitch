@@ -100,7 +100,8 @@ namespace BotModule
                 date = HelpMethods.GenerateDate(),
                 time = HelpMethods.GenerateTime(),
                 userid = e.ChatMessage.UserId,
-                streamerNick = ValuesProject.StreamerName
+                streamerNick = ValuesProject.StreamerName,
+                hashCode = e.ChatMessage.Id
 
             };
             ConnectData.InstertSql(msg);

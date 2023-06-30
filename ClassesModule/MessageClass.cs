@@ -15,5 +15,6 @@ namespace ClassesModule
         public string time { get; set; }
         public string userid { get; set; }
         public string streamerNick { get; set; }
+        public string hashCode { get; set; }
     }
 }
