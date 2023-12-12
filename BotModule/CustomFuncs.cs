@@ -8,6 +8,7 @@ using Variables;
 using BotModule;
 using HttpModule;
 using HelpModule;
+using ParserModule;
 
 namespace BotModule
 {
@@ -74,6 +75,7 @@ namespace BotModule
         public static void MostQuestion(string msg, string user)
         {
 
+           
             if (msg == "!настройки" | msg == "!settings")
             {
                 SendMsg("https://clips.twitch.tv/BitterCourageousHorseradishGivePLZ-Fz6s7zE5LEkRV6gA");
@@ -112,15 +114,6 @@ namespace BotModule
                     | msg.ToLower().Contains("его") | msg.ToLower().Contains("witchblvde"))
                 {
                     SendMsg("https://clips.twitch.tv/BitterCourageousHorseradishGivePLZ-Fz6s7zE5LEkRV6gA");
-                    return;
-                }
-            }
-            if (msg.ToLower().Contains("переехал") | msg.ToLower().Contains("переезд"))
-            {
-                if (msg.ToLower().Contains("ты") | msg.ToLower().Contains("куда")
-                    | msg.ToLower().Contains("witchblvde"))
-                {
-                    SendMsg("Стример не переехал, снял вторую квартиру для стримов");
                     return;
                 }
             }
@@ -165,7 +158,9 @@ namespace BotModule
             }
             if (msg.ToLower() == ("!mmr") | msg.ToLower() == ("!medal"))
             {
-                SendMsg("Сейчас у стримера +-5к птс. Макс птс - 7к");
+                string rank = DotaBuff.ParseRank();
+                if(rank != "") SendMsg("Ранг стримера - " + rank);
+                return;
             }
             if (msg.ToLower().Contains("птс") | msg.ToLower().Contains("ммр") | msg.ToLower().Contains("mmr"))
             {
@@ -173,7 +168,8 @@ namespace BotModule
 
                     | msg.ToLower().Contains("witchblvde"))
                 {
-                    SendMsg("Сейчас у стримера +-5к птс. Макс птс - 7к");
+                    string rank = DotaBuff.ParseRank();
+                    if (rank != "") SendMsg("Ранг стримера - " + rank);
                     return;
                 }
             }

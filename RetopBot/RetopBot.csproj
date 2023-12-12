@@ -99,6 +99,9 @@
     <Compile Include="Pages\PagesFuncs\ReportsPage.xaml.cs">
       <DependentUpon>ReportsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\TestPage.xaml.cs">
+      <DependentUpon>TestPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ShazamFolder\Config.cs" />
     <Compile Include="ShazamFolder\Magic\Analyser.cs" />
     <Compile Include="ShazamFolder\Magic\Landmark.cs" />
@@ -163,6 +166,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\startbot.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\TestPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -284,6 +291,10 @@
     <ProjectReference Include="..\HttpModule\HttpModule.csproj">
       <Project>{96fc0177-5371-422e-bb80-94c4c0f785a0}</Project>
       <Name>HttpModule</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ParserModule\ParserModule.csproj">
+      <Project>{4aeae4ba-4c72-4b51-8132-654a1590da8c}</Project>
+      <Name>ParserModule</Name>
     </ProjectReference>
     <ProjectReference Include="..\Variables\Variables.csproj">
       <Project>{bd7a9a0e-81c6-44f1-a5af-2600742c1bb9}</Project>

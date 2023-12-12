@@ -9,12 +9,7 @@
       mc:Ignorable="d" 
       d:DesignHeight="500" d:DesignWidth="1000"
       Title="ReportsPage">
-    <Page.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF383838"/>
-            <GradientStop Color="#FF353535" Offset="1"/>
-        </LinearGradientBrush>
-    </Page.Background>
+
 
     <Grid>
         

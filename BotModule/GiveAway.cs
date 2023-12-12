@@ -24,11 +24,7 @@ namespace BotModule
 
         public static void StartGiveAwayTimer()
         {
-            localgivelist.Add("Igor");
-            localgivelist.Add("Dima");
-            localgivelist.Add("Egor");
-            localgivelist.Add("Ivan");
-            localgivelist.Add("Andrey");
+
             localtimer.Elapsed += Localtimer_Elapsed;
             localtimer.Start();
         }

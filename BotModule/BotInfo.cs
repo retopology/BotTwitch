@@ -23,6 +23,7 @@ using TwitchLib.Api.Helix.Models.Channels.GetChannelInformation;
 using System.Timers;
 using TwitchLib.Api.Helix.Models.Search;
 using TwitchLib.PubSub;
+using TwitchLib.Api.Helix.Models.Users.GetUsers;
 
 namespace BotModule
 {
@@ -110,8 +111,10 @@ namespace BotModule
             
             bool NeedTrack = false;
             bool Moderator = e.ChatMessage.IsModerator ? true : false;
-
+            
+            
             //Buttons.CheckForMove(msg);
+            
             if (msg.username == ValuesProject.ActualUser.username)
             {
                 if (msg.message.Contains("!убратьвсех"))CustomCommands.BanWave(msg);
@@ -121,12 +124,14 @@ namespace BotModule
                 CustomCommands.IsMyCommand(msg);
                 if (ValuesProject.CB_COLORED) CustomFuncs.SetColorChat();
             }
+            if (msg.message.Contains("!followage")) CustomCommands.FollowAge(msg);
+                //if (msg.message == "!drop") CustomFuncs.SendMsg("(. Y .)");
             if(GiveAway.findtogive) CustomCommands.IsGiveAwayMsg(msg,e.ChatMessage.IsSubscriber);
             if(ValuesProject.CB_COUNT_MSGS && msg.message.Contains("!сообщения")) CustomCommands.SendCountMsgs(msg);
             if(ValuesProject.CB_GOOGLE && msg.message.Contains("!гугл")) CustomCommands.SendGoogle(msg);
             if (msg.message.Contains("!трек")) NeedTrack = true;
             if (ValuesProject.CB_STATA && msg.message.Contains("!стата")) CustomCommands.SendHeroStatistic(msg);
-            if (ValuesProject.CB_LAST_GAME && msg.message.Contains("!ласт")) CustomCommands.SendLastGame();
+            if (ValuesProject.CB_LAST_GAME && msg.message.Contains("!ласт"))CustomCommands.SendLastGame();
             if (ValuesProject.CB_WIN_LOSE && msg.message.Contains("!wl")) CustomCommands.SendWinLose();
             if (ValuesProject.CB_COMMANDS_LIST && msg.message.Contains("!команды")) CustomCommands.SendCommands();
             if (ValuesProject.CB_TAG_MESSAGE && msg.message.Contains(ValuesProject.ActualUser.username)) CustomCommands.IsTagMe(msg);

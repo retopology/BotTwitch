@@ -50,6 +50,7 @@ namespace RetopBot
             InitializeComponent();
 
             mainwindow = this;
+            //ParserModule.DotaBuff.SetSite();
             frame.Navigate(new Pages.startbot());
             
            

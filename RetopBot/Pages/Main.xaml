@@ -7,15 +7,10 @@
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
       Title="Main">
-    <Page.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF383838"/>
-            <GradientStop Color="#FF353535" Offset="1"/>
-        </LinearGradientBrush>
-    </Page.Background>
+
     <Grid>
 
-        <Border Margin="0,30,0,0" CornerRadius="10" Background="#FF484848"
+        <Border Margin="0,25,0,0" CornerRadius="10" Background="#FF484848"
                 Height="55" VerticalAlignment="Top" 
                      HorizontalAlignment="Center" >
             <StackPanel Orientation="Horizontal" 
@@ -193,7 +188,7 @@
                 </Border>
             </StackPanel>
         </Border>
-        <Border Margin="0,90,0,10" CornerRadius="20" Background="#FF474747">
+        <Border Margin="5,90,5,10" CornerRadius="20" Background="#FF474747">
             <Grid>
 
                 <Frame x:Name="mainframe" NavigationUIVisibility="Hidden"/>

@@ -8,12 +8,7 @@
       d:DesignHeight="500" d:DesignWidth="1000"
       Title="allChatPage"
       xmlns:gif ="https://github.com/XamlAnimatedGif/XamlAnimatedGif">
-    <Page.Background>
-        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-            <GradientStop Color="#FF383838"/>
-            <GradientStop Color="#FF353535" Offset="1"/>
-        </LinearGradientBrush>
-    </Page.Background>
+
     <Grid>
         <ScrollViewer Margin="0,70,0,0" x:Name="allmsgsscroll">
             <StackPanel x:Name="parrent" VerticalAlignment="Bottom">

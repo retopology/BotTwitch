@@ -13,7 +13,85 @@ namespace ParserModule
     public class DotaBuff
     {
         private static List<String> HeroesList = new List<String>();
-        private static List<Classes.Games> games = new List<Classes.Games>();
+        private static List<Games> games = new List<Games>();
+        public static void SetSite()
+        {
+            string htmlcode = $"http://192.168.0.3";
+            HtmlWeb ws = new HtmlWeb();
+            ws.OverrideEncoding = Encoding.UTF8;
+            HtmlDocument doc = ws.Load(htmlcode);
+            foreach (HtmlNode item in doc.DocumentNode.SelectNodes(
+                    "//div[contains(@class, 'kek')]"))
+            {
+                
+                HtmlNode div = doc.CreateElement("b");
+                div.InnerHtml = "Hello world";
+                item.AppendChild(div);
+                
+                
+
+
+            }
+            
+            doc.Save("C:/ospanel/domains/server/index.html");
+            doc.LoadHtml(htmlcode);
+
+
+        }
+        public static string ParseRank()
+        {
+            try
+            {
+
+                
+
+
+                string htmlcode = ValuesProject.DotaBuffUrl;
+                HtmlWeb ws = new HtmlWeb();
+                ws.OverrideEncoding = Encoding.UTF8;
+                HtmlDocument doc = ws.Load(htmlcode);
+
+
+                var lik = doc.DocumentNode.SelectNodes(
+                    "//div[contains(@class, 'header-content-container')]" +
+                    "//div[contains(@class, 'header-content')]" +
+                    "//div[contains(@class, 'header-content-secondary')]" +
+                    "//div[contains(@class, 'rank-tier-wrapper')]").First();
+
+                return lik.Attributes["title"].Value.ToString().Replace("Место: ", "");
+                 
+                //bool findChar = false;
+                //foreach (var item in codeArray)
+                //{
+
+                //    if (!findChar)
+                //    {
+
+                //    }
+                //}
+
+
+                //string end = "";
+                //foreach (HtmlNode item in doc.DocumentNode.SelectNodes(
+                //    "//div[contains(@class, 'header-content-container')]" +
+                //    "//div[contains(@class, 'header-content')]" +
+                //    "//div[contains(@class, 'header-content-secondary')]" +
+                //    "//div[contains(@class, 'rank-tier-wrapper')]"))
+                //{
+
+                //    // end+= item.InnerText.ToString().Replace("Rank: ","");
+                //    end += item.Attributes["oldtitle"].Value.ToString().Replace("Rank: ", "");
+
+                //}
+
+                //return lol;
+            }
+            catch(Exception exp)
+            {
+                return exp.Message.ToString();
+            }
+        }
+
         public static string ParserHeroes(string hero)
         {
             try
@@ -31,6 +109,7 @@ namespace ParserModule
                     "//table[contains(@class, 'sortable')]" +
                     "//td"))
                 {
+                    
                     if (item.InnerText.ToString().Length > 0) HeroesList.Add(item.InnerText.ToString().Replace("&#39;s", ""));
 
                 }
@@ -70,11 +149,29 @@ namespace ParserModule
                         return "";
                     }
                 }
+
                 if (fineded.Count > 0)
                 {
                     return fineded[0].name + ", Матчей - " + fineded[0].matches + ", Винрейт - " + fineded[0].winrate;
                 }
-                else return "";
+                else
+                {
+                    List<String> noPlayerHero = new List<String>();
+                    foreach (HtmlNode item in doc.DocumentNode.SelectNodes(
+                    "//div[contains(@class, 'hero-grid')]" +
+                    "//div[contains(@class, 'tile-container tile-container-hero')]" +
+                    "//div[contains(@class, 'name')]"))
+                    {
+
+                        if (item.InnerText.ToString().Length > 0) noPlayerHero.Add(item.InnerText.ToString().Replace("&#39;s", ""));
+
+                    }
+                    foreach (var item in noPlayerHero)
+                    {
+                        if (item.ToLower().Contains(hero.ToLower())) return "У стримера нету игр на " + item;
+                    }
+                    return "";
+                }
             }
             catch
             {
@@ -134,12 +231,29 @@ namespace ParserModule
                     string hero = item.InnerText.ToString().Replace("Рекрут", "").Replace("Страж", "")
                         .Replace("Рыцарь", "").Replace("Герой", "").Replace("Легенда", "").Replace("Властелин", "")
                         .Replace("Божество", "").Replace("Титан", "");
-                    string[] mas = hero.Split(' ');
-                    string end = "";
-                    for (int i = 0; i < mas.Length - 1; i++) end += mas[i] + " ";
-                    end = end.Substring(0, end.Length - 1);
-                    games[select].hero = end;
-                    select++;
+
+
+
+                    if (hero.Contains(" ") | hero.Contains("-") | hero.Contains("'"))
+                    {
+
+
+                        string[] mas = hero.Split(' ');
+                        string end = "";
+                        for (int i = 0; i < mas.Length; i++) end += mas[i] + " ";
+                        end = end.Substring(0, end.Length - 1);
+                        games[select].hero = end;
+                        select++;
+                    }
+                    else
+                    {
+                        games[select].hero = hero;
+                        select++;
+                    }
+
+
+
+
                 }
                 // Вывод
                 if (!last)
@@ -151,13 +265,19 @@ namespace ParserModule
                 }
                 else
                 {
-                    return games[0].hero + ", Результат - " + games[0].result
-                                + ", КДА - " + games[0].KDA + ". Информация берется с основного аккаунта Ромы.";
+                    foreach (var item in games)
+                    {
+                        if(!item.hero.Contains("Нет героя"))
+                            return item.hero + ", Результат - " + item.result
+                                + ", КДА - " + item.KDA + ". Информация берется с основного аккаунта Ромы.";
+                    }
+                    return "";
+                    
                 }
             }
-            catch
+            catch(Exception ex)
             {
-                return "";
+                return ex.Message;
             }
 
 

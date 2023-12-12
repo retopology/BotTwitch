@@ -332,5 +332,82 @@ namespace BotModule
             GiveAway.findtogive = false;
             GiveAway.localtimer.Stop();
         }
+
+        // !followage
+        public static void FollowAge(MessageClass user)
+        {
+            // followed_at
+            Task<String> end = GET.GetUserDateFollow(user.userid);
+            string[] mas = end.Result.Split(':');
+            bool find = false;
+            foreach (var item in mas)
+            {
+                if (find)
+                {
+                    DateTime todayTime = DateTime.Now.AddDays(-1);
+                    DateTime timeFollow = new DateTime();
+                    DateTime zeroTime = new DateTime(1, 1, 1);
+                    string[] dateMas = item.Split('-');
+                    string year = dateMas[0].Remove(0,1);
+                    string mouth = dateMas[1];
+                    string day = dateMas[2][0] + "" + dateMas[2][1];
+                    timeFollow = DateTime.ParseExact(year + "-" + mouth + "-" + day, "yyyy-MM-dd",
+                        System.Globalization.CultureInfo.InvariantCulture);
+                    if (timeFollow.Year == todayTime.Year &&
+                        timeFollow.Month == todayTime.Month &&
+                        timeFollow.Day == todayTime.Day)
+                    {
+                        CustomFuncs.SendMsg(user.username + ", ты подписан первый день!");
+                        break;
+                    }
+
+
+                    TimeSpan span = todayTime - timeFollow;
+
+                    int years = (zeroTime + span).Year - 1;
+                    int months = (zeroTime + span).Month - 1;
+                    int days = (zeroTime + span).Day;
+
+
+                    if (days == 0 && months == 0 && years == 0)
+                    {
+                        CustomFuncs.SendMsg(user.username + ", ты подписан первый день!");
+                    }
+                    else
+                    {
+                        string endDate = user.username + ", ты подписан ";
+                        if (years > 0)
+                        {
+                            if (years == 1) endDate += years + " год ";
+                            if (years == 2) endDate += years + " года ";
+                            if (years == 3) endDate += years + " года ";
+                            if (years == 4) endDate += years + " года ";
+                            if (years >= 5) endDate += years + " лет ";
+                        }
+
+                        if (months > 0)
+                        {
+                            if (months == 1) endDate += months + " месяц ";
+                            if (months == 2) endDate += months + " месяца ";
+                            if (months == 3) endDate += months + " месяца ";
+                            if (months == 4) endDate += months + " месяца ";
+                            if (months >= 5) endDate += months + " месяцев ";
+                        }
+
+                        if (days > 0)
+                        {
+                            if (days == 1) endDate += $"{days} день";
+                            if (days == 2) endDate += $"{days} дня";
+                            if (days == 3) endDate += $"{days} дня";
+                            if (days == 4) endDate += $"{days} дня";
+                            if (days >= 5) endDate += $"{days} дней";
+                        }
+                        CustomFuncs.SendMsg(endDate);
+                    }
+                    break;
+                }
+                if (item.Contains("followed_at")) find = true;
+            }
+        }
     }
 }

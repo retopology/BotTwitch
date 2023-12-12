@@ -92,3 +92,5 @@ C:\Users\ivan\Desktop\BotTwitch\RetopBot\bin\Debug\Variables.pdb
 C:\Users\ivan\Desktop\BotTwitch\RetopBot\bin\Debug\ParserModule.pdb
 C:\Users\ivan\Desktop\BotTwitch\RetopBot\obj\Debug\Windows\streamersettings.g.cs
 C:\Users\ivan\Desktop\BotTwitch\RetopBot\obj\Debug\Windows\streamersettings.baml
+C:\Users\ivan\Desktop\BotTwitch\RetopBot\obj\Debug\Pages\TestPage.g.cs
+C:\Users\ivan\Desktop\BotTwitch\RetopBot\obj\Debug\Pages\TestPage.baml
